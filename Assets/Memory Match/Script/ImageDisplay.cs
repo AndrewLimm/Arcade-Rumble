@@ -7,9 +7,10 @@ public class ImageDisplay : MonoBehaviour
 {
     public List<SpriteRenderer> spriteRenderers = new List<SpriteRenderer>(); // List dari komponen SpriteRenderer
     public List<Sprite> sprites = new List<Sprite>(); // List dari sprite yang akan ditampilkan
-    public float _displayTime = 5f; // Waktu untuk menampilkan sprite
+    public float _displayTimePerSprite = 2f; // Waktu untuk menampilkan sprite
 
     private bool _isGameStarted = false; // Flag untuk memastikan game sudah dimulai
+    private List<int> _shuffledIndices = new List<int>(); // Indices yang diacak dari sprites
 
     public void StartGame()
     {
@@ -19,28 +20,44 @@ public class ImageDisplay : MonoBehaviour
 
     IEnumerator DisplaySprites()
     {
-        // Tampilkan sprite
-        for (int i = 0; i < spriteRenderers.Count; i++)
+        List<int> indices = new List<int> { 0, 1, 2 }; // Index dari sprite
+        Shuffle(indices); // Acak urutan index
+        _shuffledIndices = indices;
+
+        // Tampilkan sprite satu per satu berdasarkan urutan yang diacak
+        for (int i = 0; i < indices.Count; i++)
         {
-            if (i < sprites.Count)
-            {
-                spriteRenderers[i].sprite = sprites[i]; // Ganti sprite yang ditampilkan di SpriteRenderer
-            }
+            // Set sprite berdasarkan index acak
+            spriteRenderers[indices[i]].sprite = sprites[indices[i]];
+
+            // Tampilkan sprite selama 2 detik
+            yield return new WaitForSeconds(_displayTimePerSprite);
+
+            // Sembunyikan sprite setelah 2 detik
+            spriteRenderers[indices[i]].sprite = null;
         }
 
-        // Tunggu selama displayTime detik
-        yield return new WaitForSeconds(_displayTime);
+        // Setelah semua gambar ditampilkan, aktifkan input pemain
+    }
 
-        // Sembunyikan sprite dengan mengosongkan SpriteRenderer
-        foreach (var spriteRenderer in spriteRenderers)
+    void Shuffle(List<int> list)
+    {
+        for (int i = 0; i < list.Count; i++)
         {
-            spriteRenderer.sprite = null; // Menghilangkan sprite dengan set null
+            int randomIndex = Random.Range(0, list.Count);
+            int temp = list[i];
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
         }
-        // Aktifkan input pemain di sini
     }
 
     public bool IsGameStarted()
     {
         return _isGameStarted;
+    }
+
+    public List<int> GetShuffledIndices()
+    {
+        return _shuffledIndices;
     }
 }

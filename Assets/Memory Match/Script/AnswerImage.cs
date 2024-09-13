@@ -4,30 +4,55 @@ using UnityEngine;
 
 public class AnswerImage : MonoBehaviour
 {
+    [SerializeField] ImageDisplay _imageDisplay;
     public List<SpriteRenderer> answerRenderers = new List<SpriteRenderer>(); // List untuk gambar jawaban
-    public List<Sprite> answerSprites = new List<Sprite>(); // Sprite untuk jawaban
-    public string correctAnswer; // Jawaban benar yang perlu diurutkan
+    public List<Sprite> answerSprites = new List<Sprite>(); // Sprite untuk pilihan jawaban yang bisa dipilih pemain
+    public List<string> correctAnswerOrder = new List<string>(); // Urutan jawaban yang benar
 
     private bool gameStarted = false; // Cek apakah permainan sudah dimulai
-    private string player1Answer = ""; // Jawaban dari Player 1
-    private string player2Answer = ""; // Jawaban dari Player 2
+    private List<string> player1Answers = new List<string>(); // Urutan jawaban dari Player 1
+    private List<string> player2Answers = new List<string>(); // Urutan jawaban dari Player 2
 
     void Start()
     {
-        DisplayAnswers(); // Tampilkan jawaban ketika permainan dimulai
+        StartCoroutine(WaitForQuestionDisplay()); // Menampilkan soal di awal permainan
     }
 
-    // Menampilkan gambar jawaban di layar (kiri, tengah, kanan)
+    // Coroutine untuk menunggu sampai soal selesai ditampilkan
+    IEnumerator WaitForQuestionDisplay()
+    {
+        // Tunggu sampai soal selesai ditampilkan
+        while (!_imageDisplay.IsGameStarted())
+        {
+            yield return null;
+        }
+
+        // Ambil urutan soal yang sudah diacak dari _ImageDisplay
+        List<int> shuffledIndices = _imageDisplay.GetShuffledIndices();
+        correctAnswerOrder.Clear();
+
+        // Simpan urutan soal yang benar berdasarkan urutan yang diacak
+        foreach (var index in shuffledIndices)
+        {
+            correctAnswerOrder.Add(_imageDisplay.sprites[index].name);
+        }
+
+        // Tampilkan pilihan jawaban secara acak
+        DisplayAnswers();
+        gameStarted = true; // Permainan dimulai
+    }
+
+    // Menampilkan gambar jawaban yang bisa dipilih pemain
     void DisplayAnswers()
     {
         for (int i = 0; i < answerRenderers.Count; i++)
         {
             if (i < answerSprites.Count)
             {
-                answerRenderers[i].sprite = answerSprites[i]; // Tampilkan sprite di layar
+                answerRenderers[i].sprite = answerSprites[i]; // Tampilkan sprite jawaban sesuai urutan di answerSprites
             }
+            Debug.Log($"AnswerRenderer {i} diatur ke {answerSprites[i].name}");
         }
-        gameStarted = true; // Menandakan bahwa game dimulai dan pemain bisa menjawab
     }
 
     void Update()
@@ -51,15 +76,71 @@ public class AnswerImage : MonoBehaviour
     {
         if (player == 1)
         {
-            player1Answer = answerSprites[answerIndex].name; // Set jawaban Player 1
-            Debug.Log("Player 1 memilih: " + player1Answer);
+            player1Answers.Add(answerSprites[answerIndex].name); // Simpan jawaban Player 1
+            Debug.Log("Player 1 memilih: " + answerSprites[answerIndex].name);
+
+            if (player1Answers.Count == correctAnswerOrder.Count)
+            {
+                CheckAnswers(1); // Cek jawaban Player 1 jika sudah memilih semua
+            }
         }
         else if (player == 2)
         {
-            player2Answer = answerSprites[answerIndex].name; // Set jawaban Player 2
-            Debug.Log("Player 2 memilih: " + player2Answer);
+            player2Answers.Add(answerSprites[answerIndex].name); // Simpan jawaban Player 2
+            Debug.Log("Player 2 memilih: " + answerSprites[answerIndex].name);
+
+            if (player2Answers.Count == correctAnswerOrder.Count)
+            {
+                CheckAnswers(2); // Cek jawaban Player 2 jika sudah memilih semua
+            }
+        }
+    }
+
+    // Fungsi untuk mengecek apakah jawaban pemain sesuai dengan urutan yang benar
+    void CheckAnswers(int player)
+    {
+        List<string> playerAnswers = (player == 1) ? player1Answers : player2Answers;
+        bool isCorrect = true;
+
+        for (int i = 0; i < correctAnswerOrder.Count; i++)
+        {
+            if (playerAnswers[i] != correctAnswerOrder[i])
+            {
+                isCorrect = false;
+                break;
+            }
         }
 
-        // Anda bisa menambahkan logika tambahan untuk mengecek jawaban yang benar di sini
+        if (isCorrect)
+        {
+            Debug.Log("Player " + player + " benar!");
+            // Tambahkan logika untuk jawaban yang benar
+        }
+        else
+        {
+            Debug.Log("Player " + player + " salah!");
+            // Tambahkan logika untuk jawaban yang salah
+        }
+
+        // Reset jawaban pemain setelah pengecekan
+        if (player == 1)
+        {
+            player1Answers.Clear();
+        }
+        else
+        {
+            player2Answers.Clear();
+        }
+    }
+
+    void Shuffle(List<Sprite> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            int randomIndex = Random.Range(0, list.Count);
+            Sprite temp = list[i];
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
+        }
     }
 }
