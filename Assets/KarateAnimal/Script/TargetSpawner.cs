@@ -31,13 +31,13 @@ public class TargetSpawner : MonoBehaviour
         int randomLaneIndex = Random.Range(0, spawnPoints.Length);
         GameObject spawnedTarget = Instantiate(targetPrefab, spawnPoints[randomLaneIndex].position, Quaternion.identity);
 
+        Debug.Log("Musuh di-spawn di lane " + (randomLaneIndex + 1)); // Log untuk memeriksa lane
+
         // Set jalur tetap untuk musuh di `EnemyController`
         EnemyController enemyController = spawnedTarget.GetComponent<EnemyController>();
         if (enemyController != null)
         {
-            // Tetapkan lane position sebagai tujuan musuh
             enemyController.SetLane(spawnPoints[randomLaneIndex].position);
         }
-
     }
 }

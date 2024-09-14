@@ -8,10 +8,10 @@ public class EnemyController : MonoBehaviour
     public float speed = 2f; // Kecepatan pergerakan musuh
     private Vector3 laneTarget; // Posisi tujuan di jalur tetap
 
-
     public void SetLane(Vector3 lanePosition)
     {
         laneTarget = lanePosition; // Tetapkan jalur tetap saat musuh di-spawn
+
     }
 
     void Update()

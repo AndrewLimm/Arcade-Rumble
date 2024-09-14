@@ -14,36 +14,42 @@ public class PlayerController1 : MonoBehaviour
     public LayerMask targetLayer; // Layer untuk objek yang bisa diserang
     public int score = 0; // Skor pemain
 
-    // public Animator animator; // Animator untuk animasi serangan
-
     void Update()
     {
+        // Cek input pemain untuk setiap baris
         if (Input.GetKeyDown(attackKey1))
         {
-            Attack(attackPoint1, "AttackLine1");
+            Debug.Log("Attacking lane 1");
+            Attack(attackPoint1); // Serang di baris 1
         }
         else if (Input.GetKeyDown(attackKey2))
         {
-            Attack(attackPoint2, "AttackLine2");
+            Debug.Log("Attacking lane 2");
+            Attack(attackPoint2); // Serang di baris 2
         }
         else if (Input.GetKeyDown(attackKey3))
         {
-            Attack(attackPoint3, "AttackLine3");
+            Debug.Log("Attacking lane 3");
+            Attack(attackPoint3); // Serang di baris 3
         }
     }
 
-    void Attack(Transform attackPoint, string attackAnimation)
+    void Attack(Transform attackPoint)
     {
-        // Menjalankan animasi serangan
-        // animator.SetTrigger(attackAnimation);
-
-        // Deteksi objek di area serangan
+        // Deteksi objek di area serangan berdasarkan posisi
         Collider2D[] hitTargets = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, targetLayer);
 
         foreach (Collider2D target in hitTargets)
         {
-            Destroy(target.gameObject); // Menghancurkan objek yang terkena serangan
-            score += 1; // Tambahkan skor setiap kali objek dihancurkan
+            EnemyController enemy = target.GetComponent<EnemyController>();
+
+            // Hancurkan musuh jika mereka berada dalam jangkauan
+            if (enemy != null)
+            {
+                Debug.Log("Enemy destroyed at position " + attackPoint.position);
+                Destroy(enemy.gameObject);
+                score += 1; // Tambahkan skor setiap kali objek dihancurkan
+            }
         }
     }
 
