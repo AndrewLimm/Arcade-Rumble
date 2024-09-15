@@ -1145,10 +1145,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   signalRenderer: {fileID: 796968734}
-  roundDuration: 60
+  roundDuration: 30
   minWaitTime: 3
   maxWaitTime: 5
-  gameReset: {fileID: 2039422644}
   scoreManager: {fileID: 2128702131}
 --- !u!4 &2128702129
 Transform:
