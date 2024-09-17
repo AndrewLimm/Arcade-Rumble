@@ -1,89 +1,91 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MathGameLogic : MonoBehaviour
 {
-    private int skorPemain1 = 0;
-    private int skorPemain2 = 0;
+    public QuickMathRandomRequestor randomRequestor;  // Referensi ke RandomRequestor untuk mengambil soal
+    public Image soalImage;                           // Referensi ke Image untuk menampilkan gambar soal
+    public Image[] pilihanJawabanImages;              // Referensi ke Image untuk menampilkan pilihan jawaban
 
-    private int posisiJawabanBenar;
+    private Soal soalAktif;                         // Soal yang sedang aktif
 
-    public delegate void SoalDibuat(string soal, string[] pilihan);
-    public event SoalDibuat OnSoalDibuat;
+    // Memulai permainan dengan meminta soal baru
 
-    public delegate void SkorDiperbarui(int skor1, int skor2);
-    public event SkorDiperbarui OnSkorDiperbarui;
+    void Start()
+    {
+        MulaiPermainan();                            // Mulai permainan saat script mulai
+    }
 
     public void MulaiPermainan()
     {
-        GenerateQuestion();
+        if (randomRequestor != null)
+        {
+            RequestSoalBaru();                       // Meminta soal baru dari RandomPool
+        }
+        else
+        {
+            Debug.LogError("RandomRequestor belum disambungkan ke MathGameLogic.");
+        }
     }
 
-    public void GenerateQuestion()
+    // Meminta soal baru dan menyimpannya di soalAktif
+    public void RequestSoalBaru()
     {
-        int angka1 = Random.Range(1, 10);
-        int angka2 = Random.Range(1, 10);
-        int operasi = Random.Range(0, 4); // 0 = penjumlahan, 1 = pengurangan, 2 = perkalian, 3 = pembagian
+        soalAktif = randomRequestor.RequestSoal();  // Dapatkan soal dari RandomPool
+        UpdateUI();  // Perbarui UI dengan soal dan pilihan jawaban baru
+    }
 
-        string soal = "";
-        int jawabanBenar = 0;
-
-        switch (operasi)
+    // Memperbarui UI dengan soal dan pilihan jawaban
+    private void UpdateUI()
+    {
+        if (soalAktif != null)
         {
-            case 0:
-                soal = angka1 + " + " + angka2;
-                jawabanBenar = angka1 + angka2;
-                break;
-            case 1:
-                soal = angka1 + " - " + angka2;
-                jawabanBenar = angka1 - angka2;
-                break;
-            case 2:
-                soal = angka1 + " * " + angka2;
-                jawabanBenar = angka1 * angka2;
-                break;
-            case 3:
-                soal = angka1 + " / " + angka2;
-                jawabanBenar = angka1 / angka2;
-                break;
-        }
+            soalImage.sprite = soalAktif.pertanyaan;  // Tampilkan gambar soal
 
-        posisiJawabanBenar = Random.Range(0, 3);
-        string[] pilihanJawaban = new string[3];
-        pilihanJawaban[posisiJawabanBenar] = jawabanBenar.ToString();
+            // Mengacak pilihan jawaban
+            List<Sprite> jawaban = new List<Sprite>(soalAktif.jawaban);
+            jawaban.Add(soalAktif.jawabanBenar);
+            jawaban.Shuffle(); // Jika Anda memiliki metode Shuffle
 
-        for (int i = 0; i < pilihanJawaban.Length; i++)
-        {
-            if (i != posisiJawabanBenar)
+            for (int i = 0; i < pilihanJawabanImages.Length; i++)
             {
-                int jawabanSalah = Random.Range(1, 100);
-                while (jawabanSalah == jawabanBenar)
+                if (i < jawaban.Count)
                 {
-                    jawabanSalah = Random.Range(1, 100);
+                    pilihanJawabanImages[i].sprite = jawaban[i];
+                    pilihanJawabanImages[i].gameObject.SetActive(true); // Tampilkan gambar
                 }
-                pilihanJawaban[i] = jawabanSalah.ToString();
+                else
+                {
+                    pilihanJawabanImages[i].gameObject.SetActive(false); // Sembunyikan jika tidak ada cukup jawaban
+                }
             }
         }
-
-        OnSoalDibuat?.Invoke(soal, pilihanJawaban);
     }
 
-    public void PeriksaJawaban(int posisiDipilih, int pemain)
+    // Memeriksa apakah jawaban yang dipilih benar
+    public void CekJawaban(int pilihanDipilih, int pemain)
     {
-        if (posisiDipilih == posisiJawabanBenar)
+        if (soalAktif != null)
         {
-            if (pemain == 1)
+            // Periksa apakah jawaban yang dipilih benar
+            Sprite jawabanDipilih = pilihanJawabanImages[pilihanDipilih].sprite;
+            bool benar = jawabanDipilih == soalAktif.jawabanBenar;
+            if (benar)
             {
-                skorPemain1++;
+                Debug.Log("Player " + pemain + " memilih jawaban yang benar!");
+                // Lanjutkan logika untuk mereset soal atau lanjutkan game
             }
-            else if (pemain == 2)
+            else
             {
-                skorPemain2++;
+                Debug.Log("Player " + pemain + " memilih jawaban yang salah.");
             }
-
-            OnSkorDiperbarui?.Invoke(skorPemain1, skorPemain2);
-            GenerateQuestion();
+        }
+        else
+        {
+            Debug.LogError("SoalAktif null.");
         }
     }
 }
