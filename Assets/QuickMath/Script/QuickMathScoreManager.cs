@@ -9,6 +9,8 @@ public class QuickMathScoreManager : MonoBehaviour
     public int skorPemain2 { get; private set; }  // Skor untuk pemain 2
     public int poinBenar = 1;                     // Poin yang didapat jika menjawab benar, bisa diatur di editor
 
+    public int nopoin = 0;
+
     public TMP_Text scorePlayer1Text;
     public TMP_Text scorePlayer2Text;
 
@@ -30,7 +32,7 @@ public class QuickMathScoreManager : MonoBehaviour
 
     public void KurangiSkorPemain1(int poin)
     {
-        skorPemain1 -= poin;
+        skorPemain1 -= nopoin;
         if (skorPemain1 < 0) skorPemain1 = 0;  // Pastikan skor tidak kurang dari 0
         Debug.Log("Skor Pemain 1: " + skorPemain1);
         UpdateUISkor();
@@ -38,7 +40,7 @@ public class QuickMathScoreManager : MonoBehaviour
 
     public void KurangiSkorPemain2(int poin)
     {
-        skorPemain2 -= poin;
+        skorPemain2 -= nopoin;
         if (skorPemain2 < 0) skorPemain2 = 0;  // Pastikan skor tidak kurang dari 0
         Debug.Log("Skor Pemain 2: " + skorPemain2);
         UpdateUISkor();

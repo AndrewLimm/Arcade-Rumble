@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poinBenar: 1
+  nopoin: 0
   scorePlayer1Text: {fileID: 1194403383}
   scorePlayer2Text: {fileID: 2107710685}
 --- !u!4 &326636604

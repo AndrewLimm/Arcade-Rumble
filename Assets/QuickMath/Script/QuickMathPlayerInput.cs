@@ -23,6 +23,7 @@ public class QuickMathPlayerInput : MonoBehaviour
     {
         if (mathGameLogic != null)
         {
+            Debug.Log($"Memproses input untuk pemain {pemain} dengan pilihan {pilihanDipilih}.");
             mathGameLogic.CekJawaban(pilihanDipilih, pemain);
         }
         else

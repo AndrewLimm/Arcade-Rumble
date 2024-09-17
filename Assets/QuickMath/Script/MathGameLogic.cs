@@ -24,7 +24,7 @@ public class MathGameLogic : MonoBehaviour
     {
         if (randomRequestor != null)
         {
-            scoreManager.ResetSkor();                 //mereset Skor
+            scoreManager.ResetSkor();                 // Reset skor
             RequestSoalBaru();                       // Meminta soal baru dari RandomPool
         }
         else
@@ -37,6 +37,11 @@ public class MathGameLogic : MonoBehaviour
     public void RequestSoalBaru()
     {
         soalAktif = randomRequestor.RequestSoal();  // Dapatkan soal dari RandomPool
+        if (soalAktif == null)
+        {
+            Debug.LogError("SoalAktif null. Tidak ada soal yang tersedia.");
+            return;
+        }
         UpdateUI();  // Perbarui UI dengan soal dan pilihan jawaban baru
     }
 
@@ -47,11 +52,25 @@ public class MathGameLogic : MonoBehaviour
         {
             soalImage.sprite = soalAktif.pertanyaan;  // Tampilkan gambar soal
 
-            // Mengacak pilihan jawaban
-            List<Sprite> jawaban = new List<Sprite>(soalAktif.jawaban);
+            // Mengambil semua jawaban yang tersedia termasuk jawaban yang benar
+            List<Sprite> jawaban = new List<Sprite>();
+
+            // Tambahkan jawaban yang salah terlebih dahulu, cek agar tidak ada yang sama dengan jawaban benar
+            foreach (var jawabanSalah in soalAktif.jawaban)
+            {
+                if (jawabanSalah != soalAktif.jawabanBenar) // Pastikan tidak sama dengan jawaban benar
+                {
+                    jawaban.Add(jawabanSalah);
+                }
+            }
+
+            // Tambahkan jawaban yang benar
             jawaban.Add(soalAktif.jawabanBenar);
+
+            // Mengacak daftar jawaban
             jawaban.Shuffle(); // Jika Anda memiliki metode Shuffle
 
+            // Menampilkan jawaban di UI
             for (int i = 0; i < pilihanJawabanImages.Length; i++)
             {
                 if (i < jawaban.Count)
@@ -103,13 +122,12 @@ public class MathGameLogic : MonoBehaviour
                 }
             }
 
-            // Setelah pemain menjawab, minta soal baru
+            // Meminta soal baru tanpa menunggu
             RequestSoalBaru();
         }
         else
         {
             Debug.LogError("SoalAktif null.");
-
         }
     }
 }
