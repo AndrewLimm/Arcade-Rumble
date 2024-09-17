@@ -12,8 +12,9 @@ public class MathGameLogic : MonoBehaviour
 
     private Soal soalAktif;                         // Soal yang sedang aktif
 
-    // Memulai permainan dengan meminta soal baru
+    [SerializeField] QuickMathScoreManager scoreManager;
 
+    // Memulai permainan dengan meminta soal baru
     void Start()
     {
         MulaiPermainan();                            // Mulai permainan saat script mulai
@@ -23,6 +24,7 @@ public class MathGameLogic : MonoBehaviour
     {
         if (randomRequestor != null)
         {
+            scoreManager.ResetSkor();                 //mereset Skor
             RequestSoalBaru();                       // Meminta soal baru dari RandomPool
         }
         else
@@ -73,19 +75,41 @@ public class MathGameLogic : MonoBehaviour
             // Periksa apakah jawaban yang dipilih benar
             Sprite jawabanDipilih = pilihanJawabanImages[pilihanDipilih].sprite;
             bool benar = jawabanDipilih == soalAktif.jawabanBenar;
+
             if (benar)
             {
-                Debug.Log("Player " + pemain + " memilih jawaban yang benar!");
-                // Lanjutkan logika untuk mereset soal atau lanjutkan game
+                if (pemain == 1)
+                {
+                    scoreManager.TambahSkorPemain1(scoreManager.poinBenar); // Tambah poin untuk pemain 1
+                    Debug.Log("Player 1 memilih jawaban yang benar!");
+                }
+                else if (pemain == 2)
+                {
+                    scoreManager.TambahSkorPemain2(scoreManager.poinBenar); // Tambah poin untuk pemain 2
+                    Debug.Log("Player 2 memilih jawaban yang benar!");
+                }
             }
             else
             {
-                Debug.Log("Player " + pemain + " memilih jawaban yang salah.");
+                if (pemain == 1)
+                {
+                    scoreManager.KurangiSkorPemain1(scoreManager.poinBenar); // Kurangi poin untuk pemain 1
+                    Debug.Log("Player 1 memilih jawaban yang salah.");
+                }
+                else if (pemain == 2)
+                {
+                    scoreManager.KurangiSkorPemain2(scoreManager.poinBenar); // Kurangi poin untuk pemain 2
+                    Debug.Log("Player 2 memilih jawaban yang salah.");
+                }
             }
+
+            // Setelah pemain menjawab, minta soal baru
+            RequestSoalBaru();
         }
         else
         {
             Debug.LogError("SoalAktif null.");
+
         }
     }
 }

@@ -1,48 +1,69 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class QuickMathScoreManager : MonoBehaviour
 {
-    private int skorPemain1 = 0; // Skor untuk pemain 1
-    private int skorPemain2 = 0; // Skor untuk pemain 2
+    public int skorPemain1 { get; private set; }  // Skor untuk pemain 1
+    public int skorPemain2 { get; private set; }  // Skor untuk pemain 2
+    public int poinBenar = 1;                     // Poin yang didapat jika menjawab benar, bisa diatur di editor
 
-    // Event untuk ketika skor berubah
-    public delegate void SkorDiupdate(int skorPemain1, int skorPemain2);
-    public event SkorDiupdate OnSkorDiupdate;
+    public TMP_Text scorePlayer1Text;
+    public TMP_Text scorePlayer2Text;
 
-    // Menambah skor untuk pemain 1
-    public void TambahSkorPemain1()
+    // Menambahkan poin ke pemain 1
+    public void TambahSkorPemain1(int poin)
     {
-        skorPemain1++;
-        SkorDiupdateCallback(); // Memanggil event ketika skor berubah
+        skorPemain1 += poin;
+        Debug.Log("Skor Pemain 1: " + skorPemain1);
+        UpdateUISkor(); // Perbarui UI skor jika ada
     }
 
-    // Menambah skor untuk pemain 2
-    public void TambahSkorPemain2()
+    // Menambahkan poin ke pemain 2
+    public void TambahSkorPemain2(int poin)
     {
-        skorPemain2++;
-        SkorDiupdateCallback(); // Memanggil event ketika skor berubah
+        skorPemain2 += poin;
+        Debug.Log("Skor Pemain 2: " + skorPemain2);
+        UpdateUISkor(); // Perbarui UI skor jika ada
     }
 
-    // Memanggil event untuk memperbarui skor di UI
-    private void SkorDiupdateCallback()
+    public void KurangiSkorPemain1(int poin)
     {
-        if (OnSkorDiupdate != null)
+        skorPemain1 -= poin;
+        if (skorPemain1 < 0) skorPemain1 = 0;  // Pastikan skor tidak kurang dari 0
+        Debug.Log("Skor Pemain 1: " + skorPemain1);
+        UpdateUISkor();
+    }
+
+    public void KurangiSkorPemain2(int poin)
+    {
+        skorPemain2 -= poin;
+        if (skorPemain2 < 0) skorPemain2 = 0;  // Pastikan skor tidak kurang dari 0
+        Debug.Log("Skor Pemain 2: " + skorPemain2);
+        UpdateUISkor();
+    }
+
+    // Memperbarui UI skor jika ada
+    private void UpdateUISkor()
+    {
+        // Tambahkan logika di sini jika Anda memiliki UI untuk menampilkan skor
+        if (scorePlayer1Text != null)
         {
-            OnSkorDiupdate(skorPemain1, skorPemain2); // Panggil event untuk UI atau logic
+            scorePlayer1Text.text = "Skor Pemain 1: " + skorPemain1;  // Perbarui skor pemain 1 di UI
+        }
+
+        if (scorePlayer2Text != null)
+        {
+            scorePlayer2Text.text = "Skor Pemain 2: " + skorPemain2;  // Perbarui skor pemain 2 di UI
         }
     }
 
-    // Mengambil skor pemain 1
-    public int GetSkorPemain1()
+    // Reset skor jika permainan di-reset atau dimulai ulang
+    public void ResetSkor()
     {
-        return skorPemain1;
-    }
-
-    // Mengambil skor pemain 2
-    public int GetSkorPemain2()
-    {
-        return skorPemain2;
+        skorPemain1 = 0;
+        skorPemain2 = 0;
+        UpdateUISkor();
     }
 }
