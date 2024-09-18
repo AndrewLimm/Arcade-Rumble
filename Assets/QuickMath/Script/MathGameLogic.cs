@@ -6,128 +6,125 @@ using UnityEngine.UI;
 
 public class MathGameLogic : MonoBehaviour
 {
-    public QuickMathRandomRequestor randomRequestor;  // Referensi ke RandomRequestor untuk mengambil soal
-    public Image soalImage;                           // Referensi ke Image untuk menampilkan gambar soal
-    public Image[] pilihanJawabanImages;              // Referensi ke Image untuk menampilkan pilihan jawaban
-
-    private Soal soalAktif;                         // Soal yang sedang aktif
+    public QuickMathRandomRequestor randomRequestor;
+    public Image soalImage;
+    public Image[] pilihanJawabanImages;
+    private Soal soalAktif;
+    public float jedaSebelumSoalBaru = 1f;
 
     [SerializeField] QuickMathScoreManager scoreManager;
 
-    // Memulai permainan dengan meminta soal baru
+    private bool isAnswered = false; // Variabel untuk mencegah input ganda
+    private bool gameEnded = false;  // Variabel untuk menghentikan input setelah permainan berakhir
+
+    void OnEnable()
+    {
+        // Subscribe ke event OnTimeUp dari QuickMathGameTImer
+        QuickMathGameTImer.OnTimeUp += AkhiriPermainan;
+    }
+
+    void OnDisable()
+    {
+        // Unsubscribe dari event OnTimeUp untuk mencegah memory leak
+        QuickMathGameTImer.OnTimeUp -= AkhiriPermainan;
+    }
+
     void Start()
     {
-        MulaiPermainan();                            // Mulai permainan saat script mulai
+        MulaiPermainan();
     }
 
     public void MulaiPermainan()
     {
-        if (randomRequestor != null)
-        {
-            scoreManager.ResetSkor();                 // Reset skor
-            RequestSoalBaru();                       // Meminta soal baru dari RandomPool
-        }
-        else
-        {
-            Debug.LogError("RandomRequestor belum disambungkan ke MathGameLogic.");
-        }
+        scoreManager.ResetSkor();
+        RequestSoalBaru();
+        QuickMathGameTImer timer = FindObjectOfType<QuickMathGameTImer>();
+        timer.StartTimer();  // Mulai timer saat permainan dimulai
+        gameEnded = false;   // Reset status permainan
     }
 
-    // Meminta soal baru dan menyimpannya di soalAktif
     public void RequestSoalBaru()
     {
-        soalAktif = randomRequestor.RequestSoal();  // Dapatkan soal dari RandomPool
+        if (gameEnded) return;  // Jika permainan berakhir, hentikan permintaan soal baru
+
+        soalAktif = randomRequestor.RequestSoal();
         if (soalAktif == null)
         {
-            Debug.LogError("SoalAktif null. Tidak ada soal yang tersedia.");
+            Debug.LogError("Tidak ada soal yang tersedia.");
             return;
         }
-        UpdateUI();  // Perbarui UI dengan soal dan pilihan jawaban baru
+
+        UpdateUI();
+        isAnswered = false;  // Reset status jawaban setiap soal baru dimulai
     }
 
-    // Memperbarui UI dengan soal dan pilihan jawaban
     private void UpdateUI()
     {
-        if (soalAktif != null)
+        soalImage.sprite = soalAktif.pertanyaan;
+        List<Sprite> jawaban = new List<Sprite>(soalAktif.jawaban);
+        jawaban.Add(soalAktif.jawabanBenar);
+        jawaban.Shuffle(); // Pastikan metode Shuffle ada
+
+        for (int i = 0; i < pilihanJawabanImages.Length; i++)
         {
-            soalImage.sprite = soalAktif.pertanyaan;  // Tampilkan gambar soal
-
-            // Mengambil semua jawaban yang tersedia termasuk jawaban yang benar
-            List<Sprite> jawaban = new List<Sprite>();
-
-            // Tambahkan jawaban yang salah terlebih dahulu, cek agar tidak ada yang sama dengan jawaban benar
-            foreach (var jawabanSalah in soalAktif.jawaban)
+            if (i < jawaban.Count)
             {
-                if (jawabanSalah != soalAktif.jawabanBenar) // Pastikan tidak sama dengan jawaban benar
-                {
-                    jawaban.Add(jawabanSalah);
-                }
+                pilihanJawabanImages[i].sprite = jawaban[i];
+                pilihanJawabanImages[i].gameObject.SetActive(true);
             }
-
-            // Tambahkan jawaban yang benar
-            jawaban.Add(soalAktif.jawabanBenar);
-
-            // Mengacak daftar jawaban
-            jawaban.Shuffle(); // Jika Anda memiliki metode Shuffle
-
-            // Menampilkan jawaban di UI
-            for (int i = 0; i < pilihanJawabanImages.Length; i++)
+            else
             {
-                if (i < jawaban.Count)
-                {
-                    pilihanJawabanImages[i].sprite = jawaban[i];
-                    pilihanJawabanImages[i].gameObject.SetActive(true); // Tampilkan gambar
-                }
-                else
-                {
-                    pilihanJawabanImages[i].gameObject.SetActive(false); // Sembunyikan jika tidak ada cukup jawaban
-                }
+                pilihanJawabanImages[i].gameObject.SetActive(false);
             }
         }
     }
 
-    // Memeriksa apakah jawaban yang dipilih benar
+    // Menangani input pemain, hanya satu pemain bisa menjawab setiap soal
     public void CekJawaban(int pilihanDipilih, int pemain)
     {
+        if (gameEnded) return;  // Jika permainan berakhir, hentikan input
+        if (isAnswered) return; // Cek apakah sudah ada pemain yang menjawab
+
         if (soalAktif != null)
         {
-            // Periksa apakah jawaban yang dipilih benar
             Sprite jawabanDipilih = pilihanJawabanImages[pilihanDipilih].sprite;
             bool benar = jawabanDipilih == soalAktif.jawabanBenar;
 
             if (benar)
             {
-                if (pemain == 1)
-                {
-                    scoreManager.TambahSkorPemain1(scoreManager.poinBenar); // Tambah poin untuk pemain 1
-                    Debug.Log("Player 1 memilih jawaban yang benar!");
-                }
-                else if (pemain == 2)
-                {
-                    scoreManager.TambahSkorPemain2(scoreManager.poinBenar); // Tambah poin untuk pemain 2
-                    Debug.Log("Player 2 memilih jawaban yang benar!");
-                }
-            }
-            else
-            {
-                if (pemain == 1)
-                {
-                    scoreManager.KurangiSkorPemain1(scoreManager.poinBenar); // Kurangi poin untuk pemain 1
-                    Debug.Log("Player 1 memilih jawaban yang salah.");
-                }
-                else if (pemain == 2)
-                {
-                    scoreManager.KurangiSkorPemain2(scoreManager.poinBenar); // Kurangi poin untuk pemain 2
-                    Debug.Log("Player 2 memilih jawaban yang salah.");
-                }
-            }
+                isAnswered = true;  // Tandai soal sebagai sudah dijawab
 
-            // Meminta soal baru tanpa menunggu
-            RequestSoalBaru();
+                // Pemain yang menjawab lebih dulu mendapatkan poin
+                if (pemain == 1)
+                {
+                    scoreManager.TambahSkorPemain1(scoreManager.poinBenar);
+                    Debug.Log("Player 1 mendapat poin!");
+                }
+                else if (pemain == 2)
+                {
+                    scoreManager.TambahSkorPemain2(scoreManager.poinBenar);
+                    Debug.Log("Player 2 mendapat poin!");
+                }
+
+                StartCoroutine(JedaSebelumSoalBaru());
+            }
         }
-        else
+    }
+
+    private IEnumerator JedaSebelumSoalBaru()
+    {
+        yield return new WaitForSeconds(jedaSebelumSoalBaru);
+        if (!gameEnded)
         {
-            Debug.LogError("SoalAktif null.");
+            RequestSoalBaru();  // Minta soal baru jika permainan belum berakhir
         }
+    }
+
+    // Fungsi untuk mengakhiri permainan ketika waktu habis
+    private void AkhiriPermainan()
+    {
+        Debug.Log("Waktu habis! Permainan selesai.");
+        gameEnded = true;  // Permainan berakhir, hentikan semua input
+        // Anda bisa menambahkan logika tambahan seperti menampilkan UI hasil akhir di sini.
     }
 }
