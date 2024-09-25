@@ -133,8 +133,9 @@ GameObject:
   - component: {fileID: 347815631}
   - component: {fileID: 347815630}
   - component: {fileID: 347815629}
+  - component: {fileID: 347815632}
   m_Layer: 0
-  m_Name: player 1
+  m_Name: 'Tombol Makanan '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,8 +154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 1
-  collectKey: 97
   playerScore: 0
+  range: 3
 --- !u!212 &347815630
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -216,12 +217,25 @@ Transform:
   m_GameObject: {fileID: 347815628}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.83, y: -1.87, z: 0}
+  m_LocalPosition: {x: -7.8, y: -1.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &347815632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347815628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ea48ab130e66284aade3e9090d5d74c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  edibleCollectKey: 97
 --- !u!1 &348658403
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,10 +265,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af1cfd2ac66a7144a364afc70606344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnerPosition: {fileID: 1053608703}
-  objectPrefab: {fileID: 3995606057669591567, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
-  spawnedObject: {fileID: 0}
-  respawnTime: 3
+  spawnStartPoint: {fileID: 1053608703}
+  foodItems:
+  - {fileID: 3489960380191936552, guid: b3bdc1b12f86a114abafd51fc34739f5, type: 3}
+  - {fileID: 2788575416038877163, guid: 375cb3514b64123408c6e8c788258aa5, type: 3}
+  - {fileID: 7929171850947225604, guid: 3879cbe2f3635db4e94227be61256b72, type: 3}
+  spawnedObjects: []
+  maxFoodItems: 5
+  spawnInterval: 100
+  moveSpeed: 4
 --- !u!4 &348658405
 Transform:
   m_ObjectHideFlags: 0
@@ -281,8 +300,9 @@ GameObject:
   - component: {fileID: 402583867}
   - component: {fileID: 402583866}
   - component: {fileID: 402583865}
+  - component: {fileID: 402583868}
   m_Layer: 0
-  m_Name: player 2
+  m_Name: 'Tombol Sampah '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -300,9 +320,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b94b382289ef5045814c584959a365e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumber: 2
-  collectKey: 106
+  playerNumber: 1
   playerScore: 0
+  range: 3
 --- !u!212 &402583866
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -364,12 +384,25 @@ Transform:
   m_GameObject: {fileID: 402583864}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.93, y: -1.87, z: 0}
+  m_LocalPosition: {x: -4.93, y: -1.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &402583868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402583864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4ff6201447bb14393cfba3587527d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trashCollectKey: 100
 --- !u!1 &767987557
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,27 +412,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 767987559}
-  - component: {fileID: 767987558}
+  - component: {fileID: 767987560}
   m_Layer: 0
   m_Name: Testing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &767987558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 767987557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acb2c91727be1484eac7f3c98d2d628e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnerManager: {fileID: 348658404}
+  m_IsActive: 0
 --- !u!4 &767987559
 Transform:
   m_ObjectHideFlags: 0
@@ -415,6 +435,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &767987560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767987557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acb2c91727be1484eac7f3c98d2d628e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1053608702
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,7 +472,7 @@ Transform:
   m_GameObject: {fileID: 1053608702}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -6.25, y: -0.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -5,10 +5,8 @@ using UnityEngine;
 public class PlayerCollect : MonoBehaviour
 {
     public int playerNumber; // Assign 1 for Player 1, 2 for Player 2 in the Inspector
-    public KeyCode collectKey; // Set the collect key for the player in the Inspector (e.g. A for Player 1, L for Player 2)
-    public int playerScore = 0;
-    public float range = 100f;
-
+    public int playerScore = 0; // Score pemain
+    public float range = 100f; // Collection range
     private SpawnerManager spawnManager;
 
     private void Start()
@@ -16,24 +14,46 @@ public class PlayerCollect : MonoBehaviour
         spawnManager = FindObjectOfType<SpawnerManager>(); // Find the SpawnManager script in the scene
     }
 
-    private void Update()
+    public GameObject GetFrontFoodInRange()
     {
-        if (spawnManager.spawnedObject != null && Input.GetKeyDown(collectKey))
+        if (spawnManager.spawnedObjects.Count > 0)
         {
-            // Check if the player is close enough to collect the object
-            float distance = Vector3.Distance(transform.position, spawnManager.spawnedObject.transform.position);
+            GameObject frontFood = spawnManager.spawnedObjects[0];
+            float distance = Vector3.Distance(transform.position, frontFood.transform.position);
 
-            if (distance < range) // Adjust the collection range if needed
+            if (distance < range)
             {
-                CollectObject();
+                return frontFood;
             }
         }
+
+        return null; // Jika tidak ada objek dalam range
     }
 
-    private void CollectObject()
+    public void CollectEdible(GameObject food)
     {
-        playerScore += 1;
-        Debug.Log("Player " + playerNumber + " Score: " + playerScore);
-        spawnManager.ObjectCollected(); // Trigger the respawn
+        if (food == null) return; // Check if the food object is null
+
+        playerScore += 1; // Tambahkan skor
+        Debug.Log("Player " + playerNumber + " collected edible food! Score: " + playerScore);
+        spawnManager.ShiftFoodItems(); // Shift makanan ke bawah
+    }
+
+    public void CollectTrash(GameObject food)
+    {
+        if (food == null) return; // Check if the food object is null
+
+        playerScore += 1; // Tambahkan skor
+        Debug.Log("Player " + playerNumber + " collected trash correctly! Score: " + playerScore);
+        spawnManager.ShiftFoodItems(); // Shift makanan ke bawah
+    }
+
+    public void WrongCollection(GameObject food)
+    {
+        if (food == null) return; // Check if the food object is null
+
+        playerScore -= 1; // Kurangi skor
+        Debug.Log("Player " + playerNumber + " collected the wrong item! Score: " + playerScore);
+        spawnManager.ShiftFoodItems(); // Shift makanan ke bawah
     }
 }
