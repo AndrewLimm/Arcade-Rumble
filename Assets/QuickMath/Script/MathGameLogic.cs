@@ -8,7 +8,7 @@ public class MathGameLogic : MonoBehaviour
 {
     public QuickMathRandomRequestor randomRequestor;
     public Image soalImage;
-    public Image[] pilihanJawabanImages;
+    public Image[] pilihanJawabanImages; // Asumsikan Anda memiliki dua gambar pilihan
     private Soal soalAktif;
     public float jedaSebelumSoalBaru = 1f;
 
@@ -19,13 +19,11 @@ public class MathGameLogic : MonoBehaviour
 
     void OnEnable()
     {
-        // Subscribe ke event OnTimeUp dari QuickMathGameTImer
         QuickMathGameTImer.OnTimeUp += AkhiriPermainan;
     }
 
     void OnDisable()
     {
-        // Unsubscribe dari event OnTimeUp untuk mencegah memory leak
         QuickMathGameTImer.OnTimeUp -= AkhiriPermainan;
     }
 
@@ -61,15 +59,20 @@ public class MathGameLogic : MonoBehaviour
     private void UpdateUI()
     {
         soalImage.sprite = soalAktif.pertanyaan;
-        List<Sprite> jawaban = new List<Sprite>(soalAktif.jawaban);
-        jawaban.Add(soalAktif.jawabanBenar);
-        jawaban.Shuffle(); // Pastikan metode Shuffle ada
 
+        // Buat list yang akan diacak, termasuk jawaban benar dan jawaban salah
+        List<Sprite> pilihanJawaban = new List<Sprite> { soalAktif.jawabanBenar };
+        pilihanJawaban.AddRange(soalAktif.jawabanSalah);
+
+        // Acak daftar jawaban
+        pilihanJawaban.Shuffle(); // Memanggil metode ekstensi Shuffle
+
+        // Menampilkan jawaban pada UI
         for (int i = 0; i < pilihanJawabanImages.Length; i++)
         {
-            if (i < jawaban.Count)
+            if (i < pilihanJawaban.Count)
             {
-                pilihanJawabanImages[i].sprite = jawaban[i];
+                pilihanJawabanImages[i].sprite = pilihanJawaban[i];
                 pilihanJawabanImages[i].gameObject.SetActive(true);
             }
             else

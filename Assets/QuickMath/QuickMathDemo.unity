@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e67ff00b96d764d96d90478c70e7bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTime: 5
+  totalTime: 60
   isGameRunning: 0
 --- !u!114 &222385592
 MonoBehaviour:
@@ -1172,22 +1172,19 @@ MonoBehaviour:
   soalList:
   - pertanyaan: {fileID: 21300000, guid: a14d06a56c9952542879e2b767eb7898, type: 3}
     jawabanBenar: {fileID: 21300000, guid: a14d06a56c9952542879e2b767eb7898, type: 3}
-    jawaban:
-    - {fileID: 21300000, guid: a14d06a56c9952542879e2b767eb7898, type: 3}
+    jawabanSalah:
     - {fileID: 21300000, guid: 7aab3521b2d78cc4ba669fb0ed16780c, type: 3}
     - {fileID: 21300000, guid: 865c2687808dd7b4c85eb2ffbdf0cce4, type: 3}
-  - pertanyaan: {fileID: 21300000, guid: 7aab3521b2d78cc4ba669fb0ed16780c, type: 3}
-    jawabanBenar: {fileID: 21300000, guid: 7aab3521b2d78cc4ba669fb0ed16780c, type: 3}
-    jawaban:
-    - {fileID: 21300000, guid: 7aab3521b2d78cc4ba669fb0ed16780c, type: 3}
-    - {fileID: 21300000, guid: a14d06a56c9952542879e2b767eb7898, type: 3}
-    - {fileID: 21300000, guid: 865c2687808dd7b4c85eb2ffbdf0cce4, type: 3}
-  - pertanyaan: {fileID: 21300000, guid: 865c2687808dd7b4c85eb2ffbdf0cce4, type: 3}
-    jawabanBenar: {fileID: 21300000, guid: 865c2687808dd7b4c85eb2ffbdf0cce4, type: 3}
-    jawaban:
-    - {fileID: 21300000, guid: a14d06a56c9952542879e2b767eb7898, type: 3}
-    - {fileID: 21300000, guid: 7aab3521b2d78cc4ba669fb0ed16780c, type: 3}
-    - {fileID: 21300000, guid: 865c2687808dd7b4c85eb2ffbdf0cce4, type: 3}
+  - pertanyaan: {fileID: 21300000, guid: daeed44c6cfcbfd41adb3e061e3a336c, type: 3}
+    jawabanBenar: {fileID: 21300000, guid: daeed44c6cfcbfd41adb3e061e3a336c, type: 3}
+    jawabanSalah:
+    - {fileID: 21300000, guid: f1d2f3599059db8479a44acee32ba4bf, type: 3}
+    - {fileID: 21300000, guid: 69230ea5f634e574e9fbb851bfd0268c, type: 3}
+  - pertanyaan: {fileID: 21300000, guid: 37000b78018be91489c69d8ac071aff6, type: 3}
+    jawabanBenar: {fileID: 21300000, guid: 37000b78018be91489c69d8ac071aff6, type: 3}
+    jawabanSalah:
+    - {fileID: 21300000, guid: 9231d09f1d9a18f4b92eed205a7eb134, type: 3}
+    - {fileID: 21300000, guid: c228832d9815e8d4ca3d559d169e8411, type: 3}
 --- !u!4 &1662605578
 Transform:
   m_ObjectHideFlags: 0

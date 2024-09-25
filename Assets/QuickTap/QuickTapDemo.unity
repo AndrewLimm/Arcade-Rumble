@@ -272,7 +272,7 @@ MonoBehaviour:
   - {fileID: 7929171850947225604, guid: 3879cbe2f3635db4e94227be61256b72, type: 3}
   spawnedObjects: []
   maxFoodItems: 5
-  spawnInterval: 100
+  spawnInterval: 1.5
   moveSpeed: 4
 --- !u!4 &348658405
 Transform:

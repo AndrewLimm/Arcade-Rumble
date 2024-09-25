@@ -8,7 +8,7 @@ public class Soal
 {
     public Sprite pertanyaan;           // Gambar yang akan ditampilkan sebagai pertanyaan
     public Sprite jawabanBenar;         // Gambar jawaban benar
-    public List<Sprite> jawaban;        // Pilihan gambar lainnya (selain yang benar)
+    public List<Sprite> jawabanSalah;        // Pilihan gambar lainnya (selain yang benar)
 
 }
 
@@ -46,18 +46,18 @@ public class RandomPool : MonoBehaviour
             return null;
         }
 
-        if (soal.jawaban == null || soal.jawaban.Count == 0)
+        if (soal.jawabanSalah == null || soal.jawabanSalah.Count == 0)
         {
-            Debug.LogError("Soal memiliki daftar jawaban yang null atau kosong.");
+            Debug.LogError("Soal memiliki daftar jawaban salah yang null atau kosong.");
             return null;
         }
 
-        // Debug untuk memastikan daftar jawaban tidak mengandung nilai null
-        foreach (Sprite jawaban in soal.jawaban)
+        // Debug untuk memastikan daftar jawaban salah tidak mengandung nilai null
+        foreach (Sprite jawaban in soal.jawabanSalah)
         {
             if (jawaban == null)
             {
-                Debug.LogError("Daftar jawaban mengandung nilai null.");
+                Debug.LogError("Daftar jawaban salah mengandung nilai null.");
                 return null;
             }
         }
