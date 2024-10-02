@@ -5,7 +5,7 @@ using UnityEngine;
 public class DisableAttackPlayer2GameTembak : MonoBehaviour
 {
     public Player2ControllerGameTembak player2Controller; // Referensi ke Player2Control
-    private bool isCoroutineRunning = false;
+    private Coroutine disableCoroutine; // Menyimpan referensi ke coroutine yang berjalan
 
     private void Awake()
     {
@@ -27,10 +27,16 @@ public class DisableAttackPlayer2GameTembak : MonoBehaviour
     // Nonaktifkan serangan Player 2
     public void DisablePlayer2Attack()
     {
-        if (player2Controller != null && !isCoroutineRunning)
+        if (player2Controller != null)
         {
+            // Jika coroutine sudah berjalan, hentikan sebelum memulai yang baru
+            if (disableCoroutine != null)
+            {
+                StopCoroutine(disableCoroutine);
+            }
+
             Debug.Log("Menonaktifkan serangan Player 2");
-            StartCoroutine(DisableAttackCoroutine());
+            disableCoroutine = StartCoroutine(DisableAttackCoroutine());
         }
         else
         {
@@ -39,15 +45,14 @@ public class DisableAttackPlayer2GameTembak : MonoBehaviour
     }
 
     // Coroutine untuk menonaktifkan serangan Player 2
-    IEnumerator DisableAttackCoroutine()
+    private IEnumerator DisableAttackCoroutine()
     {
-        isCoroutineRunning = true;
         player2Controller.canShoot = false; // Menonaktifkan serangan
 
         yield return new WaitForSeconds(2f); // Tunggu 2 detik
 
         player2Controller.canShoot = true; // Mengizinkan pemain untuk menembak lagi
-        isCoroutineRunning = false;
+        disableCoroutine = null; // Reset referensi coroutine
         Debug.Log("Serangan Player 2 diaktifkan kembali");
     }
 }

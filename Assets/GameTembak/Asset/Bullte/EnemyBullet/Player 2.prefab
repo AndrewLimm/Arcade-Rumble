@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  bulletPrefab: {fileID: 7776263813212769816, guid: e8c5105c3a80a6f448acca9002a90840, type: 3}
+  bulletPrefab: {fileID: 6984618194259023202, guid: 1731a1a9a45b52348833622e23999861, type: 3}
   bulletSpawnPoint: {fileID: 1360475089913088479}
   canShoot: 0
   immunePlayer2GameTembak: {fileID: 0}

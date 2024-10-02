@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class ImmunePlayer2GameTembak : MonoBehaviour
 {
-    public bool isInvulnerable = false; // Variabel untuk mengontrol invulnerabilitas
-    public float invulnerabilityDuration = 3f; // Durasi invulnerabilitas
+    public bool canReceiveDamage = true; // Mendeteksi apakah player dapat menerima damage
+    public float damageCooldown = 3f; // Durasi cooldown setelah menerima damage
 
-    // Metode untuk mengambil damage
+    // Metode untuk menerima damage
     public void TakeDamagePlayer2()
     {
-        if (!isInvulnerable)
+        if (canReceiveDamage)
         {
-            // Logika untuk menerima damage di sini
             Debug.Log("Player 2 menerima damage!");
-            // Tambahkan logika damage yang sesuai, seperti mengurangi health
+            // Logika pengurangan health di sini
 
-            // Memanggil metode untuk memulai status imun
-            StartCoroutine(ActivateInvulnerability());
+            canReceiveDamage = false; // Nonaktifkan kemampuan menerima damage
+            StartCoroutine(DamageCooldown()); // Memulai coroutine untuk cooldown
         }
         else
         {
@@ -25,12 +24,11 @@ public class ImmunePlayer2GameTembak : MonoBehaviour
         }
     }
 
-    // Coroutine untuk mengatur status imun
-    private IEnumerator ActivateInvulnerability()
+    // Coroutine untuk mengatur cooldown damage
+    private IEnumerator DamageCooldown()
     {
-        isInvulnerable = true; // Aktifkan status imun
-        yield return new WaitForSeconds(invulnerabilityDuration); // Tunggu selama durasi yang ditentukan
-        isInvulnerable = false; // Nonaktifkan status imun
-        Debug.Log("Imun selesai, Player 2 bisa menerima damage lagi.");
+        yield return new WaitForSeconds(damageCooldown); // Tunggu selama durasi cooldown
+        canReceiveDamage = true; // Aktifkan kembali kemampuan menerima damage
+        Debug.Log("Player 2 dapat menerima damage lagi.");
     }
 }

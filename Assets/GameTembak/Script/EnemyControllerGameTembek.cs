@@ -8,6 +8,22 @@ public class EnemyControllerGameTembek : MonoBehaviour
     public float moveDownDistance = 0.5f;
 
     private bool movingRight = true;
+    public int pointsForKill = 10; // Jumlah poin yang diberikan ketika musuh terbunuh
+
+    [SerializeField] ScoreManagerGameTembak scoreManagerGameTembak;
+
+    void Awake()
+    {
+        // Temukan ScoreManagerGameTembak di scene
+        scoreManagerGameTembak = FindObjectOfType<ScoreManagerGameTembak>();
+
+        // Periksa jika tidak ditemukan
+        if (scoreManagerGameTembak == null)
+        {
+            Debug.LogError("ScoreManagerGameTembak tidak ditemukan di scene!");
+        }
+    }
+
 
     void Update()
     {
@@ -34,6 +50,24 @@ public class EnemyControllerGameTembek : MonoBehaviour
         {
             movingRight = !movingRight;
             transform.position = new Vector2(transform.position.x, transform.position.y - moveDownDistance);
+        }
+        else if (other.CompareTag("PlayerBullet"))
+        {
+            // Ketika terkena peluru dari pemain, musuh akan mati dan memberikan poin
+            Destroy(other.gameObject); // Hancurkan peluru
+
+            if (other.gameObject.layer == LayerMask.NameToLayer("Player1Bullet"))
+            {
+                // Tambahkan poin untuk Player 1
+                scoreManagerGameTembak.AddScorePlayer1(pointsForKill);
+            }
+            else if (other.gameObject.layer == LayerMask.NameToLayer("Player2Bullet"))
+            {
+                // Tambahkan poin untuk Player 2
+                scoreManagerGameTembak.AddScorePlayer2(pointsForKill);
+            }
+
+            Destroy(gameObject); // Hancurkan musuh
         }
     }
 }

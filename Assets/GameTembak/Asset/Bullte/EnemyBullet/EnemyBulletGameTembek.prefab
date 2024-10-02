@@ -100,8 +100,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   lifetime: 3
-  disableAttackScript1: {fileID: 0}
-  disableAttackScript2: {fileID: 0}
 --- !u!61 &587069614771294014
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 1003174450230095278}
   - component: {fileID: 1865229933923879666}
   - component: {fileID: 4693437360157470462}
+  - component: {fileID: 523513798254652217}
   m_Layer: 6
   m_Name: Player 1
   m_TagString: Player1
@@ -132,10 +133,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  bulletPrefab: {fileID: 7776263813212769816, guid: e8c5105c3a80a6f448acca9002a90840, type: 3}
+  bulletPrefab: {fileID: 8074911442947544345, guid: a4766124a47bfa14287256b08c3399b7, type: 3}
   bulletSpawnPoint: {fileID: 7257831437941498122}
   canShoot: 0
-  isInvulnerable: 0
   immunePlayer: {fileID: 0}
 --- !u!50 &1865229933923879666
 Rigidbody2D:
@@ -209,3 +209,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &523513798254652217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4419566678853251767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5da04c910ae0d74fba75abf2946962f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canReceiveDamage: 1
+  damageCooldown: 3

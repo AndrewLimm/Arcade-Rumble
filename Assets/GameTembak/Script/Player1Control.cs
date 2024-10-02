@@ -14,6 +14,9 @@ public class Player1Control : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    private float lastShootTime; // Waktu tembakan terakhir
+    public float shootCooldown = 0.3f; // Durasi cooldown tembakan
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -38,7 +41,7 @@ public class Player1Control : MonoBehaviour
         rb.velocity = new Vector2(move * speed, 0); // Gerakan horizontal
 
         // Menembak dengan tombol W, hanya jika canShoot bernilai true
-        if (Input.GetKeyDown(KeyCode.W) && canShoot)
+        if (Input.GetKeyDown(KeyCode.W) && canShoot && Time.time >= lastShootTime + shootCooldown)
         {
             Shoot();
         }
@@ -48,6 +51,7 @@ public class Player1Control : MonoBehaviour
     {
         // Menembakkan peluru dari posisi pemain
         Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+        lastShootTime = Time.time;
     }
 
     public void ReceiveDamagePlayer1()
