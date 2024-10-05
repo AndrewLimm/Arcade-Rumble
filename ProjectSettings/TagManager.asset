@@ -9,6 +9,8 @@ TagManager:
   - Player1
   - Player2
   - PlayerBullet
+  - Player1Collector
+  - Player2Collector
   layers:
   - Default
   - TransparentFX
