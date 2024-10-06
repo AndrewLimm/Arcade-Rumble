@@ -11,6 +11,7 @@ TagManager:
   - PlayerBullet
   - Player1Collector
   - Player2Collector
+  - Coin
   layers:
   - Default
   - TransparentFX
