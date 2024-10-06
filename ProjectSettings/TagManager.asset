@@ -12,6 +12,8 @@ TagManager:
   - Player1Collector
   - Player2Collector
   - Coin
+  - Obstacle
+  - Scoring
   layers:
   - Default
   - TransparentFX
