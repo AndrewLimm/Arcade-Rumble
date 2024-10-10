@@ -14,6 +14,7 @@ TagManager:
   - Coin
   - Obstacle
   - Scoring
+  - ObstacleDestroy
   layers:
   - Default
   - TransparentFX

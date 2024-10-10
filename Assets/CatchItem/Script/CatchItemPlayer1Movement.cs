@@ -9,6 +9,10 @@ public class CatchItemPlayer1Movement : MonoBehaviour
     private Rigidbody2D rb;
     private float movement;
 
+    public bool isFacingRight = true;
+
+    public SpriteRenderer spriteRenderer;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,12 +31,37 @@ public class CatchItemPlayer1Movement : MonoBehaviour
         {
             movement = 1;
         }
+
+        //melakukan flip
+        FlipCharacter();
     }
 
     void FixedUpdate()
     {
         // Gerakkan player ke kiri/kanan berdasarkan input
         rb.velocity = new Vector2(movement * moveSpeed, rb.velocity.y);
+    }
+
+
+    // Fungsi untuk membalik arah hadap karakter
+    void FlipCharacter()
+    {
+        // Jika bergerak ke kiri dan sedang menghadap kanan atau sebaliknya, maka balik arah
+        if (movement < 0 && isFacingRight)
+        {
+            Flip();
+        }
+        else if (movement > 0 && !isFacingRight)
+        {
+            Flip();
+        }
+    }
+
+    // Fungsi untuk membalik sprite karakter
+    void Flip()
+    {
+        isFacingRight = !isFacingRight; // Balik arah hadap
+        spriteRenderer.flipX = !spriteRenderer.flipX; // Membalikkan sprite secara horizontal
     }
 
 }
