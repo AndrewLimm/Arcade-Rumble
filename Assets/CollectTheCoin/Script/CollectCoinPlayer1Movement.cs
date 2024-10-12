@@ -11,10 +11,15 @@ public class CollectCoinPlayer1Movement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
 
+    public SpriteRenderer spriteRenderer;
+
+    [SerializeField] CollecCoinPlayer1Animator collecCoinPlayer1Animator;
+
     private void Start()
     {
         originalSpeed = moveSpeed;
         rb = GetComponent<Rigidbody2D>();
+        collecCoinPlayer1Animator = GetComponent<CollecCoinPlayer1Animator>();
     }
 
     void Update()
@@ -26,6 +31,8 @@ public class CollectCoinPlayer1Movement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+        UpdateAnimation();
+        FlipSprite();
     }
 
     void ProcessInputs()
@@ -65,5 +72,24 @@ public class CollectCoinPlayer1Movement : MonoBehaviour
     {
         moveSpeed = originalSpeed * multiplier;
         speedBoostTimer = duration;
+    }
+
+    void UpdateAnimation()
+    {
+        bool isMoving = movement.x != 0 || movement.y != 0;
+        collecCoinPlayer1Animator.UpdateAnimationState(isMoving);
+    }
+
+    // Flip the sprite based on movement direction
+    void FlipSprite()
+    {
+        if (movement.x > 0)
+        {
+            spriteRenderer.flipX = false; // Menghadap kanan
+        }
+        else if (movement.x < 0)
+        {
+            spriteRenderer.flipX = true; // Menghadap kiri
+        }
     }
 }
