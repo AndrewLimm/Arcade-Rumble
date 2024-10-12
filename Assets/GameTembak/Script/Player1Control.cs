@@ -11,17 +11,17 @@ public class Player1Control : MonoBehaviour
 
     [SerializeField] ImmunePlayer1GameTembak immunePlayer; // Referensi ke script immune
 
-
     private Rigidbody2D rb;
-
+    private SpriteRenderer spriteRenderer; // Komponen SpriteRenderer untuk mengatur flip
     private float lastShootTime; // Waktu tembakan terakhir
     public float shootCooldown = 0.3f; // Durasi cooldown tembakan
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>(); // Mendapatkan komponen SpriteRenderer
         canShoot = true;
-        // Mendapatkan referensi ke Immmune
+        // Mendapatkan referensi ke Immune
         immunePlayer = GetComponent<ImmunePlayer1GameTembak>();
     }
 
@@ -32,15 +32,17 @@ public class Player1Control : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             move = -1; // Bergerak ke kiri
+            spriteRenderer.flipX = false; // Membalik sprite ke arah kiri
         }
         else if (Input.GetKey(KeyCode.D))
         {
             move = 1; // Bergerak ke kanan
+            spriteRenderer.flipX = true; // Mengembalikan sprite ke arah kanan
         }
 
         rb.velocity = new Vector2(move * speed, 0); // Gerakan horizontal
 
-        // Menembak dengan tombol W, hanya jika canShoot bernilai true
+        // Menembak dengan tombol W, hanya jika canShoot bernilai true dan cooldown telah berlalu
         if (Input.GetKeyDown(KeyCode.W) && canShoot && Time.time >= lastShootTime + shootCooldown)
         {
             Shoot();

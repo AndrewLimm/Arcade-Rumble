@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 4994801969126737251}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.996, z: 0}
+  m_LocalPosition: {x: 0, y: -0.692, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 812393873090280206}
   - component: {fileID: 3178087566798774703}
   - component: {fileID: 6401668535991581154}
+  - component: {fileID: 6542411813137728188}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -109,7 +110,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: -7659945631384244969, guid: 8721cbbfe3ba6a8418cd21a8de3a410c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -156,7 +157,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
+    oldSize: {x: 1.44, y: 1.36}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -204,8 +205,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b7b58806f80cd43980c3075058e0d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 1.5
   moveDownDistance: 0.5
+  pointsForKill: 10
+  scoreManagerGameTembak: {fileID: 0}
 --- !u!114 &6401668535991581154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,3 +224,24 @@ MonoBehaviour:
   bulletPrefab: {fileID: 457395542757254183, guid: 7e78eb3be9ca2c748b95e6fa08958fb5, type: 3}
   bulletSpawnPoint: {fileID: 5259854209913000705}
   shootInterval: 2
+--- !u!95 &6542411813137728188
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7470155510020886603}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 190b3c83d17b9a243b21c48b2e9a16cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
