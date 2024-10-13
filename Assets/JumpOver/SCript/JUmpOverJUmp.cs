@@ -4,15 +4,46 @@ using UnityEngine;
 
 public class JUmpOverJUmp : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
 
+    public float jumpForce = 10f;
+    private bool canDoubleJump = false;
+    private Rigidbody2D rb;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        HandleJump();
+    }
 
+    private void HandleJump()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            if (IsGrounded())
+            {
+                Jump();
+                canDoubleJump = true; // Mengizinkan double jump setelah lompatan pertama
+            }
+            else if (canDoubleJump)
+            {
+                Jump();
+                canDoubleJump = false; // Menonaktifkan double jump setelah digunakan
+            }
+        }
+    }
+
+    private void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce); // Beri gaya ke atas pada rigidbody
+    }
+
+    private bool IsGrounded()
+    {
+        // Cek apakah player menyentuh tanah
+        return rb.velocity.y == 0;
     }
 }

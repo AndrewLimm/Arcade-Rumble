@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class JumpOverFastFall : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float fastFallSpeed = 20f;
+    private Rigidbody2D rb;
+
+    private void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        HandleFastFall();
+    }
+
+    private void HandleFastFall()
+    {
+        if (!IsGrounded() && Input.GetKeyDown(KeyCode.S))
+        {
+            FastFall();
+        }
+    }
+
+    private void FastFall()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, -fastFallSpeed); // Mempercepat kejatuhan pemain
+    }
+
+    private bool IsGrounded()
+    {
+        // Cek apakah player menyentuh tanah
+        return rb.velocity.y == 0;
     }
 }
