@@ -6,10 +6,9 @@ using UnityEngine;
 [System.Serializable]
 public class Soal
 {
-    public Sprite pertanyaan;           // Gambar yang akan ditampilkan sebagai pertanyaan
-    public Sprite jawabanBenar;         // Gambar jawaban benar
-    public List<Sprite> jawabanSalah;        // Pilihan gambar lainnya (selain yang benar)
-
+    public string pertanyaan;           // Text yang akan ditampilkan sebagai pertanyaan
+    public string jawabanBenar;         // Jawaban benar dalam bentuk teks
+    public List<string> jawabanSalah;   // Pilihan jawaban lainnya (salah) dalam bentuk teks
 }
 
 public class RandomPool : MonoBehaviour
@@ -34,15 +33,15 @@ public class RandomPool : MonoBehaviour
             return null;
         }
 
-        if (soal.pertanyaan == null)
+        if (string.IsNullOrEmpty(soal.pertanyaan))
         {
-            Debug.LogError("Soal memiliki gambar pertanyaan yang null.");
+            Debug.LogError("Soal memiliki pertanyaan yang kosong atau null.");
             return null;
         }
 
-        if (soal.jawabanBenar == null)
+        if (string.IsNullOrEmpty(soal.jawabanBenar))
         {
-            Debug.LogError("Soal memiliki gambar jawaban benar yang null.");
+            Debug.LogError("Soal memiliki jawaban benar yang kosong atau null.");
             return null;
         }
 
@@ -52,17 +51,17 @@ public class RandomPool : MonoBehaviour
             return null;
         }
 
-        // Debug untuk memastikan daftar jawaban salah tidak mengandung nilai null
-        foreach (Sprite jawaban in soal.jawabanSalah)
+        // Debug untuk memastikan daftar jawaban salah tidak mengandung nilai null atau kosong
+        foreach (string jawaban in soal.jawabanSalah)
         {
-            if (jawaban == null)
+            if (string.IsNullOrEmpty(jawaban))
             {
-                Debug.LogError("Daftar jawaban salah mengandung nilai null.");
+                Debug.LogError("Daftar jawaban salah mengandung nilai kosong atau null.");
                 return null;
             }
         }
 
-        Debug.Log("Soal yang diambil: " + soal.pertanyaan.name);
+        Debug.Log("Soal yang diambil: " + soal.pertanyaan);
         return soal; // Ambil soal secara acak
     }
 }
