@@ -6,11 +6,14 @@ public class TargetSpawner : MonoBehaviour
 {
     public GameObject targetPrefab; // Prefab objek yang akan diserang
     public Transform[] spawnPoints; // Tempat di mana objek akan muncul
-    public float spawnInterval = 2f; // Waktu interval antar spawn
+    public float minSpawnInterval = 2f; // Interval spawn minimum
+    public float maxSpawnInterval = 4f; // Interval spawn maksimum
+    private float spawnInterval; // Waktu interval antar spawn
     private float timer;
 
     void Start()
     {
+        SetRandomSpawnInterval(); // Set interval spawn acak saat permainan dimulai
         timer = spawnInterval;
     }
 
@@ -21,7 +24,8 @@ public class TargetSpawner : MonoBehaviour
         if (timer <= 0f)
         {
             SpawnTarget();
-            timer = spawnInterval; // Reset timer
+            SetRandomSpawnInterval(); // Set interval spawn acak untuk spawn berikutnya
+            timer = spawnInterval; // Reset timer dengan interval baru
         }
     }
 
@@ -39,5 +43,11 @@ public class TargetSpawner : MonoBehaviour
         {
             enemyController.SetLane(spawnPoints[randomLaneIndex].position);
         }
+    }
+
+    void SetRandomSpawnInterval()
+    {
+        spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
+        Debug.Log("Interval spawn baru: " + spawnInterval + " detik");
     }
 }
