@@ -2,25 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCollect : MonoBehaviour
+public class QuickTapPlayer2Input : MonoBehaviour
 {
     public int playerScore = 0; // Player 1's score
     public float range = 100f; // Collection range
-    private SpawnerManager spawnManager;
-    private QuickTapScoreUI player1ScoreUI;
+    private QuickTapPlayer2Spawner spawnManagerplayer2;
+    private QuickTapPlayer2Ui player2ScoreUI;
 
     private void Start()
     {
-        spawnManager = FindObjectOfType<SpawnerManager>(); // Find the SpawnManager script in the scene
-        player1ScoreUI = FindObjectOfType<QuickTapScoreUI>(); // Find the Player1ScoreUI script in the scene
+        spawnManagerplayer2 = FindObjectOfType<QuickTapPlayer2Spawner>(); // Find the SpawnManager script in the scene
+        player2ScoreUI = FindObjectOfType<QuickTapPlayer2Ui>(); // Find the Player1ScoreUI script in the scene
     }
 
     public GameObject GetFrontFoodInRange()
     {
-        if (spawnManager.spawnedObjects.Count > 0)
+        if (spawnManagerplayer2.spawnedObjectplayer2.Count > 0)
         {
-            GameObject frontFood = spawnManager.spawnedObjects[0];
+            GameObject frontFood = spawnManagerplayer2.spawnedObjectplayer2[0];
             float distance = Vector3.Distance(transform.position, frontFood.transform.position);
+            Debug.Log("Jarak ke objek: " + distance);
 
             if (distance < range)
             {
@@ -39,9 +40,9 @@ public class PlayerCollect : MonoBehaviour
         Debug.Log("Player 1 collected edible food! Score: " + playerScore);
 
         // Update Player 1's score on the UI
-        player1ScoreUI.UpdatePlayer1Score(playerScore);
+        player2ScoreUI.UpdatePlayer2Score(playerScore);
 
-        spawnManager.ShiftFoodItems(); // Shift food items downward
+        spawnManagerplayer2.ShiftFoodItems(); // Shift food items downward
     }
 
     public void CollectTrash(GameObject food)
@@ -52,9 +53,9 @@ public class PlayerCollect : MonoBehaviour
         Debug.Log("Player 1 collected trash correctly! Score: " + playerScore);
 
         // Update Player 1's score on the UI
-        player1ScoreUI.UpdatePlayer1Score(playerScore);
+        player2ScoreUI.UpdatePlayer2Score(playerScore);
 
-        spawnManager.ShiftFoodItems(); // Shift food items downward
+        spawnManagerplayer2.ShiftFoodItems(); // Shift food items downward
     }
 
     public void WrongCollection(GameObject food)
@@ -65,9 +66,17 @@ public class PlayerCollect : MonoBehaviour
         Debug.Log("Player 1 collected the wrong item! Score: " + playerScore);
 
         // Update Player 1's score on the UI
-        player1ScoreUI.UpdatePlayer1Score(playerScore);
+        player2ScoreUI.UpdatePlayer2Score(playerScore);
 
-        spawnManager.ShiftFoodItems(); // Shift food items downward
+        spawnManagerplayer2.ShiftFoodItems(); // Shift food items downward
 
+    }
+
+    private void OnDrawGizmos()
+    {
+        // Set the color for the Gizmos
+        Gizmos.color = Color.green;
+        // Draw a wire sphere to represent the collection range
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 }

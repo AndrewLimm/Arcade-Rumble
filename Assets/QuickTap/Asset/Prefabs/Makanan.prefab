@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6447234109549308427
+--- !u!1001 &1279088380024055268
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,9 +8,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1568833515902516509, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
+      propertyPath: m_Size.x
+      value: 2.7128165
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568833515902516509, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
+      propertyPath: m_Size.y
+      value: 1.2387483
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568833515902516509, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.00000011920929
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568833515902516509, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.007319689
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568833515902516509, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568833515902516509, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.468
+      objectReference: {fileID: 0}
     - target: {fileID: 3995606057669591567, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
       propertyPath: m_Name
-      value: two
+      value: Makanan
       objectReference: {fileID: 0}
     - target: {fileID: 3995606057669591567, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
       propertyPath: m_TagString
@@ -57,16 +81,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9115153066931894609, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 87c108f501ab5c647a395893411f01ba, type: 3}
+    - target: {fileID: 9115153066931894609, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
       propertyPath: m_Color.b
-      value: 0.2058117
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9115153066931894609, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
       propertyPath: m_Color.g
-      value: 0.2058117
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9115153066931894609, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
       propertyPath: m_Color.r
-      value: 0.23584908
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

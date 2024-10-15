@@ -9,7 +9,7 @@ public class EdibleInput : MonoBehaviour
 
     private void Start()
     {
-        playerCollect = GetComponent<PlayerCollect>(); // Mengakses skrip PlayerCollect
+        playerCollect = FindAnyObjectByType<PlayerCollect>(); // Mengakses skrip PlayerCollect
     }
 
     private void Update()

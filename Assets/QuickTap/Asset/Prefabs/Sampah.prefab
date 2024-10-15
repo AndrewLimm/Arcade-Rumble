@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &512824264476103207
+--- !u!1001 &3973715237843150241
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,9 +8,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1568833515902516509, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
+      propertyPath: m_Size.x
+      value: 2.4819126
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568833515902516509, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
+      propertyPath: m_Size.y
+      value: 1.0232847
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568833515902516509, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.011226654
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568833515902516509, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.02245316
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568833515902516509, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.475
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568833515902516509, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.03
+      objectReference: {fileID: 0}
     - target: {fileID: 3995606057669591567, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
       propertyPath: m_Name
-      value: one
+      value: Sampah
       objectReference: {fileID: 0}
     - target: {fileID: 3995606057669591567, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
       propertyPath: m_TagString
@@ -57,17 +81,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9115153066931894609, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9115153066931894609, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9115153066931894609, guid: ce37e74188da6d04f83d27c3ad53b49f, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3d20efbb410c9a74aa1fb8faf968bd50, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
