@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class SpawnerManager : MonoBehaviour
 {
+
     public Transform spawnStartPoint; // Titik awal spawn di bagian bawah
     public List<GameObject> foodItems; // List makanan dan sampah
     public List<GameObject> spawnedObjects; // List objek yang sudah di-spawn
     public int maxFoodItems = 100; // Maksimal 100 makanan
     public float spawnInterval = 1.5f; // Jarak vertikal antar makanan
-    public float moveSpeed = 2f; // Kecepatan makanan turun saat makanan dikumpulkan
+    public float moveSpeed = 2f; // Kecepatan makanan naik saat makanan dikumpulkan
 
     private void Start()
     {
@@ -20,21 +21,21 @@ public class SpawnerManager : MonoBehaviour
         }
     }
 
-    // Method untuk spawn makanan
+    // Method untuk spawn makanan dari bawah ke atas
     private void SpawnFoodItem(int index)
     {
         if (foodItems.Count > 0)
         {
             // Memilih makanan acak dari list
             int randomIndex = Random.Range(0, foodItems.Count);
-            // Spawn di posisi yang lebih tinggi dari objek terakhir
-            GameObject food = Instantiate(foodItems[randomIndex], spawnStartPoint.position + new Vector3(0, index * spawnInterval, 0), Quaternion.identity);
+            // Spawn di posisi yang lebih rendah dari objek terakhir
+            GameObject food = Instantiate(foodItems[randomIndex], spawnStartPoint.position - new Vector3(0, index * spawnInterval, 0), Quaternion.identity);
 
             spawnedObjects.Add(food); // Menambahkan makanan ke list spawned
         }
     }
 
-    // Method untuk memindahkan makanan ke atas setelah objek terdepan dikumpulkan
+    // Method untuk memindahkan makanan ke bawah setelah objek terdepan dikumpulkan
     public void ShiftFoodItems()
     {
         if (spawnedObjects.Count > 0)
@@ -44,10 +45,10 @@ public class SpawnerManager : MonoBehaviour
             spawnedObjects.RemoveAt(0);
             Destroy(collectedFood);
 
-            // Geser makanan yang tersisa ke atas
+            // Geser makanan yang tersisa ke bawah
             for (int i = 0; i < spawnedObjects.Count; i++)
             {
-                Vector3 targetPosition = spawnStartPoint.position + new Vector3(0, (i) * spawnInterval, 0);
+                Vector3 targetPosition = spawnStartPoint.position - new Vector3(0, i * spawnInterval, 0);
                 StartCoroutine(MoveToPosition(spawnedObjects[i], targetPosition)); // Pindahkan dengan animasi
             }
 

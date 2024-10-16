@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     private bool hasFinished = false;  // To check if Player 1 has finished
     public GameEnded gameManager;    // Reference to the GameManager script
 
+    public RaceToFinishAnimation animationController;
+
     private void Update()
     {
         if (hasFinished || gameManager == null)
@@ -20,12 +22,18 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(moveKey1) || Input.GetKeyDown(moveKey2))
         {
             transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
+            animationController.PlayMoveAnimation();  // Trigger the move animation
+        }
+        else
+        {
+            animationController.PlayIdleAnimation();  // Trigger the idle animation
         }
 
         // Check if the player has reached the finish line
         if (transform.position.x >= finishLine.position.x)
         {
             hasFinished = true;
+            animationController.PlayIdleAnimation();  // Ensure the idle animation plays
             gameManager.EndGame("Player 1");   // Notify GameManager that Player 1 won
         }
     }

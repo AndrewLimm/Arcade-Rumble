@@ -17,9 +17,9 @@ public class QuickTapPlayer2Input : MonoBehaviour
 
     public GameObject GetFrontFoodInRange()
     {
-        if (spawnManagerplayer2.spawnedObjectplayer2.Count > 0)
+        if (spawnManagerplayer2.spawnedObjectsPlayer2.Count > 0)
         {
-            GameObject frontFood = spawnManagerplayer2.spawnedObjectplayer2[0];
+            GameObject frontFood = spawnManagerplayer2.spawnedObjectsPlayer2[0];
             float distance = Vector3.Distance(transform.position, frontFood.transform.position);
             Debug.Log("Jarak ke objek: " + distance);
 

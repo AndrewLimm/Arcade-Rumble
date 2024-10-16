@@ -5,54 +5,54 @@ using UnityEngine;
 public class QuickTapPlayer2Spawner : MonoBehaviour
 {
     public Transform spawnStartPoint; // Titik awal spawn di bagian bawah
-    public List<GameObject> foodItemsplayer2; // List makanan dan sampah
-    public List<GameObject> spawnedObjectplayer2; // List objek yang sudah di-spawn
-    public int maxFoodItems = 100; // Maksimal 100 makanan
+    public List<GameObject> foodItemsPlayer2; // List makanan dan sampah khusus Player 2
+    public List<GameObject> spawnedObjectsPlayer2; // List objek yang sudah di-spawn khusus Player 2
+    public int maxFoodItems = 100; // Maksimal 100 makanan untuk Player 2
     public float spawnInterval = 1.5f; // Jarak vertikal antar makanan
-    public float moveSpeed = 2f; // Kecepatan makanan turun saat makanan dikumpulkan
+    public float moveSpeed = 2f; // Kecepatan makanan naik saat makanan dikumpulkan
 
     private void Start()
     {
-        // Spawn makanan pada awal permainan
+        // Spawn makanan pada awal permainan untuk Player 2
         for (int i = 0; i < maxFoodItems; i++)
         {
             SpawnFoodItem(i);
         }
     }
 
-    // Method untuk spawn makanan
+    // Method untuk spawn makanan dari bawah ke atas khusus Player 2
     private void SpawnFoodItem(int index)
     {
-        if (foodItemsplayer2.Count > 0)
+        if (foodItemsPlayer2.Count > 0)
         {
-            // Memilih makanan acak dari list
-            int randomIndex = Random.Range(0, foodItemsplayer2.Count);
-            // Spawn di posisi yang lebih tinggi dari objek terakhir
-            GameObject food = Instantiate(foodItemsplayer2[randomIndex], spawnStartPoint.position + new Vector3(0, index * spawnInterval, 0), Quaternion.identity);
+            // Memilih makanan acak dari list khusus Player 2
+            int randomIndex = Random.Range(0, foodItemsPlayer2.Count);
+            // Spawn di posisi yang lebih rendah dari objek terakhir
+            GameObject food = Instantiate(foodItemsPlayer2[randomIndex], spawnStartPoint.position - new Vector3(0, index * spawnInterval, 0), Quaternion.identity);
 
-            spawnedObjectplayer2.Add(food); // Menambahkan makanan ke list spawned
+            spawnedObjectsPlayer2.Add(food); // Menambahkan makanan ke list spawned khusus Player 2
         }
     }
 
-    // Method untuk memindahkan makanan ke atas setelah objek terdepan dikumpulkan
+    // Method untuk memindahkan makanan ke bawah setelah objek terdepan dikumpulkan oleh Player 2
     public void ShiftFoodItems()
     {
-        if (spawnedObjectplayer2.Count > 0)
+        if (spawnedObjectsPlayer2.Count > 0)
         {
-            // Hapus makanan terdepan dari list
-            GameObject collectedFood = spawnedObjectplayer2[0];
-            spawnedObjectplayer2.RemoveAt(0);
+            // Hapus makanan terdepan dari list khusus Player 2
+            GameObject collectedFood = spawnedObjectsPlayer2[0];
+            spawnedObjectsPlayer2.RemoveAt(0);
             Destroy(collectedFood);
 
-            // Geser makanan yang tersisa ke atas
-            for (int i = 0; i < spawnedObjectplayer2.Count; i++)
+            // Geser makanan yang tersisa ke bawah
+            for (int i = 0; i < spawnedObjectsPlayer2.Count; i++)
             {
-                Vector3 targetPosition = spawnStartPoint.position + new Vector3(0, (i) * spawnInterval, 0);
-                StartCoroutine(MoveToPosition(spawnedObjectplayer2[i], targetPosition)); // Pindahkan dengan animasi
+                Vector3 targetPosition = spawnStartPoint.position - new Vector3(0, i * spawnInterval, 0);
+                StartCoroutine(MoveToPosition(spawnedObjectsPlayer2[i], targetPosition)); // Pindahkan dengan animasi
             }
 
             // Respawn satu makanan di bagian paling bawah
-            SpawnFoodItem(spawnedObjectplayer2.Count);
+            SpawnFoodItem(spawnedObjectsPlayer2.Count);
         }
     }
 
