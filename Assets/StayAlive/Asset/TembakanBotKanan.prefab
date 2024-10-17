@@ -48,6 +48,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6033218844161922419, guid: 934565a6d3452724094a2eeee01a3523, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6033218844161922419, guid: 934565a6d3452724094a2eeee01a3523, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f01d991de8dbf3a4c974af02b880c00f, type: 3}
+    - target: {fileID: 7390221293428458952, guid: 934565a6d3452724094a2eeee01a3523, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7390221293428458952, guid: 934565a6d3452724094a2eeee01a3523, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7390221293428458952, guid: 934565a6d3452724094a2eeee01a3523, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.215
+      objectReference: {fileID: 0}
+    - target: {fileID: 7390221293428458952, guid: 934565a6d3452724094a2eeee01a3523, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.845
+      objectReference: {fileID: 0}
     - target: {fileID: 7802890084086662736, guid: 934565a6d3452724094a2eeee01a3523, type: 3}
       propertyPath: m_Name
       value: TembakanBotKanan
@@ -59,6 +83,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7802890084086662736, guid: 934565a6d3452724094a2eeee01a3523, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4300550697675256018}
+    - targetCorrespondingSourceObject: {fileID: 7802890084086662736, guid: 934565a6d3452724094a2eeee01a3523, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3671428798585601016}
   m_SourcePrefab: {fileID: 100100000, guid: 934565a6d3452724094a2eeee01a3523, type: 3}
 --- !u!1 &2864729049823237496 stripped
 GameObject:
@@ -79,3 +106,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   lifetime: 3
+  damage: 35
+--- !u!58 &3671428798585601016
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2864729049823237496}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.45, y: -0.13}
+  serializedVersion: 2
+  m_Radius: 0.12154901

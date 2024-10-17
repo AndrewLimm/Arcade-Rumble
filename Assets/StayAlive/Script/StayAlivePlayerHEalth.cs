@@ -7,6 +7,8 @@ public class StayAlivePlayerHEalth : MonoBehaviour
     public int maxHealth = 100;  // Maximum health of the player
     public int currentHealth;
 
+    [SerializeField] StayAliveGameOverManager gameOverManager;
+
     void Start()
     {
         currentHealth = maxHealth;  // Initialize player's health to maximum
@@ -21,10 +23,21 @@ public class StayAlivePlayerHEalth : MonoBehaviour
             currentHealth = 0;
             Debug.Log(gameObject.tag + " is dead!");  // Player is dead
             // You can add logic here to handle player death
-        }
-        else
-        {
-            Debug.Log(gameObject.tag + " has " + currentHealth + " health left.");
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0;
+                Debug.Log(gameObject.tag + " is dead!");  // Player is dead
+
+                // Panggil metode TriggerEnd di GameOverManager jika health pemain mencapai 0
+                if (gameOverManager != null)
+                {
+                    gameOverManager.TriggerEnd();
+                }
+            }
+            else
+            {
+                Debug.Log(gameObject.tag + " has " + currentHealth + " health left.");
+            }
         }
     }
 }
