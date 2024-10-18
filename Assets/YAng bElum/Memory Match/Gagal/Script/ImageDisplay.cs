@@ -20,14 +20,13 @@ public class ImageDisplay : MonoBehaviour
 
     IEnumerator DisplaySprites()
     {
-        List<int> indices = new List<int> { 0, 1, 2 }; // Index dari sprite
-        Shuffle(indices); // Acak urutan index
+        List<int> indices = new List<int> { 0, 1, 2 };
+        Shuffle(indices);
         _shuffledIndices = indices;
 
         // Tampilkan sprite satu per satu berdasarkan urutan yang diacak
         for (int i = 0; i < indices.Count; i++)
         {
-            // Set sprite berdasarkan index acak
             spriteRenderers[indices[i]].sprite = sprites[indices[i]];
 
             // Tampilkan sprite selama 2 detik
@@ -37,7 +36,7 @@ public class ImageDisplay : MonoBehaviour
             spriteRenderers[indices[i]].sprite = null;
         }
 
-        // Setelah semua gambar ditampilkan, aktifkan input pemain
+        _isGameStarted = false; // Tandai bahwa soal selesai
     }
 
     void Shuffle(List<int> list)
@@ -59,5 +58,13 @@ public class ImageDisplay : MonoBehaviour
     public List<int> GetShuffledIndices()
     {
         return _shuffledIndices;
+    }
+
+    public void CheckAnswer(bool playerAnsweredCorrectly)
+    {
+        if (playerAnsweredCorrectly && !_isGameStarted)
+        {
+            StartGame(); // Memulai soal baru hanya jika jawaban benar
+        }
     }
 }
