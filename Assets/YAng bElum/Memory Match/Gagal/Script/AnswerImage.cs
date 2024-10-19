@@ -10,6 +10,8 @@ public class AnswerImage : MonoBehaviour
     [SerializeField] private MemoryMatchPlayer2Input player2Input;
     [SerializeField] private MemoryMatchINputIndicator inputIndicator; // Referensi ke MemoryMatchInputIndicator
     [SerializeField] private MemoryMatchInputIndicatorPlayer memoryMatchInputIndicatorPlayer;
+    [SerializeField] private MemoryMatchPlayer1Score memoryMatchPlayer1Score;
+    [SerializeField] private MemoryMatchPlayer2 memoryMatchPlayer2Score;
 
     public List<SpriteRenderer> answerRenderers = new List<SpriteRenderer>();
     public List<Sprite> answerSprites = new List<Sprite>();
@@ -169,6 +171,16 @@ public class AnswerImage : MonoBehaviour
         {
             Debug.Log("Player " + pemain + " benar!");
             _imageDisplay.CheckAnswer(true); // Memanggil fungsi CheckAnswer di sini
+
+            if (pemain == 1)
+            {
+                memoryMatchPlayer1Score.AddScore(); //menambahkan score
+            }
+            else if (pemain == 2)
+            {
+                memoryMatchPlayer2Score.AddScore(); //menambahkan scoreplayer 2
+            }
+
         }
         else
         {
