@@ -10,11 +10,6 @@ public class MemoryMatchGameTImer : MonoBehaviour
     public TMP_Text timerText; // UI Text untuk menampilkan timer
     private bool isGameRunning = false; // Flag untuk mengecek apakah permainan sedang berjalan
 
-    private void Start()
-    {
-        StartGameTimer(); // Mulai timer saat permainan dimulai
-    }
-
     private void Update()
     {
         if (isGameRunning)

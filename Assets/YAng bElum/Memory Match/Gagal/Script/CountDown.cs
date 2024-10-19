@@ -9,6 +9,7 @@ public class CountDown : MonoBehaviour
     public float _countdownTime = 5f;
 
     [SerializeField] ImageDisplay _display;
+    [SerializeField] MemoryMatchGameTImer gameTImer;
 
     void Start()
     {
@@ -28,6 +29,8 @@ public class CountDown : MonoBehaviour
         _countdownText.gameObject.SetActive(false);
         // Start the game
 
+        // Mulai permainan setelah countdown selesai
         _display.StartGame();
+        gameTImer.StartGameTimer(); // Memulai timer permainan di sini
     }
 }

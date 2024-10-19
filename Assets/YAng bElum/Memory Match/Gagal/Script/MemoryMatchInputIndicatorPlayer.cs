@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MemoryMatchINputIndicator : MonoBehaviour
+public class MemoryMatchInputIndicatorPlayer : MonoBehaviour
 {
     public List<SpriteRenderer> lamps; // List untuk menyimpan SpriteRenderer dari lampu
     public Sprite lampOnSprite; // Sprite lampu menyala
@@ -29,13 +29,13 @@ public class MemoryMatchINputIndicator : MonoBehaviour
         {
             lamps[index].sprite = lampOnSprite; // Setel sprite lampu menyala sesuai index input
             lampCount++; // Tambahkan hitungan lampu yang menyala
-            Debug.Log($"Lampu Player 1 ke-{index + 1} menyala!");
+            Debug.Log($"Lampu Player 2 ke-{index + 1} menyala!");
 
             // Jika semua lampu sudah menyala, reset lampu kembali ke keadaan mati
             if (lampCount >= lamps.Count)
             {
                 ResetLamps();
-                Debug.Log("Semua lampu Player 1 menyala, reset lampu!");
+                Debug.Log("Semua lampu Player 2 menyala, reset lampu!");
             }
         }
     }

@@ -9,6 +9,7 @@ public class AnswerImage : MonoBehaviour
     [SerializeField] private MemoryMatchPlayer1Input player1Input;
     [SerializeField] private MemoryMatchPlayer2Input player2Input;
     [SerializeField] private MemoryMatchINputIndicator inputIndicator; // Referensi ke MemoryMatchInputIndicator
+    [SerializeField] private MemoryMatchInputIndicatorPlayer memoryMatchInputIndicatorPlayer;
 
     public List<SpriteRenderer> answerRenderers = new List<SpriteRenderer>();
     public List<Sprite> answerSprites = new List<Sprite>();
@@ -140,7 +141,7 @@ public class AnswerImage : MonoBehaviour
         if (!gameStarted || !player2InputAllowed || player2Answers.Count >= correctAnswerOrder.Count) return;
 
         player2Answers.Add(answerSprites[indeksJawaban].name);
-        inputIndicator.IndicateInput(player2Answers.Count - 1); // Menyala lampu untuk jawaban Player 2
+        memoryMatchInputIndicatorPlayer.IndicateInput(player2Answers.Count - 1); // Menyala lampu untuk jawaban Player 2
 
         Debug.Log("Player 2 memilih: " + answerSprites[indeksJawaban].name);
         StartCoroutine(DebouncePlayer2Input());
