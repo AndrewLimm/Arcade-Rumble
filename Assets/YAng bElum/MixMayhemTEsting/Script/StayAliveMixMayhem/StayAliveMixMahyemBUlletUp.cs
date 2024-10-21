@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StayAliveBullterMovement : MonoBehaviour
+public class StayAliveMixMahyemBUlletUp : MonoBehaviour
 {
     public float speed = 5f;  // Speed of the bullet
     public float lifetime = 3f;  // Lifetime of the bullet before being destroyed
-
     public int damage = 10;
 
     void Start()
@@ -18,7 +17,7 @@ public class StayAliveBullterMovement : MonoBehaviour
     void Update()
     {
         // Move the bullet downward
-        transform.Translate(Vector2.down * speed * Time.deltaTime);
+        transform.Translate(Vector2.up * speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

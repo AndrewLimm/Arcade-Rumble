@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StayAliveBullterMovement : MonoBehaviour
+public class StayALiveMixMayhemBulletDown : MonoBehaviour
 {
     public float speed = 5f;  // Speed of the bullet
     public float lifetime = 3f;  // Lifetime of the bullet before being destroyed
-
     public int damage = 10;
 
     void Start()
