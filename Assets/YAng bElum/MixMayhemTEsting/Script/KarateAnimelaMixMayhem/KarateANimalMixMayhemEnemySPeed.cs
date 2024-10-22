@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class KarateANimalMixMayhemEnemySPeed : MonoBehaviour
 {
     public float speed = 2f; // Kecepatan pergerakan musuh
     private Vector3 laneTarget; // Posisi tujuan di jalur tetap

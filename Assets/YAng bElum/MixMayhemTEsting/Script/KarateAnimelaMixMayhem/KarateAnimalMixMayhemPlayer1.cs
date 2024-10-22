@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController1 : MonoBehaviour
+public class KarateAnimalMixMayhemPlayer1 : MonoBehaviour
 {
+
     public KeyCode attackKey1 = KeyCode.A; // Tombol untuk baris 1
     public KeyCode attackKey2 = KeyCode.S; // Tombol untuk baris 2
     public KeyCode attackKey3 = KeyCode.D; // Tombol untuk baris 3
@@ -14,13 +15,13 @@ public class PlayerController1 : MonoBehaviour
     public LayerMask targetLayer; // Layer untuk objek yang bisa diserang
 
     public KarateAnimalPlayer1Animator playerAnimator; // Referensi ke skrip animator
-    [SerializeField] public KarateAnimalScoreManager KarateAnimalScoreManager;
+    [SerializeField] public KarateAnimalMixMayhemScoreManager KarateAnimalScoreManager;
 
     void Start()
     {
         // Mendapatkan referensi ke skrip KarateAnimalPlayer1Animator dari GameObject ini
         playerAnimator = GetComponent<KarateAnimalPlayer1Animator>();
-        KarateAnimalScoreManager = FindObjectOfType<KarateAnimalScoreManager>();
+        KarateAnimalScoreManager = FindObjectOfType<KarateAnimalMixMayhemScoreManager>();
     }
 
     void Update()
@@ -53,7 +54,7 @@ public class PlayerController1 : MonoBehaviour
 
         foreach (Collider2D target in hitTargets)
         {
-            EnemyController enemy = target.GetComponent<EnemyController>();
+            KarateANimalMixMayhemEnemySPeed enemy = target.GetComponent<KarateANimalMixMayhemEnemySPeed>();
 
             // Hancurkan musuh jika mereka berada dalam jangkauan
             if (enemy != null)
@@ -85,4 +86,3 @@ public class PlayerController1 : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint3.position, attackRange);
     }
 }
-
