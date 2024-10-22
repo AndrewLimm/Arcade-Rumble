@@ -15,6 +15,9 @@ TagManager:
   - Obstacle
   - Scoring
   - ObstacleDestroy
+  - Edible
+  - Trash
+  - Wall
   layers:
   - Default
   - TransparentFX

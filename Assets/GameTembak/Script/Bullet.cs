@@ -29,5 +29,10 @@ public class Bullet : MonoBehaviour
             // Hancurkan peluru
             Destroy(gameObject);
         }
+        if (other.CompareTag("Wall"))
+        {
+            Debug.Log("Peluru terkena tembok!"); // Debug untuk tembok
+            Destroy(gameObject); // Hancurkan peluru jika menyentuh boundary
+        }
     }
 }

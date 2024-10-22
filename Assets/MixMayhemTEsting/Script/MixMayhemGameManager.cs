@@ -12,6 +12,9 @@ public class MixMayhemGameManager : MonoBehaviour
     private GameObject currentMiniGame1;
     private GameObject currentMiniGame2;
 
+    // List untuk melacak objek yang di-spawn
+    public List<GameObject> spawnedObjects = new List<GameObject>();
+
     private void Start()
     {
         StartMiniGame1();
@@ -69,12 +72,51 @@ public class MixMayhemGameManager : MonoBehaviour
         StartMiniGame1();
     }
 
+    // Fungsi untuk menonaktifkan semua game mini, termasuk spawned objects
     private void DeactivateCurrentMiniGame(GameObject miniGame)
     {
-        // Jika mini-game yang diberikan tidak null, nonaktifkan
         if (miniGame != null)
         {
+            // Hapus semua objek yang di-spawn dari mini-game ini
+            DestroySpawnedObjects();
+
+            // Nonaktifkan semua child objects secara rekursif
+            SetActiveRecursively(miniGame, false);
+
+            // Nonaktifkan mini-game itu sendiri
             miniGame.SetActive(false);
         }
+    }
+
+    // Fungsi untuk menonaktifkan semua child objects secara rekursif
+    private void SetActiveRecursively(GameObject obj, bool active)
+    {
+        obj.SetActive(active);
+
+        foreach (Transform child in obj.transform)
+        {
+            SetActiveRecursively(child.gameObject, active);
+        }
+    }
+
+    // Fungsi untuk menambahkan objek yang di-spawn ke dalam list
+    public void RegisterSpawnedObject(GameObject obj)
+    {
+        spawnedObjects.Add(obj);
+    }
+
+    // Fungsi untuk menghancurkan semua objek yang di-spawn
+    private void DestroySpawnedObjects()
+    {
+        foreach (GameObject obj in spawnedObjects)
+        {
+            if (obj != null)
+            {
+                Destroy(obj);
+            }
+        }
+
+        // Kosongkan daftar setelah semua objek dihapus
+        spawnedObjects.Clear();
     }
 }
