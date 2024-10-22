@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class MixMayhemGameManager : MonoBehaviour
 {
-    // Array untuk mini-game di kedua panel
-    public GameObject[] miniGamePanel1Array; // Array untuk mini-game di panel 1
-    public GameObject[] miniGamePanel2Array; // Array untuk mini-game di panel 2
+    public MixMayhemPoolRequestor requestor;
+    public float miniGameDuration = 15f;
+    public float transitionDuration = 8f;
+    public float transitionDurationPanel1 = 2f;
 
-    public float miniGameDuration = 15f; // Durasi setiap mini-game
-    public float transitionDuration = 8f; // Waktu transisi sebelum mini-game baru terbuka
-    public float transitionDurationPanel1 = 2f; // Cooldown sebelum memanggil kembali mini-game 1
+    private GameObject currentMiniGame1;
+    private GameObject currentMiniGame2;
 
     private void Start()
     {
@@ -19,37 +19,49 @@ public class MixMayhemGameManager : MonoBehaviour
 
     private void StartMiniGame1()
     {
-        // Pilih mini-game secara acak dari panel 1
-        int randomIndex1 = Random.Range(0, miniGamePanel1Array.Length);
-        ActivateMiniGame(miniGamePanel1Array, randomIndex1);
+        // Nonaktifkan mini-game yang sedang aktif di panel 1
+        DeactivateCurrentMiniGame(currentMiniGame1);
 
-        // Nonaktifkan semua mini-game di panel 2
-        DeactivateAllMiniGames(miniGamePanel2Array);
+        // Meminta game acak dari panel 1
+        currentMiniGame1 = requestor.RequestPanel1Game();
+        currentMiniGame1.SetActive(true);
 
-        // Panggil mini-game kedua pada detik ke-8
-        Invoke("StartMiniGame2", 8f);
+        // Panggil mini-game kedua setelah durasi tertentu
+        Invoke("StartMiniGame2", transitionDuration);
 
-        // Durasi total untuk mini-game pertama
+        // Durasi untuk mini-game pertama
         Invoke("EndMiniGame1", miniGameDuration);
     }
 
     private void StartMiniGame2()
     {
-        // Pilih mini-game secara acak dari panel 2
-        int randomIndex2 = Random.Range(0, miniGamePanel2Array.Length);
-        ActivateMiniGame(miniGamePanel2Array, randomIndex2);
+        // Nonaktifkan mini-game yang sedang aktif di panel 2
+        DeactivateCurrentMiniGame(currentMiniGame2);
+
+        // Meminta game acak dari panel 2
+        currentMiniGame2 = requestor.RequestPanel2Game();
+        currentMiniGame2.SetActive(true);
     }
 
     private void EndMiniGame1()
     {
-        // Nonaktifkan semua mini-game di panel 1
-        DeactivateAllMiniGames(miniGamePanel1Array);
+        // Nonaktifkan mini-game pertama
+        DeactivateCurrentMiniGame(currentMiniGame1);
 
-        // Tunggu cooldown 2 detik sebelum memanggil kembali mini-game 1
+        // Tunggu cooldown sebelum mengulang mini-game 1
         Invoke("RestartMiniGame1", transitionDurationPanel1);
 
         // Durasi total untuk mini-game kedua
-        Invoke("EndMiniGame2", miniGameDuration); // Memanggil EndMiniGame2 setelah durasi mini-game
+        Invoke("EndMiniGame2", miniGameDuration);
+    }
+
+    private void EndMiniGame2()
+    {
+        // Nonaktifkan mini-game kedua
+        DeactivateCurrentMiniGame(currentMiniGame2);
+
+        // Mulai ulang mini-game 1 setelah cooldown
+        Invoke("RestartMiniGame1", transitionDurationPanel1);
     }
 
     private void RestartMiniGame1()
@@ -57,35 +69,12 @@ public class MixMayhemGameManager : MonoBehaviour
         StartMiniGame1();
     }
 
-    private void EndMiniGame2()
+    private void DeactivateCurrentMiniGame(GameObject miniGame)
     {
-        // Nonaktifkan semua mini-game di panel 2
-        DeactivateAllMiniGames(miniGamePanel2Array);
-
-        // Kembali ke mini-game pertama setelah cooldown
-        Invoke("RestartMiniGame1", transitionDurationPanel1);
-    }
-
-    private void ActivateMiniGame(GameObject[] miniGameArray, int index)
-    {
-        // Aktifkan mini-game yang dipilih berdasarkan indeks
-        miniGameArray[index].SetActive(true);
-    }
-
-    private void DeactivateAllMiniGames(GameObject[] miniGameArray)
-    {
-        // Nonaktifkan semua mini-game dalam array
-        foreach (GameObject miniGame in miniGameArray)
+        // Jika mini-game yang diberikan tidak null, nonaktifkan
+        if (miniGame != null)
         {
             miniGame.SetActive(false);
         }
-    }
-
-    private void EndGame()
-    {
-        // Logika untuk mengakhiri permainan
-        DeactivateAllMiniGames(miniGamePanel1Array);
-        DeactivateAllMiniGames(miniGamePanel2Array);
-        // Tambahkan logika tambahan untuk menampilkan hasil atau beralih ke layar akhir
     }
 }
