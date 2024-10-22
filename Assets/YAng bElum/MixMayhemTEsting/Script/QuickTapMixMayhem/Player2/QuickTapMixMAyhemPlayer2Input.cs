@@ -7,12 +7,12 @@ public class QuickTapMixMAyhemPlayer2Input : MonoBehaviour
     public int playerScore = 0; // Player 1's score
     public float range = 100f; // Collection range
     private QuickTapPlayer2Spawner spawnManagerplayer2;
-    private QuickTapPlayer2Ui player2ScoreUI;
+    private QuickTapMixMayhemPlayer2ScoreUI player2ScoreUI;
 
     private void Start()
     {
         spawnManagerplayer2 = FindObjectOfType<QuickTapPlayer2Spawner>(); // Find the SpawnManager script in the scene
-        player2ScoreUI = FindObjectOfType<QuickTapPlayer2Ui>(); // Find the Player1ScoreUI script in the scene
+        player2ScoreUI = FindObjectOfType<QuickTapMixMayhemPlayer2ScoreUI>(); // Find the Player1ScoreUI script in the scene
     }
 
     public GameObject GetFrontFoodInRange()

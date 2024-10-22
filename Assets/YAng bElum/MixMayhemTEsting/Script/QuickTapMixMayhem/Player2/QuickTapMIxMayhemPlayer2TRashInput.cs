@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class QuickTapMIxMayhemPlayer2TRashInput : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public KeyCode trashCollectKeyplayer2; // Tombol untuk collect sampah
+    public QuickTapMixMAyhemPlayer2Input player2Collect;
+
+    private void Start()
     {
-        
+        player2Collect = FindAnyObjectByType<QuickTapMixMAyhemPlayer2Input>(); // Mengakses skrip PlayerCollect
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        // Jika pemain menekan tombol untuk collect trash
+        if (Input.GetKeyDown(trashCollectKeyplayer2))
+        {
+            Debug.Log("Tombol collect trash ditekan.");
+            GameObject frontFood = player2Collect.GetFrontFoodInRange(); // Dapatkan makanan terdepan
+            if (frontFood != null)
+            {
+                if (frontFood.CompareTag("Trash"))
+                {
+                    player2Collect.CollectTrash(frontFood); // Jika trash, collect
+                }
+                else
+                {
+                    player2Collect.WrongCollection(frontFood); // Jika salah, beri penalti
+                }
+            }
+        }
     }
 }

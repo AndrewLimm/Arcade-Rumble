@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class QuickTapMixMayhemplayer2EgibleInput : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public KeyCode edibleCollectKeyplayer2; // Tombol untuk collect makanan edible
+    public QuickTapMixMAyhemPlayer2Input player2Collect;
+
+    private void Start()
     {
-        
+        player2Collect = FindAnyObjectByType<QuickTapMixMAyhemPlayer2Input>(); // Mengakses skrip PlayerCollect
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        // Jika pemain menekan tombol untuk collect edible
+        if (Input.GetKeyDown(edibleCollectKeyplayer2))
+        {
+            Debug.Log("Tombol collect edible ditekan.");
+            GameObject frontFood = player2Collect.GetFrontFoodInRange(); // Dapatkan makanan terdepan
+            if (frontFood != null)
+            {
+                if (frontFood.CompareTag("Edible"))
+                {
+                    player2Collect.CollectEdible(frontFood); // Jika edible, collect
+                }
+                else
+                {
+                    player2Collect.WrongCollection(frontFood); // Jika salah, beri penalti
+                }
+            }
+        }
     }
 }
