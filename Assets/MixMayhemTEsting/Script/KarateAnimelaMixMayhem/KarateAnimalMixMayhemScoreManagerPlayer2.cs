@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class KarateAnimalMixMayhemScoreManagerPlayer2 : MonoBehaviour
 {
-    public int score = 0; // Skor untuk Player 2
+    public int scorePlayer2 = 0; // Skor untuk Player 2
     public TMP_Text scoreText; // Referensi ke TextMeshPro untuk menampilkan skor
 
     void Start()
@@ -15,10 +15,10 @@ public class KarateAnimalMixMayhemScoreManagerPlayer2 : MonoBehaviour
     }
 
     // Fungsi untuk menambahkan skor
-    public void AddScore(int amount)
+    public void AddScorePlayer2(int amount)
     {
-        score += amount;
-        Debug.Log("Player 2 Score: " + score);
+        scorePlayer2 += amount;
+        Debug.Log("Player 2 Score: " + scorePlayer2);
         UpdateScoreUI(); // Update tampilan skor
     }
 
@@ -27,7 +27,7 @@ public class KarateAnimalMixMayhemScoreManagerPlayer2 : MonoBehaviour
     {
         if (scoreText != null)
         {
-            scoreText.text = "Player 2 Score: " + score.ToString();
+            scoreText.text = "Player 2 Score: " + scorePlayer2.ToString();
         }
     }
 }

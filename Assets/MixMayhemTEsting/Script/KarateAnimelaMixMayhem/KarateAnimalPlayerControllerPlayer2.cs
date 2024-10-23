@@ -74,7 +74,7 @@ public class KarateAnimalPlayerControllerPlayer2 : MonoBehaviour
 
                 if (karateAnimalPlayer2Score != null)
                 {
-                    karateAnimalPlayer2Score.AddScore(10);
+                    karateAnimalPlayer2Score.AddScorePlayer2(10);
                     Debug.Log("Player 2 Score increased!"); // Debug log
                 }
                 else

@@ -12,7 +12,7 @@ public class StayAliveMixMAyhemEnlineDetector : MonoBehaviour
         if (collision.CompareTag("Player1") || collision.CompareTag("Player2"))
         {
             // Panggil fungsi untuk trigger game over
-            gameOverManager.TriggerEnd();
+            gameOverManager.TriggerEnd(collision.tag);
         }
     }
 }

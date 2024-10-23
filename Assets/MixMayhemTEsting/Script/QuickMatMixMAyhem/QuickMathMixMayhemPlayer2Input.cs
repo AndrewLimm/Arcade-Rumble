@@ -19,7 +19,7 @@ public class QuickMathMixMayhemPlayer2Input : MonoBehaviour
         if (mathGameLogic != null)
         {
             Debug.Log($"Player 2 memilih jawaban {pilihanDipilih}.");
-            mathGameLogic.CekJawaban(pilihanDipilih, 1); // 1 menunjukkan Player 1
+            mathGameLogic.CekJawaban(pilihanDipilih, 2); // 1 menunjukkan Player 1
         }
         else
         {

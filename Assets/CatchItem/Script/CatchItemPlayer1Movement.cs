@@ -5,43 +5,53 @@ using UnityEngine;
 public class CatchItemPlayer1Movement : MonoBehaviour
 {
     public float moveSpeed = 5f; // Kecepatan pergerakan pemain
-
     private Rigidbody2D rb;
     private float movement;
-
     public bool isFacingRight = true;
-
     public SpriteRenderer spriteRenderer;
+
+    // Menambahkan variabel untuk kontrol gerakan
+    private bool canMove = false;
+    private Animator animator; // Referensi Animator
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>(); // Mendapatkan komponen Animator
+
+        // Nonaktifkan animator saat permainan dimulai
+        animator.enabled = false;
     }
 
     void Update()
     {
-        // Mengambil input horizontal dari pemain 1 (A = -1, D = 1)
-        movement = 0;
-
-        if (Input.GetKey(KeyCode.A))
+        if (canMove) // Hanya gerak jika canMove true
         {
-            movement = -1;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            movement = 1;
-        }
+            // Mengambil input horizontal dari pemain 1 (A = -1, D = 1)
+            movement = 0;
 
-        //melakukan flip
-        FlipCharacter();
+            if (Input.GetKey(KeyCode.A))
+            {
+                movement = -1;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                movement = 1;
+            }
+
+            //melakukan flip
+            FlipCharacter();
+        }
     }
 
     void FixedUpdate()
     {
-        // Gerakkan player ke kiri/kanan berdasarkan input
-        rb.velocity = new Vector2(movement * moveSpeed, rb.velocity.y);
+        if (canMove) // Hanya gerak jika canMove true
+        {
+            // Gerakkan player ke kiri/kanan berdasarkan input
+            rb.velocity = new Vector2(movement * moveSpeed, rb.velocity.y);
+        }
     }
-
 
     // Fungsi untuk membalik arah hadap karakter
     void FlipCharacter()
@@ -64,4 +74,16 @@ public class CatchItemPlayer1Movement : MonoBehaviour
         spriteRenderer.flipX = !spriteRenderer.flipX; // Membalikkan sprite secara horizontal
     }
 
+    // Fungsi untuk mengaktifkan gerakan
+    public void EnableMovement()
+    {
+        canMove = true;
+        animator.enabled = true; // Aktifkan animator saat pemain dapat bergerak
+    }
+
+    public void DisableMovement()
+    {
+        canMove = false;
+        animator.enabled = false; // Aktifkan animator saat pemain dapat bergerak
+    }
 }

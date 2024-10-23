@@ -6,7 +6,7 @@ public class CtachItemMixmayhemScoreManagerplayer1 : MonoBehaviour
 {
     public static CtachItemMixmayhemScoreManagerplayer1 instance; // Singleton instance
 
-    private int scorePlayer1 = 0;
+    public int catchitemscorePlayer1 = 0;
 
     private void Awake()
     {
@@ -24,13 +24,13 @@ public class CtachItemMixmayhemScoreManagerplayer1 : MonoBehaviour
     // Menambah skor untuk Player 1
     public void AddScore(int value)
     {
-        scorePlayer1 += value;
+        catchitemscorePlayer1 += value;
         CatchItemMixMayhemScoreUiPlayer.instance.UpdateScoreUI(); // Perbarui UI setelah skor diubah
     }
 
     // Mengambil skor Player 1
     public int GetScore()
     {
-        return scorePlayer1;
+        return catchitemscorePlayer1;
     }
 }

@@ -18,6 +18,10 @@ TagManager:
   - Edible
   - Trash
   - Wall
+  - KarateAnimal
+  - QuickMath
+  - Catch
+  - ReactionTest
   layers:
   - Default
   - TransparentFX

@@ -31,7 +31,7 @@ public class StayAliveMixMayhemPlayer1COntroller : MonoBehaviour
                 // Panggil metode TriggerEnd di GameOverManager jika health pemain mencapai 0
                 if (gameOverManager != null)
                 {
-                    gameOverManager.TriggerEnd();
+                    gameOverManager.TriggerEnd(gameObject.tag);
                 }
             }
             else

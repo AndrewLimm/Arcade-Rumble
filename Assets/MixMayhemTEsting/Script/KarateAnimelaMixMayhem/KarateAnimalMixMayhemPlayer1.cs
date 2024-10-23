@@ -64,7 +64,7 @@ public class KarateAnimalMixMayhemPlayer1 : MonoBehaviour
 
                 if (KarateAnimalScoreManager != null)
                 {
-                    KarateAnimalScoreManager.AddScore(10);
+                    KarateAnimalScoreManager.AddScorePlayer1(10);
                 }
                 else
                 {
