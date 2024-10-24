@@ -5,31 +5,36 @@ using UnityEngine;
 
 public class HelpMeOutGameOver : MonoBehaviour
 {
-    [SerializeField] private GameObject gameOverUI; // Referensi ke panel Game Over UI
     [SerializeField] private HelpMeOUtPlayerTimeController helpMeOUtPlayerTimeController;
+    [SerializeField] private TextMeshProUGUI winMessageText; // Referensi untuk TextMeshPro
+
+
     void Start()
     {
-        // Pastikan Game Over UI tersembunyi saat permainan dimulai
-        if (gameOverUI != null)
+        // Menyembunyikan pesan kemenangan saat permainan dimulai
+        if (winMessageText != null)
         {
-            gameOverUI.SetActive(false);
-            Debug.Log("Game Over UI disembunyikan saat permainan dimulai.");
+            winMessageText.gameObject.SetActive(false); // Menyembunyikan teks kemenangan
+            Debug.Log("Pesan kemenangan disembunyikan saat permainan dimulai.");
         }
         else
         {
-            Debug.LogWarning("Game Over UI tidak terhubung!");
+            Debug.LogWarning("winMessageText tidak terhubung!");
         }
-        
     }
 
     // Metode untuk memicu kondisi game over
-    public void TriggerEnd()
+    public void TriggerEnd(string winner)
     {
-        // Tampilkan Game Over UI
-        if (gameOverUI != null)
+        // Menampilkan pesan pemenang
+        if (winMessageText != null)
         {
-            gameOverUI.SetActive(true);
-            Debug.Log("Game Over UI ditampilkan.");
+            winMessageText.text = $"{winner} Win!"; // Tampilkan nama pemenang
+            winMessageText.gameObject.SetActive(true); // Menampilkan teks kemenangan
+        }
+        else
+        {
+            Debug.LogWarning("winMessageText tidak terhubung!");
         }
 
         // Logika tambahan untuk game over, seperti menghentikan pergerakan pemain atau permainan

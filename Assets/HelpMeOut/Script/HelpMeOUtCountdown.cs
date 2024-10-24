@@ -13,17 +13,24 @@ public class HelpMeOUtCountdown : MonoBehaviour
     public delegate void CountdownFinished();
     public static event CountdownFinished OnCountdownFinished; // Event untuk menandakan countdown selesai
 
-    private void Start()
+    void Start()
     {
+        // Menyembunyikan countdown text secara default
+        if (countdownText != null)
+        {
+            countdownText.gameObject.SetActive(false);
+            Debug.Log("Countdown text disembunyikan saat permainan dimulai.");
+        }
+    }
+
+    public void StartCountDown()
+    {
+        countdownText.gameObject.SetActive(true); // Mengaktifkan countdown text saat mulai
         StartCoroutine(StartCountdown());
     }
 
     private IEnumerator StartCountdown()
     {
-        // Nonaktifkan kontrol pemain saat countdown
-        player1Controller.DisableControls();
-        player2Controller.DisableControls();
-
         float remainingTime = countdownTime;
 
         while (remainingTime > 0)
@@ -36,10 +43,6 @@ public class HelpMeOUtCountdown : MonoBehaviour
         countdownText.text = "GO!";
         yield return new WaitForSeconds(1f);
         countdownText.gameObject.SetActive(false); // Sembunyikan countdown setelah selesai
-
-        // Aktifkan kontrol pemain setelah countdown selesai
-        player1Controller.EnableControls();
-        player2Controller.EnableControls();
 
         OnCountdownFinished?.Invoke(); // Memicu event saat countdown selesai
     }

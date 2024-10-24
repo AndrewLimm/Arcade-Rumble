@@ -41,7 +41,7 @@ public class HelpMeOUtPlayerTimeController : MonoBehaviour
         UpdateTimerUI();
     }
 
-    private void StartTimers()
+    public void StartTimers()
     {
         isPlayer1Active = true;
         isPlayer2Active = true;
