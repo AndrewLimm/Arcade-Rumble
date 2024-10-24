@@ -2,28 +2,41 @@
 
 public class FlappyAnimalPipes : MonoBehaviour
 {
-    public Transform top;
-    public Transform bottom;
-    public float speed = 5f;
-    public float gap = 3f;
+    public Transform top;         // Transform untuk pipa atas
+    public Transform bottom;      // Transform untuk pipa bawah
+    public float speed = 5f;      // Kecepatan gerakan pipa
+    public float gap = 3f;        // Jarak antara pipa atas dan bawah
 
-    private float leftEdge;
+    private Transform destroyPoint; // Referensi ke titik hancur
+
+    public bool canMove = true;
 
     private void Start()
     {
-        leftEdge = Camera.main.ScreenToWorldPoint(Vector3.zero).x - 1f;
+        // Sesuaikan posisi pipa atas dan bawah berdasarkan gap
         top.position += Vector3.up * gap / 2;
         bottom.position += Vector3.down * gap / 2;
+
+        // Cari gameObject dengan tag "DestroyPoint" untuk digunakan sebagai titik hancur
+        destroyPoint = GameObject.FindGameObjectWithTag("DestroyPoint").transform;
     }
 
     private void Update()
     {
-        transform.position += speed * Time.deltaTime * Vector3.left;
-
-        if (transform.position.x < leftEdge)
+        if (canMove) // Gerakkan pipa hanya jika bisa bergerak
         {
-            Destroy(gameObject);
+            // Gerakkan pipa ke kiri
+            transform.position += speed * Time.deltaTime * Vector3.left;
+
+            // Hancurkan pipa ketika mencapai posisi destroyPoint
+            if (destroyPoint != null && transform.position.x < destroyPoint.position.x)
+            {
+                Destroy(gameObject);
+            }
         }
     }
-
+    public void StopMovement()
+    {
+        canMove = false;
+    }
 }

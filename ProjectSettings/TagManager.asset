@@ -22,6 +22,8 @@ TagManager:
   - QuickMath
   - Catch
   - ReactionTest
+  - Collectible
+  - DestroyPoint
   layers:
   - Default
   - TransparentFX

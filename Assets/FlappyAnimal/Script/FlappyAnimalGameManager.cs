@@ -1,74 +1,55 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 [DefaultExecutionOrder(-1)]
 public class FlappyAnimalGameManager : MonoBehaviour
 {
-    public static FlappyAnimalGameManager Instance { get; private set; }
+    [SerializeField] private Button startButton; // Reference to the Start button
+    [SerializeField] FlappyAnimalSpawner flappyAnimalSpawner;
+    [SerializeField] FlappyAnimalPlayer1Control flappyAnimalPlayer1Control;
+    [SerializeField] FlappyAnimalPlayer2Controller flappyAnimalPlayer2Controller;
+    [SerializeField] FlappyAnimalGameOverManager gameOverManager; // Reference to GameOverManager
 
-    [SerializeField] private FlappyAnimalPlayer1Control player1;
-    [SerializeField] private FlappyAnimalPlayer2Controller player2;
-    [SerializeField] private FlappyAnimalSpawner spawner;
-    [SerializeField] private GameObject playButton;
-    [SerializeField] private GameObject gameOver;
 
-    private void Awake()
+    void Start()
     {
-        if (Instance != null)
-        {
-            DestroyImmediate(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
+        // Set the game objects inactive at the start
+        DisableGameComponents();
+
+        // Add listener to the Start button
+        startButton.onClick.AddListener(StartGame);
     }
 
-    private void OnDestroy()
+    public void StartGame()
     {
-        if (Instance == this)
-        {
-            Instance = null;
-        }
+        // Enable the players and spawner
+        flappyAnimalPlayer1Control.EnableMovement();
+        flappyAnimalPlayer2Controller.EnableMovement();
+        flappyAnimalSpawner.EnableSpawning();
+
+        // Reset the game state from the GameOverManager
+        gameOverManager.ResetGameState();
     }
 
-    private void Start()
+    // Disable movement and spawner (for Game Over)
+    public void DisableGameComponents()
     {
-        Pause();
+        flappyAnimalPlayer1Control.DisableMovement();
+        flappyAnimalPlayer2Controller.DisableMovement();
+        flappyAnimalSpawner.DisableSpawning();
+        StopAllSpawnedObjects();
     }
 
-    public void Pause()
+    private void StopAllSpawnedObjects()
     {
-        Time.timeScale = 0f;
-        player1.enabled = false;
-        player2.enabled = false;
-    }
-
-    public void Play()
-    {
-        FlappyAnimalScoreManager.Instance.ResetScores();
-
-        playButton.SetActive(false);
-        gameOver.SetActive(false);
-
-        Time.timeScale = 1f;
-        player1.enabled = true;
-        player2.enabled = true;
-
+        // Temukan semua objek bertipe FlappyAnimalPipes
         FlappyAnimalPipes[] pipes = FindObjectsOfType<FlappyAnimalPipes>();
 
-        for (int i = 0; i < pipes.Length; i++)
+        // Hentikan gerakan setiap pipa
+        foreach (FlappyAnimalPipes pipe in pipes)
         {
-            Destroy(pipes[i].gameObject);
+            pipe.StopMovement();
         }
     }
-
-    public void GameOver()
-    {
-        playButton.SetActive(true);
-        gameOver.SetActive(true);
-
-        Pause();
-    }
-
 }

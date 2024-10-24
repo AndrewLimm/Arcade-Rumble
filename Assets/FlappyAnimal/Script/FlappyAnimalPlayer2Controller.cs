@@ -13,6 +13,8 @@ public class FlappyAnimalPlayer2Controller : MonoBehaviour
     private Vector3 direction;
     private int spriteIndex;
 
+    public bool canMove = false;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -33,20 +35,24 @@ public class FlappyAnimalPlayer2Controller : MonoBehaviour
 
     private void Update()
     {
-        // Check if Player 2 presses the "UpArrow" key or Right Mouse Button to jump
-        if (Input.GetKeyDown(KeyCode.I) || Input.GetMouseButtonDown(1))
+        if (canMove)
         {
-            direction = Vector3.up * strength;
+            // Check if Player 2 presses the "UpArrow" key or Right Mouse Button to jump
+            if (Input.GetKeyDown(KeyCode.I) || Input.GetMouseButtonDown(1))
+            {
+                direction = Vector3.up * strength;
+            }
+
+            // Apply gravity and update the position
+            direction.y += gravity * Time.deltaTime;
+            transform.position += direction * Time.deltaTime;
+
+            // Tilt the bird based on the direction
+            Vector3 rotation = transform.eulerAngles;
+            rotation.z = direction.y * tilt;
+            transform.eulerAngles = rotation;
         }
 
-        // Apply gravity and update the position
-        direction.y += gravity * Time.deltaTime;
-        transform.position += direction * Time.deltaTime;
-
-        // Tilt the bird based on the direction
-        Vector3 rotation = transform.eulerAngles;
-        rotation.z = direction.y * tilt;
-        transform.eulerAngles = rotation;
     }
 
     private void AnimateSprite()
@@ -68,11 +74,27 @@ public class FlappyAnimalPlayer2Controller : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Obstacle"))
         {
-            FlappyAnimalGameManager.Instance.GameOver();
+            // Jika Player 2 mati, panggil Player2GameOver di skrip Game Over
+            FlappyAnimalGameOverManager gameOverManager = FindObjectOfType<FlappyAnimalGameOverManager>();
+            gameOverManager.Player2GameOver();
+            StopSpriteAnimation();  // Stop the animation
+
         }
-        else if (other.gameObject.CompareTag("Scoring"))
-        {
-            FlappyAnimalScoreManager.Instance.IncreasePlayer2Score();
-        }
+    }
+
+    // Function to enable movement
+    public void EnableMovement()
+    {
+        canMove = true;
+    }
+
+    // Function to disable movement
+    public void DisableMovement()
+    {
+        canMove = false;
+    }
+    private void StopSpriteAnimation()
+    {
+        CancelInvoke(nameof(AnimateSprite));  // This will stop the InvokeRepeating for sprite animation
     }
 }

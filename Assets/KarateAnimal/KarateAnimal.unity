@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a74bf6950f4c9df4fb3dbe27fadf6ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPrefab: {fileID: 2856444765679103158, guid: b803e98f08722f44eae80eea54fe8669, type: 3}
+  targetPrefab: {fileID: 2856444765679103158, guid: 0263b0a1bfeedcc4d96ea6f3ea0b1474, type: 3}
   spawnPoints:
   - {fileID: 93624109}
   minSpawnInterval: 2
@@ -792,7 +792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a74bf6950f4c9df4fb3dbe27fadf6ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPrefab: {fileID: 2856444765679103158, guid: b803e98f08722f44eae80eea54fe8669, type: 3}
+  targetPrefab: {fileID: 2856444765679103158, guid: 0263b0a1bfeedcc4d96ea6f3ea0b1474, type: 3}
   spawnPoints:
   - {fileID: 850643287}
   minSpawnInterval: 2
@@ -1464,7 +1464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a74bf6950f4c9df4fb3dbe27fadf6ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPrefab: {fileID: 2856444765679103158, guid: b803e98f08722f44eae80eea54fe8669, type: 3}
+  targetPrefab: {fileID: 2856444765679103158, guid: 0263b0a1bfeedcc4d96ea6f3ea0b1474, type: 3}
   spawnPoints:
   - {fileID: 1184524177}
   minSpawnInterval: 2
