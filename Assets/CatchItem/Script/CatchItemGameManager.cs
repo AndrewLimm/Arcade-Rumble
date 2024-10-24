@@ -25,7 +25,7 @@ public class CatchItemGameManager : MonoBehaviour
         SetBotsActive(false);
     }
 
-    void StartGame()
+    public void StartGame()
     {
         // Tampilkan semua bot ketika permainan dimulai
         SetBotsActive(true);

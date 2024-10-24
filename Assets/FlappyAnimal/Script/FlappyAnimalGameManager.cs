@@ -10,6 +10,7 @@ public class FlappyAnimalGameManager : MonoBehaviour
     [SerializeField] FlappyAnimalPlayer1Control flappyAnimalPlayer1Control;
     [SerializeField] FlappyAnimalPlayer2Controller flappyAnimalPlayer2Controller;
     [SerializeField] FlappyAnimalGameOverManager gameOverManager; // Reference to GameOverManager
+    [SerializeField] FlappyAnimalCOuntDown flappyAnimalCOuntDown;
 
 
     void Start()
@@ -18,7 +19,13 @@ public class FlappyAnimalGameManager : MonoBehaviour
         DisableGameComponents();
 
         // Add listener to the Start button
-        startButton.onClick.AddListener(StartGame);
+        startButton.onClick.AddListener(StartCountdown);
+    }
+
+    public void StartCountdown()
+    {
+        flappyAnimalCOuntDown.StartCountdown();
+
     }
 
     public void StartGame()

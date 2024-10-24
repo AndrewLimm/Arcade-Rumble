@@ -7,43 +7,54 @@ public class Player1Control : MonoBehaviour
     public float speed = 5f;
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
-    public bool canShoot = false; // Variabel untuk mengontrol kapan bisa menembak
-
-    [SerializeField] ImmunePlayer1GameTembak immunePlayer; // Referensi ke script immune
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer; // Komponen SpriteRenderer untuk mengatur flip
     private float lastShootTime; // Waktu tembakan terakhir
     public float shootCooldown = 0.3f; // Durasi cooldown tembakan
 
+    public bool canMove = false; // Variabel untuk mengontrol kapan bisa bergerak
+    public bool canShoot = false; // Variabel untuk mengontrol kapan bisa menembak
+
+    [SerializeField] ImmunePlayer1GameTembak immunePlayer; // Referensi ke script immune
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>(); // Mendapatkan komponen SpriteRenderer
-        canShoot = true;
-        // Mendapatkan referensi ke Immune
         immunePlayer = GetComponent<ImmunePlayer1GameTembak>();
+
+        // Awal game, tidak bisa bergerak atau menembak
+        canMove = false;
+        canShoot = false;
     }
 
     void Update()
     {
-        // Gerakan Player 1 menggunakan A dan D
-        float move = 0;
-        if (Input.GetKey(KeyCode.A))
+        // Hanya bisa bergerak jika canMove bernilai true
+        if (canMove)
         {
-            move = -1; // Bergerak ke kiri
-            spriteRenderer.flipX = false; // Membalik sprite ke arah kiri
+            float move = 0;
+            if (Input.GetKey(KeyCode.A))
+            {
+                move = -1; // Bergerak ke kiri
+                spriteRenderer.flipX = false; // Membalik sprite ke arah kiri
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                move = 1; // Bergerak ke kanan
+                spriteRenderer.flipX = true; // Mengembalikan sprite ke arah kanan
+            }
+
+            rb.velocity = new Vector2(move * speed, 0); // Gerakan horizontal
         }
-        else if (Input.GetKey(KeyCode.D))
+        else
         {
-            move = 1; // Bergerak ke kanan
-            spriteRenderer.flipX = true; // Mengembalikan sprite ke arah kanan
+            rb.velocity = Vector2.zero; // Jika tidak bisa bergerak, hentikan pergerakan
         }
 
-        rb.velocity = new Vector2(move * speed, 0); // Gerakan horizontal
-
-        // Menembak dengan tombol W, hanya jika canShoot bernilai true dan cooldown telah berlalu
-        if (Input.GetKeyDown(KeyCode.W) && canShoot && Time.time >= lastShootTime + shootCooldown)
+        // Hanya bisa menembak jika canShoot bernilai true dan cooldown telah berlalu
+        if (canShoot && Input.GetKeyDown(KeyCode.W) && Time.time >= lastShootTime + shootCooldown)
         {
             Shoot();
         }
@@ -54,6 +65,30 @@ public class Player1Control : MonoBehaviour
         // Menembakkan peluru dari posisi pemain
         Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
         lastShootTime = Time.time;
+    }
+
+    // Method untuk mengatur kapan Player1 bisa bergerak
+    public void EnableMovement()
+    {
+        canMove = true;
+    }
+
+    // Method untuk mengatur kapan Player1 tidak bisa bergerak
+    public void DisableMovement()
+    {
+        canMove = false;
+    }
+
+    // Method untuk mengatur kapan Player1 bisa menembak
+    public void EnableShooting()
+    {
+        canShoot = true;
+    }
+
+    // Method untuk mengatur kapan Player1 tidak bisa menembak
+    public void DisableShooting()
+    {
+        canShoot = false;
     }
 
     public void ReceiveDamagePlayer1()

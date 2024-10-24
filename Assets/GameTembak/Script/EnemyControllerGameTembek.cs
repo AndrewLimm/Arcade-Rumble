@@ -8,6 +8,7 @@ public class EnemyControllerGameTembek : MonoBehaviour
     public float moveDownDistance = 0.5f;
 
     private bool movingRight = true;
+    private bool canMove = true; // Flag untuk mengontrol gerakan musuh
     public int pointsForKill = 10; // Jumlah poin yang diberikan ketika musuh terbunuh
 
     [SerializeField] ScoreManagerGameTembak scoreManagerGameTembak;
@@ -24,10 +25,13 @@ public class EnemyControllerGameTembek : MonoBehaviour
         }
     }
 
-
     void Update()
     {
-        MoveEnemy();
+        // Panggil MoveEnemy hanya jika canMove bernilai true
+        if (canMove)
+        {
+            MoveEnemy();
+        }
     }
 
     void MoveEnemy()
@@ -70,4 +74,17 @@ public class EnemyControllerGameTembek : MonoBehaviour
             Destroy(gameObject); // Hancurkan musuh
         }
     }
+
+    // Fungsi untuk memulai gerakan musuh
+    public void StartMoving()
+    {
+        canMove = false; // Aktifkan gerakan
+    }
+
+    public void StopMoving()
+
+    {
+        canMove = true;
+    }
+
 }

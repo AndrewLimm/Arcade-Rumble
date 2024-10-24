@@ -9,20 +9,45 @@ public class EnemyShooterGameTembak : MonoBehaviour
     public float shootInterval = 2f;
 
     private float shootTimer;
+    public bool canShoot = false; // Flag untuk mengontrol kapan bisa menembak
+
+
+    void Start()
+    {
+        // Spawn musuh tidak langsung dimulai saat Start, harus diaktifkan secara manual
+        canShoot = false;
+    }
 
     void Update()
     {
-        shootTimer += Time.deltaTime;
-
-        if (shootTimer >= shootInterval)
+        // Menjalankan penembakan hanya jika canShoot bernilai true
+        if (!canShoot)
         {
-            Shoot();
-            shootTimer = 0;
+            shootTimer += Time.deltaTime;
+
+            if (shootTimer >= shootInterval)
+            {
+                Shoot();
+                shootTimer = 0;
+            }
         }
     }
 
-    void Shoot()
+    public void Shoot()
     {
+        // Menembakkan peluru dari posisi enemy
         Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+    }
+
+    // Fungsi untuk memulai penembakan musuh
+    public void StartShooting()
+    {
+        canShoot = false; // Mengaktifkan penembakan
+    }
+
+    // Fungsi untuk menghentikan penembakan musuh
+    public void StopShooting()
+    {
+        canShoot = true; // Menonaktifkan penembakan
     }
 }
