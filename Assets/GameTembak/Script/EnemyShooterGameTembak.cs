@@ -12,16 +12,10 @@ public class EnemyShooterGameTembak : MonoBehaviour
     public bool canShoot = false; // Flag untuk mengontrol kapan bisa menembak
 
 
-    void Start()
-    {
-        // Spawn musuh tidak langsung dimulai saat Start, harus diaktifkan secara manual
-        canShoot = false;
-    }
-
     void Update()
     {
         // Menjalankan penembakan hanya jika canShoot bernilai true
-        if (!canShoot)
+        if (canShoot)
         {
             shootTimer += Time.deltaTime;
 
@@ -42,12 +36,14 @@ public class EnemyShooterGameTembak : MonoBehaviour
     // Fungsi untuk memulai penembakan musuh
     public void StartShooting()
     {
-        canShoot = false; // Mengaktifkan penembakan
+        canShoot = true;
+        return; // Mengaktifkan penembakan
     }
 
     // Fungsi untuk menghentikan penembakan musuh
     public void StopShooting()
     {
-        canShoot = true; // Menonaktifkan penembakan
+        canShoot = false;
+        return; // Menonaktifkan penembakan
     }
 }

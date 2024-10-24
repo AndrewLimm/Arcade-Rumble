@@ -6,20 +6,21 @@ using UnityEngine.SceneManagement;
 
 public class JumpOverGameOverManager : MonoBehaviour
 {
-    public TMP_Text gameOverText; // Text component to display Game Over message
+    public TMP_Text winnerText; // Komponen Teks untuk menampilkan pemenang
 
     private void Start()
     {
-        // Hide the Game Over text at the start of the game
-        gameOverText.gameObject.SetActive(false);
+        // Menyembunyikan teks pemenang saat permainan dimulai
+        winnerText.gameObject.SetActive(false);
     }
 
-    public void TriggerGameOver()
+    public void TriggerGameOver(string winner)
     {
-        // Show the Game Over text
-        gameOverText.gameObject.SetActive(true);
-        gameOverText.text = "Game Over"; // Set the text to "Game Over"
-        // Stop all gameplay by pausing the game
-        Time.timeScale = 0; // Pause the game
+        // Menampilkan pemenang
+        winnerText.gameObject.SetActive(true);
+        winnerText.text = winner; // Menampilkan siapa pemenangnya
+
+        // Hentikan semua gameplay dengan menghentikan game
+        Time.timeScale = 0; // Pause permainan
     }
 }

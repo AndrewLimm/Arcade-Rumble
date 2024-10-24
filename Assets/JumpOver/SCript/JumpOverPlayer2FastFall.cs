@@ -7,6 +7,8 @@ public class JumpOverPlayer2FastFall : MonoBehaviour
     public float fastFallSpeed = 20f;
     private Rigidbody2D rb;
 
+    public bool canFastfall = false;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -14,7 +16,10 @@ public class JumpOverPlayer2FastFall : MonoBehaviour
 
     private void Update()
     {
-        HandleFastFall();
+        if (canFastfall)
+        {
+            HandleFastFall();
+        }
     }
 
     private void HandleFastFall()
@@ -34,5 +39,15 @@ public class JumpOverPlayer2FastFall : MonoBehaviour
     {
         // Cek apakah player menyentuh tanah
         return rb.velocity.y == 0;
+    }
+
+    public void EnablePlayer2FastFall()
+    {
+        canFastfall = true; return;
+    }
+
+    public void disablePlayer2Fasfall()
+    {
+        canFastfall = false; return;
     }
 }

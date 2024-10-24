@@ -78,13 +78,15 @@ public class EnemyControllerGameTembek : MonoBehaviour
     // Fungsi untuk memulai gerakan musuh
     public void StartMoving()
     {
-        canMove = false; // Aktifkan gerakan
+        canMove = false;
+        return; // Aktifkan gerakan
     }
 
     public void StopMoving()
 
     {
         canMove = true;
+        return;
     }
 
 }

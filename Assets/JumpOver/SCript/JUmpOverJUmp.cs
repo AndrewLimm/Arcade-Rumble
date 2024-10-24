@@ -9,6 +9,8 @@ public class JUmpOverJUmp : MonoBehaviour
     private bool canDoubleJump = false;
     private Rigidbody2D rb;
 
+    public bool canjump = false;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -16,7 +18,10 @@ public class JUmpOverJUmp : MonoBehaviour
 
     private void Update()
     {
-        HandleJump();
+        if (canjump)
+        {
+            HandleJump();
+        }
     }
 
     private void HandleJump()
@@ -45,5 +50,15 @@ public class JUmpOverJUmp : MonoBehaviour
     {
         // Cek apakah player menyentuh tanah
         return rb.velocity.y == 0;
+    }
+
+    public void player1EnableJump()
+    {
+        canjump = true; return;
+    }
+
+    public void player1disableJump()
+    {
+        canjump = false; return;
     }
 }
