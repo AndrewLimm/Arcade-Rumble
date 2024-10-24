@@ -14,6 +14,8 @@ public class CollectCoinPlayer1Movement : MonoBehaviour
     public SpriteRenderer spriteRenderer;
 
     [SerializeField] CollecCoinPlayer1Animator collecCoinPlayer1Animator;
+    public bool canMove = false;
+
 
     private void Start()
     {
@@ -24,16 +26,24 @@ public class CollectCoinPlayer1Movement : MonoBehaviour
 
     void Update()
     {
+        if (!canMove) return;
         ProcessInputs();
         HandleSpeedBoost();
     }
 
     private void FixedUpdate()
     {
+        if (!canMove) return;
         MovePlayer();
         UpdateAnimation();
         FlipSprite();
     }
+
+    public void EnableMovementplayer1()
+    {
+        canMove = true;
+    }
+
 
     void ProcessInputs()
     {

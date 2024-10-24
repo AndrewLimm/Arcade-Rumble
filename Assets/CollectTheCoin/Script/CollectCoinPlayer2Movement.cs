@@ -16,6 +16,8 @@ public class CollectCoinPlayer2Movement : MonoBehaviour
 
     [SerializeField] CollectCoinPlayer2Animator collectCoinPlayer2Animator;
 
+    public bool canMove = false;
+
     private void Start()
     {
         originalSpeed = moveSpeed;
@@ -24,15 +26,22 @@ public class CollectCoinPlayer2Movement : MonoBehaviour
 
     void Update()
     {
+        if (!canMove) return;
         ProcessInputs();
         HandleSpeedBoost();
     }
 
     private void FixedUpdate()
     {
+        if (!canMove) return;
         MovePlayer();
         UpdateAnimation();
         FlipSprite();
+    }
+
+    public void EnableMovementplayer2()
+    {
+        canMove = true;
     }
 
     void ProcessInputs()

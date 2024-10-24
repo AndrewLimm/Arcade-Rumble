@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CollectCoinPlayer2CoinCollector : MonoBehaviour
 {
-    public int score = 0; // Skor awal Player 2
+    public int scoreplayer2 = 0; // Skor awal Player 2
     public int pointValue = 10; // Nilai koin yang ditambahkan saat diambil
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -13,11 +13,15 @@ public class CollectCoinPlayer2CoinCollector : MonoBehaviour
         if (other.CompareTag("Coin"))
         {
             // Tambahkan skor untuk Player 2
-            score += pointValue;
-            Debug.Log("Player 2 Score: " + score);
+            scoreplayer2 += pointValue;
+            Debug.Log("Player 2 Score: " + scoreplayer2);
 
             // Hancurkan koin setelah diklaim
             Destroy(other.gameObject);
         }
+    }
+    public int GetScore()
+    {
+        return scoreplayer2;
     }
 }

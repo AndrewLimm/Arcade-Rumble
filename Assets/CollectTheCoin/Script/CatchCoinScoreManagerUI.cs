@@ -28,7 +28,7 @@ public class CatchCoinScoreManagerUI : MonoBehaviour
     // Update UI skor berdasarkan nilai saat ini
     void UpdateScoreUI()
     {
-        player1ScoreText.text = "Player 1 Score: " + player1Collector.score.ToString();
-        player2ScoreText.text = "Player 2 Score: " + player2Collector.score.ToString();
+        player1ScoreText.text = "Player 1 Score: " + player1Collector.scoreplayer1.ToString();
+        player2ScoreText.text = "Player 2 Score: " + player2Collector.scoreplayer2.ToString();
     }
 }
