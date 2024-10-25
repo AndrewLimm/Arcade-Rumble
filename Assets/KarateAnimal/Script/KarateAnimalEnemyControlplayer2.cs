@@ -8,6 +8,8 @@ public class KarateAnimalEnemyControlplayer2 : MonoBehaviour
     public float speed = 2f; // Kecepatan pergerakan musuh
     private Vector3 laneTarget; // Posisi tujuan di jalur tetap
 
+    public bool CanMoveenemyPlayer2 = false;
+
     public void SetLane(Vector3 lanePosition)
     {
         laneTarget = lanePosition; // Tetapkan jalur tetap saat musuh di-spawn
@@ -16,14 +18,17 @@ public class KarateAnimalEnemyControlplayer2 : MonoBehaviour
 
     void Update()
     {
-        // Gerakkan musuh lurus menuju arah atas layar (top-down)
-        transform.position += Vector3.up * speed * Time.deltaTime;
+        if (CanMoveenemyPlayer2)
+        { // Gerakkan musuh lurus menuju arah atas layar (top-down)
+            transform.position += Vector3.up * speed * Time.deltaTime;
 
-        // Cek apakah musuh sudah mencapai ujung layar
-        if (transform.position.y > laneTarget.y + 10f) // Atur jarak untuk destroy
-        {
-            Destroy(gameObject);
+            // Cek apakah musuh sudah mencapai ujung layar
+            if (transform.position.y > laneTarget.y + 10f) // Atur jarak untuk destroy
+            {
+                Destroy(gameObject);
+            }
         }
+
     }
 
     // Fungsi untuk mendeteksi tabrakan dengan player
@@ -37,5 +42,15 @@ public class KarateAnimalEnemyControlplayer2 : MonoBehaviour
             // Kamu juga bisa menambahkan efek lain seperti suara atau animasi di sini
             Debug.Log("Enemy collided with player and destroyed");
         }
+    }
+
+    public void EnableEnemyCOntrolPlayer2()
+    {
+        CanMoveenemyPlayer2 = true; return;
+    }
+
+    public void DisableEnemyCOntrolPlayer2()
+    {
+        CanMoveenemyPlayer2 = false; return;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class KarateAnimalScoreManager : MonoBehaviour
 {
-    public int score = 0; // Skor untuk Player 1
+    public int scoreplayer1 = 0; // Skor untuk Player 1
     public TMP_Text scoreText; // Referensi ke TextMeshPro untuk menampilkan skor
 
     void Start()
@@ -17,8 +17,8 @@ public class KarateAnimalScoreManager : MonoBehaviour
     // Fungsi untuk menambahkan skor
     public void AddScore(int amount)
     {
-        score += amount;
-        Debug.Log("Player 1 Score: " + score);
+        scoreplayer1 += amount;
+        Debug.Log("Player 1 Score: " + scoreplayer1);
         UpdateScoreUI(); // Update tampilan skor
     }
 
@@ -27,7 +27,7 @@ public class KarateAnimalScoreManager : MonoBehaviour
     {
         if (scoreText != null)
         {
-            scoreText.text = "Player 1 Score: " + score.ToString();
+            scoreText.text = "Player 1 Score: " + scoreplayer1.ToString();
         }
     }
 }

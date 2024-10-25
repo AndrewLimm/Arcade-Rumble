@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Jobs;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
     public float speed = 2f; // Kecepatan pergerakan musuh
     private Vector3 laneTarget; // Posisi tujuan di jalur tetap
+
 
     public void SetLane(Vector3 lanePosition)
     {
@@ -15,6 +17,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+
         // Gerakkan musuh lurus menuju arah atas layar (top-down)
         transform.position += Vector3.up * speed * Time.deltaTime;
 
@@ -23,6 +26,8 @@ public class EnemyController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+
     }
 
     // Fungsi untuk mendeteksi tabrakan dengan player

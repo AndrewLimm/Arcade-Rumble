@@ -19,6 +19,8 @@ public class PlayerController2 : MonoBehaviour
 
     [SerializeField] private KarateAnimalPlayer2Score karateAnimalPlayer2Score;
 
+    public bool canmoveplayer2 = false;
+
     void Start()
     {
         playerAnimator = GetComponent<KarateAnimalPlayer2Animator>();
@@ -36,25 +38,28 @@ public class PlayerController2 : MonoBehaviour
 
     void Update()
     {
-        // Cek input pemain untuk setiap baris
-        if (Input.GetKeyDown(attackKey1))
-        {
-            Debug.Log("Player 2 menyerang baris 1");
-            playerAnimator.TriggerAttackAnimation(1); // Panggil animasi serangan untuk baris 1
-            Attack(attackPoint1); // Serang di baris 1
+        if (canmoveplayer2)
+        {   // Cek input pemain untuk setiap baris
+            if (Input.GetKeyDown(attackKey1))
+            {
+                Debug.Log("Player 2 menyerang baris 1");
+                playerAnimator.TriggerAttackAnimation(1); // Panggil animasi serangan untuk baris 1
+                Attack(attackPoint1); // Serang di baris 1
+            }
+            else if (Input.GetKeyDown(attackKey2))
+            {
+                Debug.Log("Player 2 menyerang baris 2");
+                playerAnimator.TriggerAttackAnimation(2); // Panggil animasi serangan untuk baris 2
+                Attack(attackPoint2); // Serang di baris 2
+            }
+            else if (Input.GetKeyDown(attackKey3))
+            {
+                Debug.Log("Player 2 menyerang baris 3");
+                playerAnimator.TriggerAttackAnimation(3); // Panggil animasi serangan untuk baris 3
+                Attack(attackPoint3); // Serang di baris 3
+            }
         }
-        else if (Input.GetKeyDown(attackKey2))
-        {
-            Debug.Log("Player 2 menyerang baris 2");
-            playerAnimator.TriggerAttackAnimation(2); // Panggil animasi serangan untuk baris 2
-            Attack(attackPoint2); // Serang di baris 2
-        }
-        else if (Input.GetKeyDown(attackKey3))
-        {
-            Debug.Log("Player 2 menyerang baris 3");
-            playerAnimator.TriggerAttackAnimation(3); // Panggil animasi serangan untuk baris 3
-            Attack(attackPoint3); // Serang di baris 3
-        }
+
     }
 
     public void Attack(Transform attackPoint)
@@ -99,5 +104,15 @@ public class PlayerController2 : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint2.position, attackRange);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(attackPoint3.position, attackRange);
+    }
+
+    public void EnableMovePlayer2()
+    {
+        canmoveplayer2 = true;
+    }
+
+    public void DisableMovePlayer2()
+    {
+        canmoveplayer2 = false;
     }
 }

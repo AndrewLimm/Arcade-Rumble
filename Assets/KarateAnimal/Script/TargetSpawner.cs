@@ -11,6 +11,10 @@ public class TargetSpawner : MonoBehaviour
     private float spawnInterval; // Waktu interval antar spawn
     private float timer;
 
+    public bool canSpawn = false;
+
+    [SerializeField] KarateAnimalTimerGamer gameTimer;
+
     void Start()
     {
         SetRandomSpawnInterval(); // Set interval spawn acak saat permainan dimulai
@@ -19,13 +23,23 @@ public class TargetSpawner : MonoBehaviour
 
     void Update()
     {
-        timer -= Time.deltaTime;
-
-        if (timer <= 0f)
+        // Check if spawning is allowed and if there are more than 5 seconds remaining
+        if (canSpawn && gameTimer.GetRemainingTime() > 5f)
         {
-            SpawnTarget();
-            SetRandomSpawnInterval(); // Set interval spawn acak untuk spawn berikutnya
-            timer = spawnInterval; // Reset timer dengan interval baru
+            timer -= Time.deltaTime;
+
+            if (timer <= 0f)
+            {
+                SpawnTarget();
+                SetRandomSpawnInterval(); // Set a new random spawn interval for the next spawn
+                timer = spawnInterval; // Reset timer with the new interval
+            }
+        }
+        else if (gameTimer.GetRemainingTime() <= 5f)
+        {
+            // Stop spawning when there are 5 seconds or less remaining
+            canSpawn = false;
+            Debug.Log("Spawner berhenti karena waktu tersisa 5 detik atau kurang.");
         }
     }
 
@@ -49,5 +63,14 @@ public class TargetSpawner : MonoBehaviour
     {
         spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
         Debug.Log("Interval spawn baru: " + spawnInterval + " detik");
+    }
+
+    public void enableSpawn()
+    {
+        canSpawn = true;
+    }
+    public void disableSpawn()
+    {
+        canSpawn = false;
     }
 }
