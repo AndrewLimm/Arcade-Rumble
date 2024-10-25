@@ -5,49 +5,50 @@ using UnityEngine;
 
 public class MemoryMatchGameTImer : MonoBehaviour
 {
-    public float gameDuration = 60f; // Total durasi permainan dalam detik
-    private float currentTime; // Waktu tersisa untuk permainan
-    public TMP_Text timerText; // UI Text untuk menampilkan timer
-    private bool isGameRunning = false; // Flag untuk mengecek apakah permainan sedang berjalan
+    public float gameDuration = 60f; // Total duration of the game in seconds
+    private float currentTime; // Remaining time for the game
+    public TMP_Text timerText; // UI Text to display the timer
+    private bool isGameRunning = false; // Flag to check if the game is running
+
+    [SerializeField] MemoryMatchGameOver gameOverManager; // Reference to the Game Over manager
 
     private void Update()
     {
         if (isGameRunning)
         {
-            currentTime -= Time.deltaTime; // Kurangi waktu berdasarkan waktu berlalu per frame
+            currentTime -= Time.deltaTime; // Decrease time based on the time passed per frame
             UpdateTimerUI();
 
             if (currentTime <= 0)
             {
-                EndGame(); // Jika waktu habis, panggil fungsi ini
+                EndGame(); // Call this function if time runs out
             }
         }
     }
 
     public void StartGameTimer()
     {
-        currentTime = gameDuration; // Setel waktu ke durasi permainan
-        isGameRunning = true; // Mulai permainan
+        currentTime = gameDuration; // Set time to game duration
+        isGameRunning = true; // Start the game
         UpdateTimerUI();
     }
 
     public void StopGameTimer()
     {
-        isGameRunning = false; // Hentikan timer permainan
+        isGameRunning = false; // Stop the game timer
     }
 
     private void UpdateTimerUI()
     {
-        timerText.text = "Time Left: " + Mathf.Ceil(currentTime).ToString() + "s"; // Perbarui tampilan UI dengan waktu tersisa
+        timerText.text = "Time Left: " + Mathf.Ceil(currentTime).ToString() + "s"; // Update UI display with remaining time
     }
 
     private void EndGame()
     {
-        isGameRunning = false; // Hentikan permainan
-        Debug.Log("Waktu Permainan Habis! Permainan Berakhir.");
-        // Panggil logika untuk menampilkan layar Game Over atau hasil akhir
+        isGameRunning = false; // Stop the game
+        Debug.Log("Game Over! Time's Up.");
 
-        // Misalnya, panggil fungsi untuk menampilkan skor akhir pemain di sini
-
+        // Call the method to display the winner
+        gameOverManager.EndCondition();
     }
 }

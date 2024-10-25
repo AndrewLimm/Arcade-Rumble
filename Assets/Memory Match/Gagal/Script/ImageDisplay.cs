@@ -9,6 +9,11 @@ public class ImageDisplay : MonoBehaviour
     public List<Sprite> sprites = new List<Sprite>(); // List dari sprite yang akan ditampilkan
     public float _displayTimePerSprite = 2f; // Waktu untuk menampilkan sprite
 
+    public float timeDecreaseRate = 0.1f; // Waktu berkurang setiap kali sprite ditampilkan
+    public float minimumDisplayTime = 0.5f; // Waktu minimum untuk menampilkan sprite
+    private float _currentDisplayTime; // Waktu saat ini untuk menampilkan sprite
+
+
     private bool _isGameStarted = false; // Flag untuk memastikan game sudah dimulai
     private List<int> _shuffledIndices = new List<int>(); // Indices yang diacak dari sprites
 
@@ -30,10 +35,13 @@ public class ImageDisplay : MonoBehaviour
             spriteRenderers[indices[i]].sprite = sprites[indices[i]];
 
             // Tampilkan sprite selama 2 detik
-            yield return new WaitForSeconds(_displayTimePerSprite);
+            yield return new WaitForSeconds(_currentDisplayTime);
 
             // Sembunyikan sprite setelah 2 detik
             spriteRenderers[indices[i]].sprite = null;
+
+            // Kurangi waktu tampilan dan pastikan tidak kurang dari minimum
+            _currentDisplayTime = Mathf.Max(minimumDisplayTime, _currentDisplayTime - timeDecreaseRate);
         }
 
         _isGameStarted = false; // Tandai bahwa soal selesai

@@ -13,6 +13,10 @@ public class CountDown : MonoBehaviour
 
     void Start()
     {
+    }
+
+    public void StartCountdownCoroutine()
+    {
         StartCoroutine(StartCountdown());
     }
 
