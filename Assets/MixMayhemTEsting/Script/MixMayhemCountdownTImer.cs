@@ -11,6 +11,10 @@ public class MixMayhemCountdownTImer : MonoBehaviour
 
     private void Start()
     {
+    }
+
+    public void StartCountdown() // Fungsi untuk memulai countdown
+    {
         StartCoroutine(Countdown());
     }
 
