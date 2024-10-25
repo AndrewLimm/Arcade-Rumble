@@ -17,20 +17,21 @@ public class MathGameLogic : MonoBehaviour
     private bool isAnswered = false; // Prevents multiple inputs
     private bool gameEnded = false;  // Stops input after the game ends
 
-    void OnEnable()
+    // void Start()
+    // {
+    //     MulaiPermainan();
+    // }
+
+    private void OnEnable()
     {
         QuickMathGameTImer.OnTimeUp += AkhiriPermainan;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         QuickMathGameTImer.OnTimeUp -= AkhiriPermainan;
     }
 
-    void Start()
-    {
-        MulaiPermainan();
-    }
 
     public void MulaiPermainan()
     {

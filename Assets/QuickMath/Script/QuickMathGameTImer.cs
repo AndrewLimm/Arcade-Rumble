@@ -1,74 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class QuickMathGameTImer : MonoBehaviour
 {
-    public float totalTime = 60f;  // Total waktu permainan dalam detik (default: 60 detik)
-    public bool isGameRunning = false;  // Untuk melacak apakah permainan sedang berjalan
+    public float totalTime = 60f; // Total waktu permainan
+    public bool isGameRunning = false;
 
     private float timeRemaining;
+    private Coroutine timerCoroutine;
 
-    // Event yang dapat di-trigger ketika waktu habis
-    public delegate void TimeUpEvent();
-    public static event TimeUpEvent OnTimeUp;
+    // Referensi ke skrip GameOver
+    public QUickmathgameover gameOverScript;
 
-    // Event untuk meng-update UI Timer (Anda bisa menghubungkannya ke UI Timer script)
-    public delegate void TimeUpdatedEvent(float timeRemaining);
-    public static event TimeUpdatedEvent OnTimeUpdated;
+    // Referensi ke TMP Text untuk UI timer
+    public TMP_Text timerText;
 
-    void Start()
+    // Event untuk memberitahu akhir permainan
+    public static event System.Action OnTimeUp;
+
+    private void Start()
     {
-        timeRemaining = totalTime;  // Set waktu awal menjadi total waktu yang diatur
+        timeRemaining = totalTime;
+        UpdateTimerText(); // Perbarui tampilan timer pada awal permainan
     }
 
-    // Memulai timer
     public void StartTimer()
     {
         if (!isGameRunning)
         {
             isGameRunning = true;
-            StartCoroutine(UpdateTimer());
+            timerCoroutine = StartCoroutine(UpdateTimer());
         }
     }
 
-    // Menghentikan timer
-    public void StopTimer()
-    {
-        isGameRunning = false;
-    }
-
-    // Coroutine untuk meng-update timer
     private IEnumerator UpdateTimer()
     {
         while (timeRemaining > 0 && isGameRunning)
         {
-            yield return new WaitForSeconds(1f);  // Menunggu satu detik
+            yield return new WaitForSeconds(1f);
             timeRemaining--;
+            UpdateTimerText();
 
-            // Trigger event untuk meng-update UI
-            if (OnTimeUpdated != null)
-            {
-                OnTimeUpdated(timeRemaining);
-            }
-
-            // Jika waktu habis, stop timer dan trigger event waktu habis
             if (timeRemaining <= 0)
             {
-                timeRemaining = 0;
                 isGameRunning = false;
-
-                if (OnTimeUp != null)
-                {
-                    OnTimeUp();  // Trigger event waktu habis
-                }
+                EndGame();
             }
         }
     }
 
-    // Mengembalikan waktu yang tersisa
-    public float GetRemainingTime()
+    private void UpdateTimerText()
     {
-        return timeRemaining;
+        int minutes = Mathf.FloorToInt(timeRemaining / 60f);
+        int seconds = Mathf.FloorToInt(timeRemaining % 60f);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    private void EndGame()
+    {
+        if (gameOverScript != null)
+        {
+            gameOverScript.CheckWinner();
+        }
+
+        OnTimeUp?.Invoke(); // Memanggil event untuk memberitahu akhir permainan
     }
 }
