@@ -20,6 +20,8 @@ public class QuickTapPlayer2Spawner : MonoBehaviour
         }
     }
 
+
+
     // Method untuk spawn makanan dari bawah ke atas khusus Player 2
     private void SpawnFoodItem(int index)
     {

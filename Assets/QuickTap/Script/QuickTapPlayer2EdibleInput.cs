@@ -12,24 +12,41 @@ public class QuickTapPlayer2EdibleInput : MonoBehaviour
         player2Collect = FindAnyObjectByType<QuickTapPlayer2Input>(); // Mengakses skrip PlayerCollect
     }
 
-    private void Update()
+    public void StartPlayer2EdibleInputCoroutine()
     {
-        // Jika pemain menekan tombol untuk collect edible
-        if (Input.GetKeyDown(edibleCollectKeyplayer2))
+        StartCoroutine(HandlePlayer2EdibleInput());
+    }
+
+    private IEnumerator HandlePlayer2EdibleInput()
+    {
+        while (true) // Loop untuk memeriksa input terus menerus
         {
-            Debug.Log("Tombol collect edible ditekan.");
-            GameObject frontFood = player2Collect.GetFrontFoodInRange(); // Dapatkan makanan terdepan
-            if (frontFood != null)
+            if (!FindObjectOfType<QuickTapTImer>().IsGameActive())
             {
-                if (frontFood.CompareTag("Edible"))
+                yield break; // Keluar dari coroutine jika permainan tidak aktif
+            }
+            
+            // Jika pemain menekan tombol untuk collect edible
+            if (Input.GetKeyDown(edibleCollectKeyplayer2))
+            {
+                Debug.Log("Tombol collect edible ditekan.");
+                GameObject frontFood = player2Collect.GetFrontFoodInRange(); // Dapatkan makanan terdepan
+                if (frontFood != null)
                 {
-                    player2Collect.CollectEdible(frontFood); // Jika edible, collect
-                }
-                else
-                {
-                    player2Collect.WrongCollection(frontFood); // Jika salah, beri penalti
+                    if (frontFood.CompareTag("Edible"))
+                    {
+                        player2Collect.CollectEdible(frontFood); // Jika edible, collect
+                        Debug.Log("Edible collected: " + frontFood.name);
+                    }
+                    else
+                    {
+                        player2Collect.WrongCollection(frontFood); // Jika salah, beri penalti
+                        Debug.Log("Salah mengambil objek: " + frontFood.name);
+                    }
                 }
             }
+
+            yield return null; // Tunggu hingga frame berikutnya
         }
     }
 }

@@ -21,6 +21,15 @@ public class SpawnerManager : MonoBehaviour
         }
     }
 
+    // public void StartCallFood()
+    // {
+    //     // Spawn makanan pada awal permainan
+    //     for (int i = 0; i < maxFoodItems; i++)
+    //     {
+    //         SpawnFoodItem(i);
+    //     }
+    // }
+
     // Method untuk spawn makanan dari bawah ke atas
     private void SpawnFoodItem(int index)
     {

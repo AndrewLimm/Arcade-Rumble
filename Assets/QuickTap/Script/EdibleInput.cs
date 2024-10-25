@@ -12,23 +12,39 @@ public class EdibleInput : MonoBehaviour
         playerCollect = FindAnyObjectByType<PlayerCollect>(); // Mengakses skrip PlayerCollect
     }
 
-    private void Update()
+    public void StartEdibleInputCoroutine()
     {
-        // Jika pemain menekan tombol untuk collect edible
-        if (Input.GetKeyDown(edibleCollectKey))
+        StartCoroutine(HandleEdibleInput());
+    }
+
+    private IEnumerator HandleEdibleInput()
+    {
+        while (true) // Loop untuk memeriksa input terus menerus
         {
-            GameObject frontFood = playerCollect.GetFrontFoodInRange(); // Dapatkan makanan terdepan
-            if (frontFood != null)
+            if (!FindObjectOfType<QuickTapTImer>().IsGameActive())
             {
-                if (frontFood.CompareTag("Edible"))
+                yield break; // Keluar dari coroutine jika permainan tidak aktif
+            }
+            // Jika pemain menekan tombol untuk collect edible
+            if (Input.GetKeyDown(edibleCollectKey))
+            {
+                GameObject frontFood = playerCollect.GetFrontFoodInRange(); // Dapatkan makanan terdepan
+                if (frontFood != null)
                 {
-                    playerCollect.CollectEdible(frontFood); // Jika edible, collect
-                }
-                else
-                {
-                    playerCollect.WrongCollection(frontFood); // Jika salah, beri penalti
+                    if (frontFood.CompareTag("Edible"))
+                    {
+                        playerCollect.CollectEdible(frontFood); // Jika edible, collect
+                        Debug.Log("Makanan berhasil diambil: " + frontFood.name);
+                    }
+                    else
+                    {
+                        playerCollect.WrongCollection(frontFood); // Jika salah, beri penalti
+                        Debug.Log("Salah mengambil makanan: " + frontFood.name);
+                    }
                 }
             }
+
+            yield return null; // Tunggu hingga frame berikutnya
         }
     }
 }
