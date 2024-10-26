@@ -12,6 +12,8 @@ public class GameTetrisPieces : GameTetrisBaseTetrisPiece
     private float moveTime;
     private float lockTime;
 
+    public bool isactive = false;
+
     public void Initialize(GameTetrisBoard board, Vector3Int position, TetrominoData data)
     {
         this.data = data;
@@ -34,40 +36,49 @@ public class GameTetrisPieces : GameTetrisBaseTetrisPiece
         }
     }
 
+    public void StartPieceGame()
+    {
+        isactive = true;
+        return;
+    }
     private void Update()
     {
-        board.Clear(this);
-
-        // We use a timer to allow the player to make adjustments to the piece
-        // before it locks in place
-        lockTime += Time.deltaTime;
-
-        // Handle rotation
-        if (Input.GetKeyDown(KeyCode.W)) // Rotate Player 1
+        if (isactive)
         {
-            Rotate(1); // rotate clockwise
+            board.Clear(this);
+
+            // We use a timer to allow the player to make adjustments to the piece
+            // before it locks in place
+            lockTime += Time.deltaTime;
+
+            // Handle rotation
+            if (Input.GetKeyDown(KeyCode.W)) // Rotate Player 1
+            {
+                Rotate(1); // rotate clockwise
+            }
+
+            // Handle hard drop
+            if (Input.GetKeyDown(KeyCode.Space)) // Hard drop Player 1
+            {
+                HardDrop();
+            }
+
+            // Allow the player to hold movement keys but only after a move delay
+            // so it does not move too fast
+            if (Time.time > moveTime)
+            {
+                HandleMoveInputs();
+            }
+
+            // Advance the piece to the next row every x seconds
+            if (Time.time > stepTime)
+            {
+                Step();
+            }
+
+            board.Set(this);
         }
 
-        // Handle hard drop
-        if (Input.GetKeyDown(KeyCode.Space)) // Hard drop Player 1
-        {
-            HardDrop();
-        }
-
-        // Allow the player to hold movement keys but only after a move delay
-        // so it does not move too fast
-        if (Time.time > moveTime)
-        {
-            HandleMoveInputs();
-        }
-
-        // Advance the piece to the next row every x seconds
-        if (Time.time > stepTime)
-        {
-            Step();
-        }
-
-        board.Set(this);
     }
 
     private void HandleMoveInputs()

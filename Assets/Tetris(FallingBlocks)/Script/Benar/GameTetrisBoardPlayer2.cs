@@ -34,12 +34,8 @@ public class GameTetrisBoardPlayer2 : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        SpawnPiece();
-    }
 
-    public void SpawnPiece()
+    public void SpawnPiecePlayer2()
     {
         int randomIndex = Random.Range(0, tetrominoes.Length);
         TetrominoData data = tetrominoes[randomIndex];

@@ -12,6 +12,9 @@ public class GameTetrisPiecePlayer2 : GameTetrisBaseTetrisPiece
     private float moveTime;
     private float lockTime;
 
+    private bool isactive = false;
+
+
 
     public void Initialize(GameTetrisBoardPlayer2 boardPlayer2, Vector3Int position, TetrominoData data)
     {
@@ -35,40 +38,48 @@ public class GameTetrisPiecePlayer2 : GameTetrisBaseTetrisPiece
         }
     }
 
+    public void StartPieceGamePlayer2()
+    {
+        isactive = true;
+    }
+
     private void Update()
     {
-        boardPlayer2.Clear(this);
-
-        // We use a timer to allow the player to make adjustments to the piece
-        // before it locks in place
-        lockTime += Time.deltaTime;
-
-        // Handle rotation
-        if (Input.GetKeyDown(KeyCode.I)) // Ganti untuk kontrol rotasi Player 2
+        if (isactive)
         {
-            Rotate(1); //rotateclockwise
-        }
+            boardPlayer2.Clear(this);
 
-        // Handle hard drop
-        if (Input.GetKeyDown(KeyCode.Return)) // Ganti untuk kontrol hard drop Player 2
-        {
-            HardDrop();
-        }
+            // We use a timer to allow the player to make adjustments to the piece
+            // before it locks in place
+            lockTime += Time.deltaTime;
 
-        // Allow the player to hold movement keys but only after a move delay
-        // so it does not move too fast
-        if (Time.time > moveTime)
-        {
-            HandleMoveInputs();
-        }
+            // Handle rotation
+            if (Input.GetKeyDown(KeyCode.I)) // Ganti untuk kontrol rotasi Player 2
+            {
+                Rotate(1); //rotateclockwise
+            }
 
-        // Advance the piece to the next row every x seconds
-        if (Time.time > stepTime)
-        {
-            Step();
-        }
+            // Handle hard drop
+            if (Input.GetKeyDown(KeyCode.Return)) // Ganti untuk kontrol hard drop Player 2
+            {
+                HardDrop();
+            }
 
-        boardPlayer2.Set(this);
+            // Allow the player to hold movement keys but only after a move delay
+            // so it does not move too fast
+            if (Time.time > moveTime)
+            {
+                HandleMoveInputs();
+            }
+
+            // Advance the piece to the next row every x seconds
+            if (Time.time > stepTime)
+            {
+                Step();
+            }
+
+            boardPlayer2.Set(this);
+        }
     }
 
     private void HandleMoveInputs()
@@ -122,7 +133,7 @@ public class GameTetrisPiecePlayer2 : GameTetrisBaseTetrisPiece
     {
         boardPlayer2.Set(this);
         boardPlayer2.ClearLines();
-        boardPlayer2.SpawnPiece();
+        boardPlayer2.SpawnPiecePlayer2();
     }
 
     private bool Move(Vector2Int translation)
