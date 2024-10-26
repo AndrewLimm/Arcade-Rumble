@@ -11804,7 +11804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1748755109
 Transform:
   m_ObjectHideFlags: 0
@@ -13119,8 +13119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requestor: {fileID: 963664546}
-  miniGameDuration: 15
-  transitionDuration: 8
+  miniGameDuration: 14
+  transitionDuration: 2
   panel2StartDelay: 7
   QuickMathgameOverManager: {fileID: 763519166}
   KarateAnimalMixMayhemGameOver: {fileID: 206254759}

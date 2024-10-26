@@ -6,8 +6,22 @@ public class StayAlivePlayer2Controller : MonoBehaviour
 {
     public float speed = 5f; // Adjust the movement speed
     private bool isFacingRight = true; // Variable to track which direction the player is facing
+    private bool canMove = false; // Flag to check if the player can move
 
     void Update()
+    {
+        if (canMove)
+        {
+            Move(); // Panggil metode Move jika kontrol diaktifkan
+        }
+    }
+
+    public void StartMoving()
+    {
+        canMove = true; // Izinkan pemain untuk bergerak
+    }
+
+    private void Move()
     {
         // Player 2 movement (IJKL)
         float horizontal = 0f;

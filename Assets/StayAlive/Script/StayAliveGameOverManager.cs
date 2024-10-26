@@ -1,33 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class StayAliveGameOverManager : MonoBehaviour
 {
-    [SerializeField] private GameObject gameOverUI; // Referensi ke panel Game Over UI
+    [SerializeField] private TMP_Text winnerText; // Reference to the UI Text component
+
+    [SerializeField] private StayAlivePlayerHEalth player1Health; // Reference to Player 1's health
+    [SerializeField] private StayAlivePlayerHEalth player2Health; // Reference to Player 2's health
+
+    private bool endLineTouched = false; // Track if the end line was touched
+
 
     void Start()
     {
-        // Pastikan Game Over UI tersembunyi saat permainan dimulai
-        if (gameOverUI != null)
+        // Optional: You can initialize the winner text to be empty or a default message
+        if (winnerText != null)
         {
-            gameOverUI.SetActive(false);
+            winnerText.text = ""; // Clear the text at the start
         }
     }
 
-    // Metode untuk memicu kondisi game over
+    // Method to trigger game over conditions
     public void TriggerEnd()
     {
-        // Tampilkan Game Over UI
-        if (gameOverUI != null)
+        Debug.Log("Checking Game Over conditions..."); // Debug statement
+
+        // Check if either player's health is zero
+        if (player1Health.currentHealth <= 0 && player2Health.currentHealth <= 0)
         {
-            gameOverUI.SetActive(true);
+            Debug.Log("It's a tie!");
+            DisplayWinner("It's a tie!");
         }
+        else if (player1Health.currentHealth <= 0 || endLineTouched)
+        {
+            Debug.Log("Player 2 wins!");
+            DisplayWinner("Player 2 Wins!");
+        }
+        else if (player2Health.currentHealth <= 0 || endLineTouched)
+        {
+            Debug.Log("Player 1 wins!");
+            DisplayWinner("Player 1 Wins!");
+        }
+        // Stop the game (optional)
+        Time.timeScale = 0f; // Stop the game
+        // Removed gameOverUI logic as per your request
+    }
 
-        // Logika tambahan untuk game over, seperti menghentikan pergerakan pemain atau permainan
-        Debug.Log("Game Over! Pemain telah mencapai garis akhir.");
+    // Method to update the winner text
+    private void DisplayWinner(string winnerMessage)
+    {
+        if (winnerText != null)
+        {
+            winnerText.text = winnerMessage; // Update the winner text
+        }
+    }
 
-        // Hentikan permainan dengan menghentikan waktu (opsional)
-        Time.timeScale = 0f; // Menghentikan permainan
+
+    // Method to set the end line touched state
+    public void SetEndLineTouched(bool touched)
+    {
+        endLineTouched = touched;
     }
 }

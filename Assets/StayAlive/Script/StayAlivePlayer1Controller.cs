@@ -6,8 +6,22 @@ public class StayAlivePlayer1Controller : MonoBehaviour
 {
     public float speed = 5f; // Adjust the movement speed
     private bool isFacingRight = true; // Variable to track which direction the player is facing
+    private bool canMove = false; // Flag to check if the player can move
 
     void Update()
+    {
+        if (canMove)
+        {
+            Move(); // Panggil metode Move jika kontrol diaktifkan
+        }
+    }
+
+    public void StartMoving()
+    {
+        canMove = true; // Izinkan pemain untuk bergerak
+    }
+
+    private void Move()
     {
         // Player 1 movement (WASD)
         float horizontal = 0f;

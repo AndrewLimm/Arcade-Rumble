@@ -8,31 +8,40 @@ public class StayAliveBotMovement : MonoBehaviour
     public float leftLimit = -5f; // Left boundary for movement
     public float rightLimit = 5f; // Right boundary for movement
 
-    private bool movingRight = true; // Direction of bot movement
+    private bool movingRight = false; // Direction of bot movement
 
-    void Update()
+    public void StartMoving()
     {
-        MoveBot();
+        // Start the movement coroutine
+        StartCoroutine(MoveBot());
     }
 
-    void MoveBot()
+    private IEnumerator MoveBot()
     {
-        // Move the bot left or right based on the direction
-        if (movingRight)
+        while (true) // Infinite loop to keep the bot moving
         {
-            transform.position += Vector3.right * speed * Time.deltaTime;
-            if (transform.position.x >= rightLimit)
+            if (movingRight)
             {
-                movingRight = false;
+                transform.position += Vector3.right * speed * Time.deltaTime;
+                if (transform.position.x >= rightLimit)
+                {
+                    movingRight = false;
+                }
             }
-        }
-        else
-        {
-            transform.position += Vector3.left * speed * Time.deltaTime;
-            if (transform.position.x <= leftLimit)
+            else
             {
-                movingRight = true;
+                transform.position += Vector3.left * speed * Time.deltaTime;
+                if (transform.position.x <= leftLimit)
+                {
+                    movingRight = true;
+                }
             }
+            yield return null; // Wait for the next frame
         }
+    }
+
+    public void StopMoving()
+    {
+        StopAllCoroutines(); // Stop all movement
     }
 }

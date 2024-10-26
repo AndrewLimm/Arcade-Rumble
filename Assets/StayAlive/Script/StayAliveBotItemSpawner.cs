@@ -9,33 +9,44 @@ public class StayAliveBotItemSpawner : MonoBehaviour
     public float minSpawnInterval = 2f; // Minimum interval for spawning items
     public float maxSpawnInterval = 4f; // Maximum interval for spawning items
 
-    private float spawnInterval; // Time interval for item spawning
-    private float nextSpawnTime; // Next spawn time
+    private bool isSpawning = false; // Flag to control the spawning process
 
-    void Start()
+    public void StartSpawning()
     {
-        // Set the initial spawn interval to a random value between minSpawnInterval and maxSpawnInterval
-        spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
-        nextSpawnTime = Time.time + spawnInterval;
-    }
-
-    void Update()
-    {
-        SpawnItem();
-    }
-
-    void SpawnItem()
-    {
-        // Check if it's time to spawn an item
-        if (Time.time >= nextSpawnTime)
+        isSpawning = true; // Enable item spawning
+        // Start the spawning coroutine for each bot
+        for (int i = 0; i < spawnPoints.Length; i++)
         {
-            // Choose a random spawn point from the array
-            int spawnIndex = Random.Range(0, spawnPoints.Length);
-            Instantiate(itemPrefab, spawnPoints[spawnIndex].position, Quaternion.identity);
+            StartCoroutine(SpawnItemCoroutine(i));
+        }
+    }
 
-            // Set the next spawn time to a random value between minSpawnInterval and maxSpawnInterval
-            spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
-            nextSpawnTime = Time.time + spawnInterval;
+    public void StopSpawning()
+    {
+        isSpawning = false; // Disable item spawning
+        // Optionally, you could stop all coroutines if you want to halt the spawning immediately
+        StopAllCoroutines();
+    }
+
+    private IEnumerator SpawnItemCoroutine(int botIndex)
+    {
+        // Define spawn interval for each bot
+        float spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
+        float nextSpawnTime = Time.time + spawnInterval;
+
+        while (isSpawning) // Keep spawning items while isSpawning is true
+        {
+            // Check if it's time to spawn an item
+            if (Time.time >= nextSpawnTime)
+            {
+                // Spawn item at the specific spawn point for this bot
+                Instantiate(itemPrefab, spawnPoints[botIndex].position, Quaternion.identity);
+
+                // Set the next spawn time to a random value
+                spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
+                nextSpawnTime = Time.time + spawnInterval;
+            }
+            yield return null; // Wait for the next frame
         }
     }
 }

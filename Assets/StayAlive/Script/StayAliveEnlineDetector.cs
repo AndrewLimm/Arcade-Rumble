@@ -11,6 +11,7 @@ public class StayAliveEnlineDetector : MonoBehaviour
         // Periksa apakah collider yang bersentuhan memiliki tag "Player1" atau "Player2"
         if (collision.CompareTag("Player1") || collision.CompareTag("Player2"))
         {
+            gameOverManager.SetEndLineTouched(true);
             // Panggil fungsi untuk trigger game over
             gameOverManager.TriggerEnd();
         }
