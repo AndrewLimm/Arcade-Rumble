@@ -5,95 +5,91 @@ using UnityEngine;
 public class ReactionMechanic : MonoBehaviour
 {
     public Renderer signalRenderer;  // Renderer untuk mengganti warna sinyal
-    public float roundDuration = 60f;  // Durasi ronde keseluruhan
     public float minWaitTime = 3f;  // Waktu minimum sebelum lampu hijau muncul
     public float maxWaitTime = 5f;  // Waktu maksimum sebelum lampu hijau muncul
-    // public GameReset gameReset;  // Referensi ke script reset
     public ReactionTestScoreManager scoreManager;  // Referensi ke ScoreManager
+    public GameOverManagerTextReactionGame gameOverManager;  // Referensi ke GameOverManager
 
-    private bool signalShown = false;  // Cek apakah lampu hijau sudah muncul
     private bool gameActive = true;  // Cek apakah game sedang aktif
     private bool gameFinished = false;  // Cek apakah game sudah selesai
-    private bool inputLocked = false;
+    private bool signalShown = false;  // Cek apakah lampu hijau sudah muncul
+    private bool inputLocked = false;  // Cek apakah input pemain terkunci
 
     public delegate void OnGameEnd(string result);
     public static event OnGameEnd GameEndEvent;  // Event untuk mengirim hasil ke UI
 
-    void Start()
+    void Update()
+    {
+    }
+
+    public void StartGameLoop()
     {
         StartCoroutine(GameLoop());
     }
 
-    void Update()
-    {
-        if (gameActive)
-        {
-            roundDuration -= Time.deltaTime;
-            if (roundDuration <= 0 && !gameFinished)
-            {
-                EndGame();
-            }
-        }
-    }
-
     // Coroutine untuk memulai game
-    public IEnumerator GameLoop()
+    private IEnumerator GameLoop()
     {
         while (gameActive)
         {
-            signalRenderer.material.color = Color.red;  // Mulai dengan lampu merah
-            signalShown = false;  // Reset status lampu hijau
-            float randomWait = Random.Range(minWaitTime, maxWaitTime);  // Waktu acak untuk menunggu lampu hijau
-            yield return new WaitForSeconds(randomWait);
-
-            ShowSignal();  // Ganti ke hijau setelah menunggu
-            yield return new WaitUntil(() => inputLocked);  // Tunggu hingga pemain menekan tombol
+            PrepareNextRound();
+            yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
+            ShowSignal();
+            yield return new WaitUntil(() => inputLocked);
+            ResetSignal();
         }
     }
 
+    // Persiapkan ronde berikutnya
+    private void PrepareNextRound()
+    {
+        signalRenderer.material.color = Color.red;  // Mulai dengan lampu merah
+        signalShown = false;  // Reset status lampu hijau
+        inputLocked = false;  // Reset input lock
+    }
+
     // Fungsi untuk menampilkan lampu hijau
-    void ShowSignal()
+    private void ShowSignal()
     {
         if (gameFinished) return;  // Cegah jika game sudah berakhir
         signalShown = true;  // Tandai bahwa lampu hijau sudah muncul
         signalRenderer.material.color = Color.green;  // Ganti warna menjadi hijau
+        inputLocked = false;  // Izinkan input
     }
 
     // Fungsi ketika pemain menang
     public void PlayerWin(int playerNumber)
     {
-        if (!signalShown || gameFinished)  // Cegah input jika lampu hijau belum muncul atau game sudah selesai
+        if (!signalShown || gameFinished || inputLocked)  // Cegah input jika lampu hijau belum muncul, game sudah selesai, atau input sudah terkunci
             return;
 
-        // Update skor dan reset status
+        inputLocked = true;  // Kunci input untuk mencegah pemain menang lebih dari sekali
+        UpdateScore(playerNumber);
+        // Assuming the timer handles the game duration
+    }
+
+    // Update skor pemain
+    private void UpdateScore(int playerNumber)
+    {
         if (scoreManager != null)
         {
             scoreManager.UpdateScore(playerNumber);  // Update skor pemain
         }
-
-        // Reset status untuk ronde berikutnya
-        signalRenderer.material.color = Color.red;  // Kembalikan lampu merah
-        signalShown = false;  // Reset status lampu hijau
-
-        // Jika durasi ronde masih ada, teruskan permainan, jika tidak, akhiri permainan
-        if (roundDuration > 0)
-        {
-            StartCoroutine(GameLoop());  // Mulai ronde berikutnya
-        }
-        else
-        {
-            EndGame();  // Akhiri permainan jika ronde selesai
-        }
     }
 
     // Fungsi untuk mengakhiri game
-    void EndGame()
+    public void EndGame()
     {
         gameActive = false;
         gameFinished = true;  // Tandai bahwa permainan sudah berakhir
-        if (GameEndEvent != null)
-        {
-            GameEndEvent("Game Over!");  // Kirim hasil akhir ke UI atau sistem lain
-        }
+        GameEndEvent?.Invoke("Game Over!");  // Kirim hasil akhir ke UI atau sistem lain
+        gameOverManager.EndGameCondition();  // Panggil fungsi untuk menampilkan hasil akhir
+    }
+
+    // Reset sinyal ke kondisi awal
+    private void ResetSignal()
+    {
+        signalRenderer.material.color = Color.red;  // Kembalikan lampu merah
+        signalShown = false;  // Reset status lampu hijau
     }
 }

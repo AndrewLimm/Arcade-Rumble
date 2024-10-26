@@ -8,8 +8,8 @@ public class ReactionTestScoreManager : MonoBehaviour
     public TMP_Text player1ScoreText;  // UI untuk skor Player 1
     public TMP_Text player2ScoreText;  // UI untuk skor Player 2
 
-    private int player1Score = 0;
-    private int player2Score = 0;
+    public int player1Score = 0;
+    public int player2Score = 0;
 
     void Start()
     {

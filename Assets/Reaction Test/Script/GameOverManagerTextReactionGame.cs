@@ -5,22 +5,32 @@ using UnityEngine;
 
 public class GameOverManagerTextReactionGame : MonoBehaviour
 {
-    public GameObject gameOverPanel;  // Panel UI untuk Game Over
-    public TMP_Text gameOverText;  // Text UI untuk hasil akhir
 
-    void OnEnable()
+    [SerializeField] ReactionTestScoreManager reactionTestScoreManager;
+    [SerializeField] TMP_Text resultText;  // Text UI untuk menampilkan hasil
+
+    void Start()
     {
-        ReactionMechanic.GameEndEvent += OnGameEnd;  // Daftarkan event untuk menerima hasil akhir
+        resultText.gameObject.SetActive(false);  // Sembunyikan teks hasil saat game dimulai
     }
 
-    void OnDisable()
+    public void EndGameCondition()
     {
-        ReactionMechanic.GameEndEvent -= OnGameEnd;  // Hapus pendaftaran event
-    }
+        // Tampilkan hasil berdasarkan skor pemain
+        if (reactionTestScoreManager.player1Score > reactionTestScoreManager.player2Score)
+        {
+            resultText.text = "Player 1 Menang!";
+        }
+        else if (reactionTestScoreManager.player1Score < reactionTestScoreManager.player2Score)
+        {
+            resultText.text = "Player 2 Menang!";
+        }
+        else
+        {
+            resultText.text = "Hasil Seri!";
+        }
 
-    void OnGameEnd(string result)
-    {
-        gameOverPanel.SetActive(true);  // Tampilkan panel Game Over
-        gameOverText.text = result;  // Tampilkan hasil akhir
+        // Tampilkan teks hasil
+        resultText.gameObject.SetActive(true);
     }
 }
