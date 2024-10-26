@@ -16,7 +16,7 @@ public class MixMayhemGameManager : MonoBehaviour
     [SerializeField] KarateAnimalMixMayhemGameOverManager KarateAnimalMixMayhemGameOver;
     [SerializeField] ReactionTestMixMayhemGameOverManager ReactionTestMixMayhemGameOverManager;
     [SerializeField] CatchITemMixMayhemGameOver catchITemMixMayhemGameOver;
-
+    [SerializeField] MIxMayhemRaceTofinishGameOverManager mIxMayhemRaceTofinishGameOverManager;
     [SerializeField] private MixMayhemCountdownTImer countdownTimer;
 
 
@@ -102,6 +102,10 @@ public class MixMayhemGameManager : MonoBehaviour
             else if (currentMiniGame2.CompareTag("ReactionTest"))
             {
                 ReactionTestMixMayhemGameOverManager.ReactionTestEndTrigger(gameObject.tag);
+            }
+            else if (currentMiniGame2.CompareTag("RaceToFinish"))
+            {
+                mIxMayhemRaceTofinishGameOverManager.RaceToFinishGameOver(gameObject.tag);
             }
         }
 
