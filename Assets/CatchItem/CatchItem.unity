@@ -733,6 +733,8 @@ MonoBehaviour:
   player1Movement: {fileID: 1697422019}
   player2Movement: {fileID: 1650653403}
   timer: {fileID: 1685862281}
+  player1ScoreUI: {fileID: 1826762998}
+  player2ScoreUI: {fileID: 1826762997}
 --- !u!4 &528160368
 Transform:
   m_ObjectHideFlags: 0

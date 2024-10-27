@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameTembakGameOverManager : MonoBehaviour
 {
@@ -27,16 +28,21 @@ public class GameTembakGameOverManager : MonoBehaviour
         if (player1Score < player2Score)
         {
             DisplayResult("Player 2 Wins!");
+            GameRumbleGameManagerForScore.instance.AddWinPoint(2);
+            Invoke("GoToResultScreen", 0.5f); // Menunggu 2 detik sebelum pindah
 
         }
         else if (player1Score > player2Score)
         {
             DisplayResult("Player 1 Wins!");
-
+            GameRumbleGameManagerForScore.instance.AddWinPoint(1);
+            Invoke("GoToResultScreen", 0.5f); // Menunggu 2 detik sebelum pindah
         }
         else if (player1Score == player2Score)
         {
             DisplayResult("Draw!");
+            LoadSpecialMiniGame();
+
         }
     }
     public void DisplayResult(string result)
@@ -46,5 +52,15 @@ public class GameTembakGameOverManager : MonoBehaviour
         Debug.Log(result); // Log hasil
 
         gameTembakGameManager.StopGame(); // Hentikan permainan
+    }
+
+    public void LoadSpecialMiniGame()
+    {
+        SceneManager.LoadScene("MixMayhem"); // Ganti dengan nama scene mini-game khusus
+    }
+
+    private void GoToResultScreen()
+    {
+        SceneManager.LoadScene("ArcadeRumbleResultScreen"); // Ganti dengan nama scene layar hasil yang sesuai
     }
 }

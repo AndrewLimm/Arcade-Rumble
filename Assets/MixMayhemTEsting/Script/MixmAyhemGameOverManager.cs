@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MixmAyhemGameOverManager : MonoBehaviour
 {
@@ -13,26 +14,23 @@ public class MixmAyhemGameOverManager : MonoBehaviour
         {
             // Pemain 2 menang
             Debug.Log("Pemain 2 menang!");
-            // Panggil fungsi untuk menampilkan hasil atau melakukan tindakan akhir
-            EndGame();
+            GameRumbleGameManagerForScore.instance.AddWinPoint(2);
+            Invoke("GoToResultScreen", 0.5f); // Menunggu 2 detik sebelum pindah
+
         }
         else if (mixMayhemPlayerlifeManager.player1Lives > mixMayhemPlayerlifeManager.player2Lives)
         {
             // Pemain 1 menang
             Debug.Log("Pemain 1 menang!");
-            // Panggil fungsi untuk menampilkan hasil atau melakukan tindakan akhir
-            EndGame();
+            GameRumbleGameManagerForScore.instance.AddWinPoint(1);
+            Invoke("GoToResultScreen", 0.5f); // Menunggu 2 detik sebelum pindah
+
         }
     }
-    public void EndGame()
-    {
-        // Hentikan semua aktivitas game
-        Time.timeScale = 0; // Menghentikan semua waktu dalam permainan
 
-        // Logika untuk mengakhiri permainan, seperti menampilkan menu akhir atau kembali ke menu utama
-        // Contoh:
-        // ShowEndGameMenu();
-        Debug.Log("Permainan berakhir. Tampilkan menu akhir.");
+    private void GoToResultScreen()
+    {
+        SceneManager.LoadScene("ArcadeRumbleResultScreen"); // Ganti dengan nama scene layar hasil yang sesuai
     }
 }
 

@@ -19,8 +19,6 @@ public class JumpOverGameOverManager : MonoBehaviour
         // Menampilkan pemenang
         winnerText.gameObject.SetActive(true);
         winnerText.text = winner; // Menampilkan siapa pemenangnya
-
         // Hentikan semua gameplay dengan menghentikan game
-        Time.timeScale = 0; // Pause permainan
     }
 }

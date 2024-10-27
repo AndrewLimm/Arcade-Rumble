@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuickTapGameOver : MonoBehaviour
 {
@@ -30,15 +31,30 @@ public class QuickTapGameOver : MonoBehaviour
             if (playerCollect.playerScore > player2Collect.playerScore)
             {
                 winnerText.text = "Player 1 Wins!";
+                GameRumbleGameManagerForScore.instance.AddWinPoint(1);
+                Invoke("GoToResultScreen", 0.5f); // Menunggu 2 detik sebelum pindah
+
             }
             else if (playerCollect.playerScore < player2Collect.playerScore)
             {
                 winnerText.text = "Player 2 Wins!";
+                GameRumbleGameManagerForScore.instance.AddWinPoint(2);
+                Invoke("GoToResultScreen", 0.5f); // Menunggu 2 detik sebelum pindah
             }
             else
             {
                 winnerText.text = "It's a Draw!";
+                LoadSpecialMiniGame();
             }
         }
+    }
+    public void LoadSpecialMiniGame()
+    {
+        SceneManager.LoadScene("MixMayhem"); // Ganti dengan nama scene mini-game khusus
+    }
+
+    private void GoToResultScreen()
+    {
+        SceneManager.LoadScene("ArcadeRumbleResultScreen"); // Ganti dengan nama scene layar hasil yang sesuai
     }
 }

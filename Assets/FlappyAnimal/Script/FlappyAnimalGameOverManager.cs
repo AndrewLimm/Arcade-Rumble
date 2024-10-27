@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FlappyAnimalGameOverManager : MonoBehaviour
 {
-      private bool player1Alive = true; // Track if Player 1 is alive
+    private bool player1Alive = true; // Track if Player 1 is alive
     private bool player2Alive = true; // Track if Player 2 is alive
 
     public TMP_Text winnerText; // Reference to the TMP Text component
@@ -33,17 +34,21 @@ public class FlappyAnimalGameOverManager : MonoBehaviour
         // Check if both players are dead
         if (!player1Alive && !player2Alive)
         {
+            LoadSpecialMiniGame();
             // If both players are dead, it's a draw
             DisplayWinner("It's a Draw!");
         }
         else if (!player1Alive)
         {
+            GameRumbleGameManagerForScore.instance.AddWinPoint(2);
+            Invoke("GoToResultScreen", 0.5f); // Menunggu 2 detik sebelum pindah
             // If Player 1 is dead, Player 2 wins
             DisplayWinner("Player 2 Wins!");
         }
         else if (!player2Alive)
         {
-            // If Player 2 is dead, Player 1 wins
+            GameRumbleGameManagerForScore.instance.AddWinPoint(1);
+            Invoke("GoToResultScreen", 0.5f); // Menunggu 2 detik sebelum pindah
             DisplayWinner("Player 1 Wins!");
         }
 
@@ -71,5 +76,15 @@ public class FlappyAnimalGameOverManager : MonoBehaviour
         player1Alive = true;
         player2Alive = true;
         winnerText.text = ""; // Clear the winner message
+    }
+
+    public void LoadSpecialMiniGame()
+    {
+        SceneManager.LoadScene("MixMayhem"); // Ganti dengan nama scene mini-game khusus
+    }
+
+    private void GoToResultScreen()
+    {
+        SceneManager.LoadScene("ArcadeRumbleResultScreen"); // Ganti dengan nama scene layar hasil yang sesuai
     }
 }

@@ -15,7 +15,22 @@ public class CatchItemGameManager : MonoBehaviour
 
     private bool gameStarted = false; // Status permainan
 
+    public CatchItemScoreUIPlayer1 player1ScoreUI; // Referensi ke skrip UI Player 1
+    public CatchItemScoreUiPlayer2 player2ScoreUI; // Referensi ke skrip UI Player 2
 
+    public static CatchItemGameManager Instance; // Menambahkan instance static
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         // Menambahkan listener untuk tombol start
@@ -44,6 +59,7 @@ public class CatchItemGameManager : MonoBehaviour
         countdown.StartCountdown();
         // Mengaktifkan gerakan pemain setelah countdown selesai
         StartCoroutine(WaitForCountdown());
+
     }
 
     private IEnumerator WaitForCountdown()
@@ -102,5 +118,16 @@ public class CatchItemGameManager : MonoBehaviour
 
         // Jika ada objek lain yang perlu dinonaktifkan, tambahkan logika di sini
         // Contoh: jika ada objek item yang bisa ditangkap, nonaktifkan juga
+    }
+    public void Player1Scores()
+    {
+        CatchItemScoreManagerPlayer1.instance.AddScore(1); // Menambahkan skor ke Player 1
+        player1ScoreUI.UpdateScoreUI(); // Memperbarui UI untuk Player 1
+    }
+
+    public void Player2Scores()
+    {
+        CatchItemScoreManagerPlayer2.instance.AddScore(1); // Menambahkan skor ke Player 2
+        player2ScoreUI.UpdateScoreUI(); // Memperbarui UI untuk Player 2
     }
 }

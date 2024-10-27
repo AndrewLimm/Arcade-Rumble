@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class CollectTheCoinGameOverManager : MonoBehaviour
 {
@@ -31,20 +33,34 @@ public class CollectTheCoinGameOverManager : MonoBehaviour
     private void Player1Wins()
     {
         Debug.Log("Player 1 wins!");
-        // Tambahkan logika lain di sini, misalnya tampilkan UI atau efek kemenangan
+        GameRumbleGameManagerForScore.instance.AddWinPoint(1);
+        Invoke("GoToResultScreen", 0.5f); // Menunggu 2 detik sebelum pindah
+
+
     }
 
     // Metode untuk menangani kemenangan Player 2
     private void Player2Wins()
     {
         Debug.Log("Player 2 wins!");
-        // Tambahkan logika lain di sini, misalnya tampilkan UI atau efek kemenangan
+        GameRumbleGameManagerForScore.instance.AddWinPoint(2);
+        Invoke("GoToResultScreen", 0.5f); // Menunggu 2 detik sebelum pindah
     }
 
     // Metode untuk menangani hasil imbang
     private void Draw()
     {
         Debug.Log("It's a draw!");
-        // Tambahkan logika lain di sini untuk hasil imbang, misalnya UI spesifik
+        LoadSpecialMiniGame();
+    }
+
+    public void LoadSpecialMiniGame()
+    {
+        SceneManager.LoadScene("MixMayhem"); // Ganti dengan nama scene mini-game khusus
+    }
+
+    private void GoToResultScreen()
+    {
+        SceneManager.LoadScene("ArcadeRumbleResultScreen"); // Ganti dengan nama scene layar hasil yang sesuai
     }
 }

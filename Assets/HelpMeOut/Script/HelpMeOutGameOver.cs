@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HelpMeOutGameOver : MonoBehaviour
 {
@@ -40,9 +41,33 @@ public class HelpMeOutGameOver : MonoBehaviour
         // Logika tambahan untuk game over, seperti menghentikan pergerakan pemain atau permainan
         Debug.Log("Game Over! Pemain telah mencapai garis akhir.");
 
+        // Menambahkan poin kemenangan sesuai dengan pemain yang menang
+        if (winner == "Player 1")
+        {
+            GameRumbleGameManagerForScore.instance.AddWinPoint(1);
+        }
+        else if (winner == "Player 2")
+        {
+            GameRumbleGameManagerForScore.instance.AddWinPoint(2);
+        }
+
         // Hentikan permainan dengan menghentikan waktu (opsional)
-        Time.timeScale = 0f; // Menghentikan permainan
         helpMeOUtPlayerTimeController.StopAllTimers();
         Debug.Log("Permainan dihentikan.");
+
+        // Pindah ke scene berikutnya setelah delay
+        StartCoroutine(LoadNextSceneAfterDelay());
+    }
+    private IEnumerator LoadNextSceneAfterDelay()
+    {
+        // Menunggu selama delay sebelum pindah scene
+        yield return new WaitForSeconds(0.5f);
+
+        // Pindah ke scene berikutnya (ganti "NamaSceneBerikutnya" dengan nama scene yang sesuai)
+        SceneManager.LoadScene("ArcadeRumbleResultScreen");
+    }
+    public void LoadSpecialMiniGame()
+    {
+        SceneManager.LoadScene("MixMayhem"); // Ganti dengan nama scene mini-game khusus
     }
 }
