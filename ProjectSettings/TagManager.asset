@@ -25,6 +25,7 @@ TagManager:
   - Collectible
   - DestroyPoint
   - RaceToFinish
+  - FinishLine
   layers:
   - Default
   - TransparentFX

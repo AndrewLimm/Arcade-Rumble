@@ -9,14 +9,22 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 2f;   // Fixed movement speed
     public Transform finishLine;   // Finish line position
     private bool hasFinished = false;  // To check if Player 1 has finished
-    public GameEnded gameManager;    // Reference to the GameManager script
+    public RaceToFInishGameOverManager gameManager;    // Reference to the GameManager script
 
     public RaceToFinishAnimation animationController;
 
+    public bool canMove = false;
+
     private void Update()
     {
-        if (hasFinished || gameManager == null)
+        if (hasFinished || !canMove || gameManager == null)
             return;
+
+        HandleMovementPlayer();
+    }
+
+    public void HandleMovementPlayer()
+    {
 
         // Move right when either key is pressed
         if (Input.GetKeyDown(moveKey1) || Input.GetKeyDown(moveKey2))
@@ -28,13 +36,19 @@ public class PlayerMovement : MonoBehaviour
         {
             animationController.PlayIdleAnimation();  // Trigger the idle animation
         }
+    }
 
-        // Check if the player has reached the finish line
-        if (transform.position.x >= finishLine.position.x)
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("FinishLine")) // Pastikan tag pada garis finish diatur ke "FinishLine"
         {
-            hasFinished = true;
-            animationController.PlayIdleAnimation();  // Ensure the idle animation plays
-            gameManager.EndGame("Player 1");   // Notify GameManager that Player 1 won
+            if (!hasFinished)
+            {
+                hasFinished = true;
+                animationController.PlayIdleAnimation();  // Ensure the idle animation plays
+                gameManager.RaceToFinishGameOver(gameObject.tag);   // Notify GameManager that Player 1 won
+            }
         }
     }
 }
+
