@@ -24,6 +24,14 @@ public class CatchItemScoreUiPlayer2 : MonoBehaviour
     // Memperbarui UI dengan skor terbaru
     public void UpdateScoreUI()
     {
-        scoreText.text = "Player 2 Score: " + CatchItemScoreManagerPlayer2.instance.GetScore();
+        if (scoreText != null)
+        {
+            int currentScore = CatchItemScoreManagerPlayer2.instance.GetScore(); // Dapatkan skor saat ini
+            scoreText.text = "Score: " + currentScore; // Perbarui teks dengan skor
+        }
+        else
+        {
+            Debug.LogError("Score Text is missing in the UI.");
+        }
     }
 }

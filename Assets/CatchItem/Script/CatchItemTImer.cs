@@ -51,11 +51,11 @@ public class CatchItemTImer : MonoBehaviour
 
     private void EndGame()
     {
-        // Panggil metode untuk memeriksa kondisi game over
-        gameOverManager.CheckGameOver();
-
         //mematikan semua game object
         catchItemGameManager.DisableAllGameObjects(); // Pastikan ini ada di GameManager
 
+
+        // Panggil metode untuk memeriksa kondisi game over
+        gameOverManager.CheckGameOver();
     }
 }

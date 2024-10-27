@@ -25,7 +25,14 @@ public class CatchItemScoreManagerPlayer1 : MonoBehaviour
     public void AddScore(int value)
     {
         scorePlayer1 += value;
-        CatchItemScoreUIPlayer1.instance.UpdateScoreUI(); // Perbarui UI setelah skor diubah
+        if (CatchItemScoreUIPlayer1.instance != null)
+        {
+            CatchItemScoreUIPlayer1.instance.UpdateScoreUI(); // Perbarui UI setelah skor diubah
+        }
+        else
+        {
+            Debug.LogError("CatchItemScoreUIPlayer1 instance is missing or not initialized.");
+        }
     }
 
     // Mengambil skor Player 1

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CatchItemGameOverManager : MonoBehaviour
 {
@@ -30,14 +31,20 @@ public class CatchItemGameOverManager : MonoBehaviour
         if (scorePlayer1 > scorePlayer2)
         {
             DisplayResult("Player 1 Wins!");
+            GameRumbleGameManagerForScore.instance.AddWinPoint(1);
+            Invoke("GoToResultScreen", 1f); // Menunggu 2 detik sebelum pindah
         }
         else if (scorePlayer2 > scorePlayer1)
         {
             DisplayResult("Player 2 Wins!");
+            GameRumbleGameManagerForScore.instance.AddWinPoint(2);
+            Invoke("GoToResultScreen", 1f); // Menunggu 2 detik sebelum pindah
+
         }
         else if (scorePlayer1 == scorePlayer2)
         {
             DisplayResult("It's a Tie!");
+            LoadSpecialMiniGame();
         }
     }
 
@@ -52,5 +59,16 @@ public class CatchItemGameOverManager : MonoBehaviour
 
         }
         Debug.Log(message); // Untuk debug, bisa dihapus jika tidak diperlukan
+    }
+
+    private void LoadSpecialMiniGame()
+    {
+        SceneManager.LoadScene("MixMayhem"); // Ganti dengan nama scene mini-game khusus
+    }
+
+    // Metode untuk memindahkan ke layar hasil
+    private void GoToResultScreen()
+    {
+        SceneManager.LoadScene("ArcadeRumbleResultScreen"); // Ganti dengan nama scene layar hasil yang sesuai
     }
 }
