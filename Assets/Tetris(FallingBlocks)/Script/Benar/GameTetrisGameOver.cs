@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameTetrisGameOver : MonoBehaviour
 {
@@ -32,20 +33,24 @@ public class GameTetrisGameOver : MonoBehaviour
         {
             Debug.Log("Player 1 wins!");
             DisplayWinner("Player 1 Wins!");
+            GameRumbleGameManagerForScore.instance.AddWinPoint(1);
+            Invoke("GoToResultScreen", 0.5f); // Menunggu 2 detik sebelum pindah
         }
         else if (player2Score > player1Score)
         {
             Debug.Log("Player 2 wins!");
             DisplayWinner("Player 2 Wins!");
+            GameRumbleGameManagerForScore.instance.AddWinPoint(2);
+            Invoke("GoToResultScreen", 0.5f); // Menunggu 2 detik sebelum pindah
         }
         else
         {
             Debug.Log("It's a tie!");
             DisplayWinner("It's a Tie!");
+            LoadSpecialMiniGame();
         }
 
         // Optional: Stop the game (e.g., pause it)
-        Time.timeScale = 0f; // Stop the game
     }
 
     // Method to update the winner text
@@ -55,5 +60,15 @@ public class GameTetrisGameOver : MonoBehaviour
         {
             winnerText.text = winnerMessage; // Update the winner text
         }
+    }
+
+    public void LoadSpecialMiniGame()
+    {
+        SceneManager.LoadScene("MixMayhem"); // Ganti dengan nama scene mini-game khusus
+    }
+
+    private void GoToResultScreen()
+    {
+        SceneManager.LoadScene("ArcadeRumbleResultScreen"); // Ganti dengan nama scene layar hasil yang sesuai
     }
 }

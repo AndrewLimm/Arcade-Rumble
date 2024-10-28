@@ -45,6 +45,18 @@ EditorBuildSettings:
     path: Assets/QuickTap/QuickTapDemo.unity
     guid: 72b8b421c33b54d46936c39b4b72ccb5
   - enabled: 1
+    path: Assets/RaceToTheFinish/RaceToTheFinish.unity
+    guid: 5bdc70a9ae0f0c7468397d7f424add24
+  - enabled: 1
+    path: Assets/Reaction Test/ReactionTest.unity
+    guid: ae92d73b3a406c042895e12bc5289faa
+  - enabled: 1
+    path: Assets/StayAlive/StayAlive.unity
+    guid: 141329292a9deac48835de538f9cc9ca
+  - enabled: 1
+    path: Assets/Tetris(FallingBlocks)/FallingBlockScene.unity
+    guid: 9a235e38569b3764e80d2119ef9a96b0
+  - enabled: 1
     path: Assets/MainScenes/ArcadeRumbleResultScreen.unity
     guid: 40603aae3ff890e408f9d9d5b229ea3a
   - enabled: 1

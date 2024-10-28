@@ -770,7 +770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveKey1: 106
   moveKey2: 108
-  moveSpeed: 10
+  moveSpeed: 40
   finishLine: {fileID: 165633682}
   gameManager: {fileID: 1898466778}
   canMove: 0
@@ -1113,7 +1113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveKey1: 97
   moveKey2: 100
-  moveSpeed: 10
+  moveSpeed: 40
   finishLine: {fileID: 165633682}
   gameManager: {fileID: 1898466778}
   animationController: {fileID: 549294832}

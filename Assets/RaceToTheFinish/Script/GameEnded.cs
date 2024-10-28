@@ -17,8 +17,7 @@ public class GameEnded : MonoBehaviour
             return;
 
         gameEnded = true;
-        gameEndCanvas.SetActive(true);   // Show the game end canvas
+        gameEndCanvas.SetActive(true);   // Show the game end canvasA
         winnerText.text = winner + " Wins!";   // Display the winner message
-        Time.timeScale = 0f;   // Pause the game (optional)
     }
 }

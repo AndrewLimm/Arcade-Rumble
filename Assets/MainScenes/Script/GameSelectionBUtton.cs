@@ -54,5 +54,26 @@ public class GameSelectionBUtton : MonoBehaviour
     {
         SceneManager.LoadScene("QuickTapDemo");
     }
+
+    public void RaceTOFInish()
+    {
+        SceneManager.LoadScene("RaceToTheFinish");
+    }
+
+    public void ReactionTest()
+    {
+        SceneManager.LoadScene("ReactionTest");
+    }
+
+    public void StayAlive()
+    {
+        SceneManager.LoadScene("StayAlive");
+    }
+
+  
+    public void Tetrsi()
+    {
+        SceneManager.LoadScene("FallingBlockScene");
+    }
 }
 
