@@ -25,7 +25,6 @@ public class GameRumbleResultGameScreenManager : MonoBehaviour
     public void OnEndGameButtonPressed()
     {
         // Mereset skor saat pemain memilih End Game dan pindah ke Final Result Screen
-        GameRumbleGameManagerForScore.instance.ResetScores();
         SceneManager.LoadScene("ArcandeRumbleResultFinish");
     }
 }

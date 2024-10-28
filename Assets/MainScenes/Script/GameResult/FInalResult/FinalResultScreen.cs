@@ -25,7 +25,7 @@ public class FinalResultScreen : MonoBehaviour
         {
             winnerText.text = "Player 2 Wins!";
         }
-    }
+    }   
 
     public void OnExitGamePressed()
     {
