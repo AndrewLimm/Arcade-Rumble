@@ -544,7 +544,7 @@ MonoBehaviour:
   attackPoint1: {fileID: 863866814}
   attackPoint2: {fileID: 1175223521}
   attackPoint3: {fileID: 2115312670}
-  attackRange: 0.5
+  attackRange: 0.3
   targetLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -1325,7 +1325,7 @@ MonoBehaviour:
   attackPoint1: {fileID: 1222671544}
   attackPoint2: {fileID: 299446483}
   attackPoint3: {fileID: 311440671}
-  attackRange: 0.5
+  attackRange: 0.3
   targetLayer:
     serializedVersion: 2
     m_Bits: 8

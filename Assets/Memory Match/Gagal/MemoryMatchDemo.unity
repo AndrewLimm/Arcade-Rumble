@@ -2637,8 +2637,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a14d06a56c9952542879e2b767eb7898, type: 3}
   - {fileID: 21300000, guid: 7aab3521b2d78cc4ba669fb0ed16780c, type: 3}
   - {fileID: 21300000, guid: 865c2687808dd7b4c85eb2ffbdf0cce4, type: 3}
-  _displayTimePerSprite: 2
-  timeDecreaseRate: 0.1
+  _displayTimePerSprite: 5
+  timeDecreaseRate: 0.3
   minimumDisplayTime: 0.5
 --- !u!4 &1956561597
 Transform:
