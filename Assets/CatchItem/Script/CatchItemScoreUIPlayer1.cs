@@ -5,28 +5,15 @@ using UnityEngine;
 
 public class CatchItemScoreUIPlayer1 : MonoBehaviour
 {
-    public static CatchItemScoreUIPlayer1 instance; // Singleton instance
-
     [SerializeField] private TMP_Text scoreText; // Referensi ke UI Text untuk Player 1
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     // Memperbarui UI dengan skor terbaru
     public void UpdateScoreUI()
     {
         if (scoreText != null)
         {
-            int currentScore = CatchItemScoreManagerPlayer1.instance.GetScore(); // Dapatkan skor saat ini
+            CatchItemScoreManagerPlayer1 scoreManager = FindObjectOfType<CatchItemScoreManagerPlayer1>();
+            int currentScore = scoreManager != null ? scoreManager.GetScore() : 0;
             scoreText.text = "Score: " + currentScore; // Perbarui teks dengan skor
         }
         else

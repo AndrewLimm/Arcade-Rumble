@@ -4,34 +4,20 @@ using UnityEngine;
 
 public class CatchItemScoreManagerPlayer2 : MonoBehaviour
 {
-    public static CatchItemScoreManagerPlayer2 instance; // Singleton instance
-
     private int scorePlayer2 = 0;
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject); // Agar tetap ada di setiap scene
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     // Menambah skor untuk Player 2
     public void AddScore(int value)
     {
         scorePlayer2 += value;
-        if (CatchItemScoreUiPlayer2.instance != null)
+        CatchItemScoreUiPlayer2 scoreUI = FindObjectOfType<CatchItemScoreUiPlayer2>();
+        if (scoreUI != null)
         {
-            CatchItemScoreUiPlayer2.instance.UpdateScoreUI(); // Perbarui UI setelah skor diubah
+            scoreUI.UpdateScoreUI(); // Perbarui UI setelah skor diubah
         }
         else
         {
-            Debug.LogError("CatchItemScoreUIPlayer1 instance is missing or not initialized.");
+            Debug.LogError("CatchItemScoreUiPlayer2 is missing or not initialized.");
         }
     }
 

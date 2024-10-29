@@ -32,13 +32,13 @@ public class CatchItemGameOverManager : MonoBehaviour
         {
             DisplayResult("Player 1 Wins!");
             GameRumbleGameManagerForScore.instance.AddWinPoint(1);
-            Invoke("GoToResultScreen", 1f); // Menunggu 2 detik sebelum pindah
+            Invoke("GoToResultScreen", 0.3f); // Menunggu 2 detik sebelum pindah
         }
         else if (scorePlayer2 > scorePlayer1)
         {
             DisplayResult("Player 2 Wins!");
             GameRumbleGameManagerForScore.instance.AddWinPoint(2);
-            Invoke("GoToResultScreen", 1f); // Menunggu 2 detik sebelum pindah
+            Invoke("GoToResultScreen", 0.3f); // Menunggu 2 detik sebelum pindah
 
         }
         else if (scorePlayer1 == scorePlayer2)

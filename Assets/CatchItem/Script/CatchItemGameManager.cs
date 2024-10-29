@@ -18,17 +18,17 @@ public class CatchItemGameManager : MonoBehaviour
     public CatchItemScoreUIPlayer1 player1ScoreUI; // Referensi ke skrip UI Player 1
     public CatchItemScoreUiPlayer2 player2ScoreUI; // Referensi ke skrip UI Player 2
 
-    public static CatchItemGameManager Instance; // Menambahkan instance static
+    private CatchItemScoreManagerPlayer1 scoreManagerPlayer1; // Referensi untuk mengakses skor Player 1
+    private CatchItemScoreManagerPlayer2 scoreManagerPlayer2; // Referensi untuk mengakses skor Player 2
 
     private void Awake()
     {
-        if (Instance == null)
+        scoreManagerPlayer1 = FindObjectOfType<CatchItemScoreManagerPlayer1>();
+        scoreManagerPlayer2 = FindObjectOfType<CatchItemScoreManagerPlayer2>();
+
+        if (scoreManagerPlayer1 == null || scoreManagerPlayer2 == null)
         {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
+            Debug.LogError("Score Manager for one or both players is missing in the scene.");
         }
     }
     void Start()
@@ -121,13 +121,19 @@ public class CatchItemGameManager : MonoBehaviour
     }
     public void Player1Scores()
     {
-        CatchItemScoreManagerPlayer1.instance.AddScore(1); // Menambahkan skor ke Player 1
-        player1ScoreUI.UpdateScoreUI(); // Memperbarui UI untuk Player 1
+        if (scoreManagerPlayer1 != null)
+        {
+            scoreManagerPlayer1.AddScore(1); // Menambahkan skor ke Player 1
+            player1ScoreUI.UpdateScoreUI(); // Memperbarui UI untuk Player 1
+        }
     }
 
     public void Player2Scores()
     {
-        CatchItemScoreManagerPlayer2.instance.AddScore(1); // Menambahkan skor ke Player 2
-        player2ScoreUI.UpdateScoreUI(); // Memperbarui UI untuk Player 2
+        if (scoreManagerPlayer2 != null)
+        {
+            scoreManagerPlayer2.AddScore(1); // Menambahkan skor ke Player 2
+            player2ScoreUI.UpdateScoreUI(); // Memperbarui UI untuk Player 2
+        }
     }
 }

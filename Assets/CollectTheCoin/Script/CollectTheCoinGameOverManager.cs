@@ -34,7 +34,7 @@ public class CollectTheCoinGameOverManager : MonoBehaviour
     {
         Debug.Log("Player 1 wins!");
         GameRumbleGameManagerForScore.instance.AddWinPoint(1);
-        Invoke("GoToResultScreen", 0.5f); // Menunggu 2 detik sebelum pindah
+        Invoke("GoToResultScreen", 0.3f); // Menunggu 2 detik sebelum pindah
 
 
     }
@@ -44,7 +44,7 @@ public class CollectTheCoinGameOverManager : MonoBehaviour
     {
         Debug.Log("Player 2 wins!");
         GameRumbleGameManagerForScore.instance.AddWinPoint(2);
-        Invoke("GoToResultScreen", 0.5f); // Menunggu 2 detik sebelum pindah
+        Invoke("GoToResultScreen", 0.3f); // Menunggu 2 detik sebelum pindah
     }
 
     // Metode untuk menangani hasil imbang
