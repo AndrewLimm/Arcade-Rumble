@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 218538782123775609, guid: 961890e57a375474796f47d9db97fe0c, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1495233924992569409, guid: 961890e57a375474796f47d9db97fe0c, type: 3}
       propertyPath: m_Name
       value: Item2
@@ -55,6 +59,10 @@ PrefabInstance:
     - target: {fileID: 3702393504415271981, guid: 961890e57a375474796f47d9db97fe0c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7824815291505049111, guid: 961890e57a375474796f47d9db97fe0c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7824815291505049111, guid: 961890e57a375474796f47d9db97fe0c, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x

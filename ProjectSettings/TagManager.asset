@@ -26,6 +26,7 @@ TagManager:
   - DestroyPoint
   - RaceToFinish
   - FinishLine
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - Player1Bullet
   - Player2Bullet
   - PostProcessing
-  - 
+  - Ground
   - 
   - 
   - 

@@ -10,6 +10,9 @@ public class CatchItemMIxMayhemPLayer1 : MonoBehaviour
     public bool isFacingRight = true;
     public SpriteRenderer spriteRenderer;
     private Animator animator; // Referensi Animator
+    public float jumpForce = 7f; // Kekuatan lompatan
+    private bool isGrounded = false; // Cek apakah pemain di tanah
+
 
     void Start()
     {
@@ -31,6 +34,11 @@ public class CatchItemMIxMayhemPLayer1 : MonoBehaviour
         {
             movement = 1;
         }
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+        {
+            Jump();
+        }
+
 
         // Melakukan flip
         FlipCharacter();
@@ -61,5 +69,28 @@ public class CatchItemMIxMayhemPLayer1 : MonoBehaviour
     {
         isFacingRight = !isFacingRight; // Balik arah hadap
         spriteRenderer.flipX = !spriteRenderer.flipX; // Membalikkan sprite secara horizontal
+    }
+    public void Jump()
+    {
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        isGrounded = false; // Set isGrounded ke false setelah lompat
+    }
+
+    // Deteksi jika pemain menyentuh tanah
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    // Reset isGrounded saat meninggalkan tanah
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
     }
 }

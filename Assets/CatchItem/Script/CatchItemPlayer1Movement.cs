@@ -9,17 +9,17 @@ public class CatchItemPlayer1Movement : MonoBehaviour
     private float movement;
     public bool isFacingRight = true;
     public SpriteRenderer spriteRenderer;
+    public float jumpForce = 7f; // Kekuatan lompatan
 
-    // Menambahkan variabel untuk kontrol gerakan
     private bool canMove = false;
+    private bool isGrounded = false; // Cek apakah pemain di tanah
     private Animator animator; // Referensi Animator
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>(); // Mendapatkan komponen Animator
+        animator = GetComponent<Animator>();
 
-        // Nonaktifkan animator saat permainan dimulai
         animator.enabled = false;
     }
 
@@ -27,7 +27,6 @@ public class CatchItemPlayer1Movement : MonoBehaviour
     {
         if (canMove) // Hanya gerak jika canMove true
         {
-            // Mengambil input horizontal dari pemain 1 (A = -1, D = 1)
             movement = 0;
 
             if (Input.GetKey(KeyCode.A))
@@ -39,24 +38,25 @@ public class CatchItemPlayer1Movement : MonoBehaviour
                 movement = 1;
             }
 
-            //melakukan flip
+            if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+            {
+                Jump();
+            }
+
             FlipCharacter();
         }
     }
 
     void FixedUpdate()
     {
-        if (canMove) // Hanya gerak jika canMove true
+        if (canMove)
         {
-            // Gerakkan player ke kiri/kanan berdasarkan input
             rb.velocity = new Vector2(movement * moveSpeed, rb.velocity.y);
         }
     }
 
-    // Fungsi untuk membalik arah hadap karakter
     void FlipCharacter()
     {
-        // Jika bergerak ke kiri dan sedang menghadap kanan atau sebaliknya, maka balik arah
         if (movement < 0 && isFacingRight)
         {
             Flip();
@@ -67,23 +67,45 @@ public class CatchItemPlayer1Movement : MonoBehaviour
         }
     }
 
-    // Fungsi untuk membalik sprite karakter
     void Flip()
     {
-        isFacingRight = !isFacingRight; // Balik arah hadap
-        spriteRenderer.flipX = !spriteRenderer.flipX; // Membalikkan sprite secara horizontal
+        isFacingRight = !isFacingRight;
+        spriteRenderer.flipX = !spriteRenderer.flipX;
     }
 
-    // Fungsi untuk mengaktifkan gerakan
     public void EnableMovement()
     {
         canMove = true;
-        animator.enabled = true; // Aktifkan animator saat pemain dapat bergerak
+        animator.enabled = true;
     }
 
     public void DisableMovement()
     {
         canMove = false;
-        animator.enabled = false; // Aktifkan animator saat pemain dapat bergerak
+        animator.enabled = false;
+    }
+
+    public void Jump()
+    {
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        isGrounded = false; // Set isGrounded to false after jumping
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Cek jika player menyentuh tanah
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        // Reset isGrounded saat player meninggalkan tanah
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
     }
 }

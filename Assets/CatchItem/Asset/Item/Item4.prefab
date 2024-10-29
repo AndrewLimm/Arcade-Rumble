@@ -53,6 +53,10 @@ PrefabInstance:
       value: Item4
       objectReference: {fileID: 0}
     - target: {fileID: 3108949813904653726, guid: 2d6fabb7f7af42e48af47136098f3e78, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108949813904653726, guid: 2d6fabb7f7af42e48af47136098f3e78, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 1.7777778
       objectReference: {fileID: 0}
@@ -63,6 +67,10 @@ PrefabInstance:
     - target: {fileID: 3857549351671459577, guid: 2d6fabb7f7af42e48af47136098f3e78, type: 3}
       propertyPath: value
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4075081038871638924, guid: 2d6fabb7f7af42e48af47136098f3e78, type: 3}
+      propertyPath: m_BodyType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9146980738850439214, guid: 2d6fabb7f7af42e48af47136098f3e78, type: 3}
       propertyPath: m_Sprite
