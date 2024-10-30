@@ -338,7 +338,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 260507998}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 807195056}
+        m_TargetAssemblyTypeName: ArcadeRumbleGameSelection, Assembly-CSharp
+        m_MethodName: GoToHelpScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &260507998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -731,7 +743,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 829166424}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 807195056}
+        m_TargetAssemblyTypeName: ArcadeRumbleGameSelection, Assembly-CSharp
+        m_MethodName: GoToAboutScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &829166424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1557,7 +1581,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1598712857}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 807195056}
+        m_TargetAssemblyTypeName: ArcadeRumbleGameSelection, Assembly-CSharp
+        m_MethodName: GoToExit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1598712857
 MonoBehaviour:
   m_ObjectHideFlags: 0

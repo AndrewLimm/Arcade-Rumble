@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/MainScenes/ArcadeRumbleGameSelection.unity
     guid: 75428fecffede174fb72a7863c3f8864
   - enabled: 1
+    path: Assets/MainScenes/ArcadeRumbleHelpScreen.unity
+    guid: 342a7a3881481ae40958b7e527695871
+  - enabled: 1
+    path: Assets/MainScenes/ArcadeRumbleAboutScreen.unity
+    guid: 063c45ac735844e4b93d0f9a8b5639f0
+  - enabled: 1
     path: Assets/CatchItem/CatchItem.unity
     guid: c9225ea8c3880dc4793c3d5634655068
   - enabled: 1

@@ -1,79 +1,169 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameSelectionBUtton : MonoBehaviour
 {
-    public void CatchItemButton()
+    private string selectedGameScene; // Menyimpan nama scene yang dipilih
+    private Button selectedButton; // Menyimpan tombol yang dipilih
+
+    // Daftar referensi ke tombol untuk setiap game
+    [SerializeField] public Button catchItemButton;
+    [SerializeField] public Button collectCoinButton;
+    [SerializeField] public Button flappyAnimalButton;
+    [SerializeField] public Button gameTembakButton;
+    [SerializeField] public Button helpMeOutButton;
+    [SerializeField] public Button jumpOverButton;
+    [SerializeField] public Button karateAnimalButton;
+    [SerializeField] public Button memoryMatchButton;
+    [SerializeField] public Button quickMathButton;
+    [SerializeField] public Button quickTapButton;
+    [SerializeField] public Button raceToFinishButton;
+    [SerializeField] public Button reactionTestButton;
+    [SerializeField] public Button stayAliveButton;
+    [SerializeField] public Button tetrisButton;
+
+    private void Start()
     {
-        //pindah ke scene Game Slection
-        SceneManager.LoadScene("CatchItem");
+        ResetButtonStyles(); // Setel gaya awal untuk setiap tombol
     }
 
-    public void CollecTheCoin()
+    // Fungsi untuk menyoroti tombol yang dipilih
+    private void HighlightButton(Button buttonToHighlight)
     {
-        SceneManager.LoadScene("CollectTheCoinScene");
-    }
-    public void FlappyAnimal()
-    {
-        SceneManager.LoadScene("FlappyAnimal");
+        ResetButtonStyles(); // Reset semua tombol terlebih dahulu
+
+        // Ubah tampilan tombol yang dipilih
+        TMP_Text buttonText = buttonToHighlight.GetComponentInChildren<TextMeshProUGUI>();
+        if (buttonText != null)
+        {
+            buttonText.fontStyle = FontStyles.Bold; // Ubah teks menjadi bold
+            buttonToHighlight.image.color = Color.yellow; // Ubah warna latar belakang tombol yang dipilih
+        }
+
+        selectedButton = buttonToHighlight; // Simpan tombol yang dipilih
     }
 
-    public void GameTembak()
+    // Fungsi untuk mereset style semua tombol ke tampilan default
+    private void ResetButtonStyles()
     {
-        SceneManager.LoadScene("GameTembakDemoScene");
+        Button[] buttons = {
+            catchItemButton, collectCoinButton, flappyAnimalButton, gameTembakButton,
+            helpMeOutButton, jumpOverButton, karateAnimalButton, memoryMatchButton,
+            quickMathButton, quickTapButton, raceToFinishButton, reactionTestButton,
+            stayAliveButton, tetrisButton
+        };
+
+        foreach (Button button in buttons)
+        {
+            TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
+            if (buttonText != null)
+            {
+                buttonText.fontStyle = FontStyles.Normal; // Kembalikan ke teks normal
+                button.image.color = Color.white; // Warna default latar belakang tombol
+            }
+        }
     }
 
-    public void HelpMeOut()
+    // Fungsi untuk setiap tombol game yang mengatur game yang dipilih dan menyorot tombol
+    public void SelectCatchItem()
     {
-        SceneManager.LoadScene("HelpMeOut");
+        selectedGameScene = "CatchItem";
+        HighlightButton(catchItemButton);
     }
 
-    public void JumpOver()
+    public void SelectCollectTheCoin()
     {
-        SceneManager.LoadScene("JumpOver");
+        selectedGameScene = "CollectTheCoinScene";
+        HighlightButton(collectCoinButton);
     }
 
-    public void KarateAnimal()
+    public void SelectFlappyAnimal()
     {
-        SceneManager.LoadScene("KarateAnimal");
+        selectedGameScene = "FlappyAnimal";
+        HighlightButton(flappyAnimalButton);
     }
 
-    public void MemoryMatch()
+    public void SelectGameTembak()
     {
-        SceneManager.LoadScene("MemoryMatchDemo");
+        selectedGameScene = "GameTembakDemoScene";
+        HighlightButton(gameTembakButton);
     }
 
-    public void QuickMath()
+    public void SelectHelpMeOut()
     {
-        SceneManager.LoadScene("QuickMathDemo");
+        selectedGameScene = "HelpMeOut";
+        HighlightButton(helpMeOutButton);
     }
 
-    public void QuickTap()
+    public void SelectJumpOver()
     {
-        SceneManager.LoadScene("QuickTapDemo");
+        selectedGameScene = "JumpOver";
+        HighlightButton(jumpOverButton);
     }
 
-    public void RaceTOFInish()
+    public void SelectKarateAnimal()
     {
-        SceneManager.LoadScene("RaceToTheFinish");
+        selectedGameScene = "KarateAnimal";
+        HighlightButton(karateAnimalButton);
     }
 
-    public void ReactionTest()
+    public void SelectMemoryMatch()
     {
-        SceneManager.LoadScene("ReactionTest");
+        selectedGameScene = "MemoryMatchDemo";
+        HighlightButton(memoryMatchButton);
     }
 
-    public void StayAlive()
+    public void SelectQuickMath()
     {
-        SceneManager.LoadScene("StayAlive");
+        selectedGameScene = "QuickMathDemo";
+        HighlightButton(quickMathButton);
     }
 
-  
-    public void Tetrsi()
+    public void SelectQuickTap()
     {
-        SceneManager.LoadScene("FallingBlockScene");
+        selectedGameScene = "QuickTapDemo";
+        HighlightButton(quickTapButton);
+    }
+
+    public void SelectRaceToFinish()
+    {
+        selectedGameScene = "RaceToTheFinish";
+        HighlightButton(raceToFinishButton);
+    }
+
+    public void SelectReactionTest()
+    {
+        selectedGameScene = "ReactionTest";
+        HighlightButton(reactionTestButton);
+    }
+
+    public void SelectStayAlive()
+    {
+        selectedGameScene = "StayAlive";
+        HighlightButton(stayAliveButton);
+    }
+
+    public void SelectTetris()
+    {
+        selectedGameScene = "FallingBlockScene";
+        HighlightButton(tetrisButton);
+    }
+
+    // Fungsi untuk tombol "Select" yang memuat scene yang telah dipilih
+    public void LoadSelectedGame()
+    {
+        if (!string.IsNullOrEmpty(selectedGameScene))
+        {
+            SceneManager.LoadScene(selectedGameScene);
+        }
+        else
+        {
+            Debug.Log("Tidak ada game yang dipilih!"); // Pesan jika belum ada game yang dipilih
+        }
     }
 }
 
