@@ -14,11 +14,9 @@ public class StayAliveGameManager : MonoBehaviour
     public void StartGame()
     {
         stayAliveCountDown.StartCountDown();
-
-        StayAliveCountDown.OnCountdownFinished += OnCountdownFinished;
     }
 
-    private void OnCountdownFinished()
+    public void OnCountdownFinished()
     {
         stayAlivePlayer1Controller.StartMoving(); // Izinkan kontrol pemain 1
         StayAlivePlayer2Controller.StartMoving(); // Izinkan kontrol pemain 2

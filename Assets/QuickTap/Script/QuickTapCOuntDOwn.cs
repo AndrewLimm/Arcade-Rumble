@@ -7,9 +7,7 @@ public class QuickTapCOuntDOwn : MonoBehaviour
 {
     public TMP_Text countdownText; // UI Text untuk menampilkan countdown
     public float countdownTime = 5f; // Durasi countdown dalam detik
-
-    public delegate void CountdownFinished();
-    public static event CountdownFinished OnCountdownFinished; // Event untuk menandakan countdown selesai
+    public QuickTapGameManager gameManager; // Referensi ke GameManager
 
     void Start()
     {
@@ -42,6 +40,10 @@ public class QuickTapCOuntDOwn : MonoBehaviour
         yield return new WaitForSeconds(1f);
         countdownText.gameObject.SetActive(false); // Sembunyikan countdown setelah selesai
 
-        OnCountdownFinished?.Invoke(); // Memicu event saat countdown selesai
+        // Langsung panggil metode di GameManager setelah countdown selesai
+        if (gameManager != null)
+        {
+            gameManager.OnCountdownFinished();
+        }
     }
 }

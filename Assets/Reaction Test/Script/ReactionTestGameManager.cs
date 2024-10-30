@@ -13,11 +13,9 @@ public class ReactionTestGameManager : MonoBehaviour
     public void StartGame()
     {
         reactionTestCountDOwn.StartCountDown();
-
-        ReactionTestCountDOwn.OnCountdownFinished += OnCountdownFinished;
     }
 
-    private void OnCountdownFinished()
+    public void OnCountdownFinished()
     {
         Debug.Log("Memulai Game...");
         player1Mechanic.EnableInput(); // Mengaktifkan input untuk pemain 1

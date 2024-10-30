@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class GameTetrisCoutnDOwn : MonoBehaviour
 {
-    public TMP_Text countdownText; // UI Text untuk menampilkan countdown
+      public TMP_Text countdownText; // UI Text untuk menampilkan countdown
     public float countdownTime = 5f; // Durasi countdown dalam detik
-    public delegate void CountdownFinished();
-    public static event CountdownFinished OnCountdownFinished; // Event untuk menandakan countdown selesai
+    public GameTetrisGameManager gameManager; // Referensi ke GameManager untuk memanggil setelah countdown selesai
 
     void Start()
     {
@@ -41,6 +40,6 @@ public class GameTetrisCoutnDOwn : MonoBehaviour
         yield return new WaitForSeconds(1f);
         countdownText.gameObject.SetActive(false); // Sembunyikan countdown setelah selesai
 
-        OnCountdownFinished?.Invoke(); // Memicu event saat countdown selesai
+        gameManager.AfterCountDown(); // Panggil AfterCountDown di GameManager
     }
 }

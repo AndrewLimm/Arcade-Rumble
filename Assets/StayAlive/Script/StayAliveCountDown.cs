@@ -9,8 +9,7 @@ public class StayAliveCountDown : MonoBehaviour
     public TMP_Text countdownText; // UI Text untuk menampilkan countdown
     public float countdownTime = 5f; // Durasi countdown dalam detik
 
-    public delegate void CountdownFinished();
-    public static event CountdownFinished OnCountdownFinished; // Event untuk menandakan countdown selesai
+    public StayAliveGameManager stayAliveGameManager;
 
     void Start()
     {
@@ -43,6 +42,7 @@ public class StayAliveCountDown : MonoBehaviour
         yield return new WaitForSeconds(1f);
         countdownText.gameObject.SetActive(false); // Sembunyikan countdown setelah selesai
 
-        OnCountdownFinished?.Invoke(); // Memicu event saat countdown selesai
+        // Panggil metode OnCountdownFinished di StayAliveGameManager
+        stayAliveGameManager.OnCountdownFinished();
     }
 }

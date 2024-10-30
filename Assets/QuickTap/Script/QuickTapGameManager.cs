@@ -16,12 +16,10 @@ public class QuickTapGameManager : MonoBehaviour
         // Start the countdown
         countdown.StartCountDown();
 
-        // Subscribe to the countdown finished event
-        QuickTapCOuntDOwn.OnCountdownFinished += OnCountdownFinished;
     }
 
     // This method is called when the countdown finishes
-    private void OnCountdownFinished()
+    public void OnCountdownFinished()
     {
         // Allow player inputs and start the game timer
         edibleInput.StartEdibleInputCoroutine();

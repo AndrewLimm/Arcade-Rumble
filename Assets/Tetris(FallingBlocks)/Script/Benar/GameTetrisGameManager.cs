@@ -16,7 +16,6 @@ public class GameTetrisGameManager : MonoBehaviour
     {
         gameTetrisCoutnDOwn.StartCountDownTimer();
 
-        GameTetrisCoutnDOwn.OnCountdownFinished += AfterCountDown;
     }
 
     public void AfterCountDown()
