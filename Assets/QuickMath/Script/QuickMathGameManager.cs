@@ -16,13 +16,26 @@ public class QuickMathGameManager : MonoBehaviour
         QuickMathCOuntdown.StartCountDownTimer();
 
         // Subscribe to the countdown finished event
-        QuickMathCOuntdown.OnCountdownFinished += StartGamePlay;
+
     }
 
-    private void StartGamePlay()
+    public void StartGamePlay()
     {
         // After the countdown finishes, enable game logic
         mathGameLogic.MulaiPermainan();
-        quickMathGameTImer.StartTimer(); // Start the game timer
+        if (quickMathGameTImer == null)
+        {
+            quickMathGameTImer = FindObjectOfType<QuickMathGameTImer>();
+        }
+
+        if (quickMathGameTImer != null)
+        {
+            mathGameLogic.MulaiPermainan();
+            quickMathGameTImer.StartTimer(); // Start the game timer
+        }
+        else
+        {
+            Debug.LogError("QuickMathGameTImer reference is still missing.");
+        }
     }
 }

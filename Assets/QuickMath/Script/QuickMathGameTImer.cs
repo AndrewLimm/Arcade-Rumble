@@ -19,7 +19,11 @@ public class QuickMathGameTImer : MonoBehaviour
 
     // Event untuk memberitahu akhir permainan
     public static event System.Action OnTimeUp;
-
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+    
     private void Start()
     {
         timeRemaining = totalTime;

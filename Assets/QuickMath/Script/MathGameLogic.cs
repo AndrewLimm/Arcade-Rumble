@@ -17,10 +17,27 @@ public class MathGameLogic : MonoBehaviour
     private bool isAnswered = false; // Prevents multiple inputs
     private bool gameEnded = false;  // Stops input after the game ends
 
-    // void Start()
-    // {
-    //     MulaiPermainan();
-    // }
+    private void Awake()
+    {
+        // Pastikan randomRequestor tidak null dan memiliki referensi ke RandomPool
+        if (randomRequestor == null)
+        {
+            Debug.LogError("QuickMathRandomRequestor belum disambungkan ke MathGameLogic.");
+        }
+        else if (randomRequestor.randomPool == null)
+        {
+            randomRequestor.randomPool = FindObjectOfType<RandomPool>();
+
+            if (randomRequestor.randomPool == null)
+            {
+                Debug.LogError("RandomPool tidak ditemukan di scene. Pastikan RandomPool ada di scene dan aktif.");
+            }
+            else
+            {
+                Debug.Log("RandomPool berhasil disambungkan ke RandomRequestor melalui script.");
+            }
+        }
+    }
 
     private void OnEnable()
     {

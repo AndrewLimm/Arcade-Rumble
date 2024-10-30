@@ -9,59 +9,46 @@ public class Soal
     public string pertanyaan;           // Text yang akan ditampilkan sebagai pertanyaan
     public string jawabanBenar;         // Jawaban benar dalam bentuk teks
     public List<string> jawabanSalah;   // Pilihan jawaban lainnya (salah) dalam bentuk teks
+
+    // Konstruktor untuk kelas Soal
+    public Soal(string pertanyaan, string jawabanBenar, List<string> jawabanSalah)
+    {
+        this.pertanyaan = pertanyaan;
+        this.jawabanBenar = jawabanBenar;
+        this.jawabanSalah = jawabanSalah;
+    }
+
 }
 
 public class RandomPool : MonoBehaviour
 {
     public List<Soal> soalList = new List<Soal>();  // List berisi soal-soal yang dimasukkan via Inspector
+    private void Start()
+    {
+        if (soalList.Count == 0)
+        {
+            // Tambahkan soal contoh
+            soalList.Add(new Soal("Contoh Pertanyaan 1", "Jawaban 1", new List<string> { "Jawaban 2", "Jawaban 3" }));
+            soalList.Add(new Soal("Contoh Pertanyaan 2", "Jawaban 1", new List<string> { "Jawaban 2", "Jawaban 3" }));
+            // Tambahkan lebih banyak soal jika perlu
+        }
+    }
+
 
     // Mengambil soal secara acak dari pool
     public Soal AmbilSoalRandom()
     {
-        if (soalList.Count == 0)
+        if (soalList.Count > 0)
         {
-            Debug.LogWarning("Tidak ada soal di dalam pool.");
+            int index = Random.Range(0, soalList.Count);
+            Soal soalTerpilih = soalList[index];
+            Debug.Log("Soal yang diambil: " + soalTerpilih.pertanyaan); // Menampilkan soal yang terpilih
+            return soalTerpilih;
+        }
+        else
+        {
+            Debug.LogError("Tidak ada soal yang tersedia di RandomPool.");
             return null;
         }
-
-        Soal soal = soalList[Random.Range(0, soalList.Count)];
-
-        // Debugging tambahan untuk memastikan soal valid
-        if (soal == null)
-        {
-            Debug.LogError("Soal yang diambil adalah null.");
-            return null;
-        }
-
-        if (string.IsNullOrEmpty(soal.pertanyaan))
-        {
-            Debug.LogError("Soal memiliki pertanyaan yang kosong atau null.");
-            return null;
-        }
-
-        if (string.IsNullOrEmpty(soal.jawabanBenar))
-        {
-            Debug.LogError("Soal memiliki jawaban benar yang kosong atau null.");
-            return null;
-        }
-
-        if (soal.jawabanSalah == null || soal.jawabanSalah.Count == 0)
-        {
-            Debug.LogError("Soal memiliki daftar jawaban salah yang null atau kosong.");
-            return null;
-        }
-
-        // Debug untuk memastikan daftar jawaban salah tidak mengandung nilai null atau kosong
-        foreach (string jawaban in soal.jawabanSalah)
-        {
-            if (string.IsNullOrEmpty(jawaban))
-            {
-                Debug.LogError("Daftar jawaban salah mengandung nilai kosong atau null.");
-                return null;
-            }
-        }
-
-        Debug.Log("Soal yang diambil: " + soal.pertanyaan);
-        return soal; // Ambil soal secara acak
     }
 }

@@ -185,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   countdownText: {fileID: 236762930}
   countdownTime: 5
+  gameManager: {fileID: 944082133}
 --- !u!1 &236762928
 GameObject:
   m_ObjectHideFlags: 0
