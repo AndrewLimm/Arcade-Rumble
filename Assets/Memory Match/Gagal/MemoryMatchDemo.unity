@@ -2497,9 +2497,9 @@ MonoBehaviour:
   - {fileID: 1939974785}
   - {fileID: 829006999}
   answerSprites:
-  - {fileID: 21300000, guid: a14d06a56c9952542879e2b767eb7898, type: 3}
-  - {fileID: 21300000, guid: 7aab3521b2d78cc4ba669fb0ed16780c, type: 3}
-  - {fileID: 21300000, guid: 865c2687808dd7b4c85eb2ffbdf0cce4, type: 3}
+  - {fileID: 21300000, guid: c3609abf45ce9df43ba0cc6a55dd7cc8, type: 3}
+  - {fileID: 21300000, guid: 6ceee6a365ee96f4cb8ce8e4065f9c5b, type: 3}
+  - {fileID: 21300000, guid: 57d65693f8e3e6b43bee95962cc66985, type: 3}
   correctAnswerOrder: []
 --- !u!4 &1909488231
 Transform:
@@ -2634,9 +2634,9 @@ MonoBehaviour:
   - {fileID: 331752783}
   - {fileID: 6167264}
   sprites:
-  - {fileID: 21300000, guid: a14d06a56c9952542879e2b767eb7898, type: 3}
-  - {fileID: 21300000, guid: 7aab3521b2d78cc4ba669fb0ed16780c, type: 3}
-  - {fileID: 21300000, guid: 865c2687808dd7b4c85eb2ffbdf0cce4, type: 3}
+  - {fileID: 21300000, guid: c3609abf45ce9df43ba0cc6a55dd7cc8, type: 3}
+  - {fileID: 21300000, guid: 6ceee6a365ee96f4cb8ce8e4065f9c5b, type: 3}
+  - {fileID: 21300000, guid: 57d65693f8e3e6b43bee95962cc66985, type: 3}
   _displayTimePerSprite: 5
   timeDecreaseRate: 0.3
   minimumDisplayTime: 0.5

@@ -2144,7 +2144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpForce: 5.5
+  jumpForce: 5.8
   spriteRenderer: {fileID: 1650653405}
 --- !u!50 &1650653404
 Rigidbody2D:
@@ -2366,7 +2366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a090b630e526148b0ecc1137e18e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameDuration: 5
+  gameDuration: 15
   timerText: {fileID: 1555599544}
   gameOverManager: {fileID: 1802739152}
   catchItemGameManager: {fileID: 528160367}
@@ -2501,7 +2501,7 @@ MonoBehaviour:
   moveSpeed: 5
   isFacingRight: 0
   spriteRenderer: {fileID: 1697422017}
-  jumpForce: 5.5
+  jumpForce: 5.8
 --- !u!95 &1697422020
 Animator:
   serializedVersion: 5
