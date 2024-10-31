@@ -27,5 +27,9 @@ public class ArcadeRumbleGameSelection : MonoBehaviour
         //pindah ke scene Game Slection
         Application.Quit();
     }
-
+    public void GoToMainMenu()
+    {
+        //pindah ke scene Game Slection
+        SceneManager.LoadScene("ArcadeRumbleMainScene");
+    }
 }
