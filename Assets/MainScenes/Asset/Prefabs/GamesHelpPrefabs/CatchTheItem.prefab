@@ -1187,7 +1187,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Player 1 Using IJL
+  m_text: 'Player 2 Using IJL
 
 '
   m_isRightToLeft: 0
