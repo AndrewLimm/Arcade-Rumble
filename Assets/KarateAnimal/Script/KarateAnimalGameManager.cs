@@ -22,7 +22,6 @@ public class KarateAnimalGameManager : MonoBehaviour
         playerController1.DisableMove();
         playerController2.DisableMovePlayer2();
         DisableAllSpawners();
-        StartButton.onClick.AddListener(InitialCountDown);
         KarateAnimalCoutnDown.OnCountdownFinished += StartGame;
 
     }

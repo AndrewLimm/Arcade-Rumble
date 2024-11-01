@@ -5,43 +5,39 @@ using UnityEngine;
 
 public class FlappyAnimalCOuntDown : MonoBehaviour
 {
-    public float CountdownTime = 5f;
-    public TMP_Text CountDownText;
 
-    [SerializeField] FlappyAnimalGameManager flappyAnimalGameManager;
+    public float countdownDuration = 5f;
+    public TMP_Text countdownText;
+    [SerializeField] private FlappyAnimalGameManager flappyAnimalGameManager;
 
     private void Start()
     {
-        // Sembunyikan countdown text pada awal game
-        CountDownText.gameObject.SetActive(false);
+        countdownText.gameObject.SetActive(false);
     }
 
-    // Fungsi yang dipanggil ketika tombol ditekan
     public void StartCountdown()
     {
-        // Mulai countdown
         StartCoroutine(Countdown());
     }
 
     private IEnumerator Countdown()
     {
-        CountDownText.gameObject.SetActive(true); // Menampilkan teks countdown
+        countdownText.gameObject.SetActive(true);
+        float realTimeCountdown = countdownDuration;
 
-        float realTimeCountdown = CountdownTime; // Menggunakan real-time countdown terlepas dari Time.timeScale
-
-        // Loop untuk countdown timer
         while (realTimeCountdown > 0)
         {
-            CountDownText.text = Mathf.Ceil(realTimeCountdown).ToString(); // Tampilkan angka countdown
-            yield return new WaitForSecondsRealtime(1f); // Gunakan waktu real-time
-            realTimeCountdown--; // Kurangi waktu real-time countdown
+            countdownText.text = Mathf.Ceil(realTimeCountdown).ToString();
+            yield return new WaitForSecondsRealtime(1f);
+            realTimeCountdown--;
         }
 
-        CountDownText.text = "GO!"; // Menampilkan 'GO!' setelah countdown selesai
-        yield return new WaitForSecondsRealtime(1f); // Tampilkan "GO!" selama 1 detik
+        countdownText.text = "GO!";
+        yield return new WaitForSecondsRealtime(1f);
 
-        CountDownText.gameObject.SetActive(false); // Sembunyikan teks countdown
+        countdownText.gameObject.SetActive(false);
 
+        // Notify GameManager that the countdown is complete
         flappyAnimalGameManager.StartGame();
     }
 }

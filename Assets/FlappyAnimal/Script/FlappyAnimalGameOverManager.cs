@@ -14,6 +14,12 @@ public class FlappyAnimalGameOverManager : MonoBehaviour
     // Reference to FlappyAnimalGameManager to disable game components
     [SerializeField] FlappyAnimalGameManager gameManager;
 
+    private void Start()
+    {
+        // Set winner text to inactive at the start
+        winnerText.gameObject.SetActive(false);
+    }
+
     // Call this function when Player 1 dies
     public void Player1GameOver()
     {

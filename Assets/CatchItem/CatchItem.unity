@@ -705,6 +705,7 @@ GameObject:
   m_Component:
   - component: {fileID: 528160368}
   - component: {fileID: 528160367}
+  - component: {fileID: 528160369}
   m_Layer: 0
   m_Name: gamemanager
   m_TagString: Untagged
@@ -750,6 +751,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &528160369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528160366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4c793e5a638614e91467f181164e61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &684658027
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,14 +950,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 1410842395}
     m_Modifications:
     - target: {fileID: 545435575378883302, guid: ee19f800d37794c4b9ab2ee541520119, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 545435575378883302, guid: ee19f800d37794c4b9ab2ee541520119, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 545435575378883302, guid: ee19f800d37794c4b9ab2ee541520119, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1410842394}
@@ -952,26 +957,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 528160367}
-    - target: {fileID: 545435575378883302, guid: ee19f800d37794c4b9ab2ee541520119, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 545435575378883302, guid: ee19f800d37794c4b9ab2ee541520119, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: StartGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 545435575378883302, guid: ee19f800d37794c4b9ab2ee541520119, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: CatchItemGameManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 545435575378883302, guid: ee19f800d37794c4b9ab2ee541520119, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 545435575378883302, guid: ee19f800d37794c4b9ab2ee541520119, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 1426894414483597586, guid: ee19f800d37794c4b9ab2ee541520119, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1052,13 +1037,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7702480694199010448, guid: ee19f800d37794c4b9ab2ee541520119, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 528160369}
+    - target: {fileID: 7702480694199010448, guid: ee19f800d37794c4b9ab2ee541520119, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoToGameSelectionScreen
+      objectReference: {fileID: 0}
     - target: {fileID: 8043832268739167718, guid: ee19f800d37794c4b9ab2ee541520119, type: 3}
       propertyPath: m_Name
       value: CatchTheItem 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8043832268739167718, guid: ee19f800d37794c4b9ab2ee541520119, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1644,7 +1633,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1191662243
 RectTransform:
   m_ObjectHideFlags: 0

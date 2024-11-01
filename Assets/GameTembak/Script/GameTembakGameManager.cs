@@ -23,7 +23,7 @@ public class GameTembakGameManager : MonoBehaviour
         StartButton.onClick.AddListener(StartGame); // Ubah untuk memanggil StartCountdown
     }
 
-    private void StartGame()
+    public void StartGame()
     {
         StartButton.interactable = false; // Nonaktifkan tombol Start
         countdownTimer.StartCountdown(); // Mulai countdown dan panggil StartGame setelah selesai

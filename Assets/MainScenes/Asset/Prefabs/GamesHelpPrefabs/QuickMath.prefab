@@ -1061,7 +1061,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Survive by answering questions correctly the more questions answered correctly,
+    the higher the score.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2612bda9c4c3da74ea76f1c97302f8cb, type: 2}
   m_sharedMaterial: {fileID: -5422886045318986721, guid: 2612bda9c4c3da74ea76f1c97302f8cb, type: 2}
@@ -2591,7 +2592,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1426894414483597586
 RectTransform:
   m_ObjectHideFlags: 0

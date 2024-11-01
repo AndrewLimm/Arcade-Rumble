@@ -25,7 +25,6 @@ public class FlappyAnimalGameManager : MonoBehaviour
     public void StartCountdown()
     {
         flappyAnimalCOuntDown.StartCountdown();
-
     }
 
     public void StartGame()

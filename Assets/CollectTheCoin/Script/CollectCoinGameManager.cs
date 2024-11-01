@@ -23,7 +23,7 @@ public class CollectCoinGameManager : MonoBehaviour
         StartButton.onClick.AddListener(StartGame);
     }
 
-    void StartGame()
+    public void StartGame()
     {
         // Mulai countdown ketika tombol start ditekan
         collectTheCoinCountdown.StartCountdown();
