@@ -63,7 +63,7 @@ public class CatchItemGameOverManager : MonoBehaviour
 
     private void LoadSpecialMiniGame()
     {
-        SceneManager.LoadScene("MixMayhem"); // Ganti dengan nama scene mini-game khusus
+        SceneManager.LoadScene("RaceToTheFinish"); // Ganti dengan nama scene mini-game khusus
     }
 
     // Metode untuk memindahkan ke layar hasil

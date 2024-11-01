@@ -21,7 +21,7 @@ public class GameSelectionBUtton : MonoBehaviour
     [SerializeField] public Button memoryMatchButton;
     [SerializeField] public Button quickMathButton;
     [SerializeField] public Button quickTapButton;
-    [SerializeField] public Button raceToFinishButton;
+    [SerializeField] public Button MixMayhemButton;
     [SerializeField] public Button reactionTestButton;
     [SerializeField] public Button stayAliveButton;
     [SerializeField] public Button tetrisButton;
@@ -53,7 +53,7 @@ public class GameSelectionBUtton : MonoBehaviour
         Button[] buttons = {
             catchItemButton, collectCoinButton, flappyAnimalButton, gameTembakButton,
             helpMeOutButton, jumpOverButton, karateAnimalButton, memoryMatchButton,
-            quickMathButton, quickTapButton, raceToFinishButton, reactionTestButton,
+            quickMathButton, quickTapButton, MixMayhemButton, reactionTestButton,
             stayAliveButton, tetrisButton
         };
 
@@ -129,10 +129,10 @@ public class GameSelectionBUtton : MonoBehaviour
         HighlightButton(quickTapButton);
     }
 
-    public void SelectRaceToFinish()
+    public void SelectMixMayhem()
     {
-        selectedGameScene = "RaceToTheFinish";
-        HighlightButton(raceToFinishButton);
+        selectedGameScene = "MixMayhem";
+        HighlightButton(MixMayhemButton);
     }
 
     public void SelectReactionTest()

@@ -36,7 +36,7 @@ public class KarateAnimalGameOverManager : MonoBehaviour
 
     public void LoadSpecialMiniGame()
     {
-        SceneManager.LoadScene("MixMayhem"); // Ganti dengan nama scene mini-game khusus
+        SceneManager.LoadScene("RaceToTheFinish"); // Ganti dengan nama scene mini-game khusus
     }
 
     private void GoToResultScreen()

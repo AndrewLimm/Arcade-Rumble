@@ -39,10 +39,7 @@ public class RaceToFInishGameOverManager : MonoBehaviour
         // Aktifkan teks pemenang agar terlihat
         winnerText.gameObject.SetActive(true);
     }
-    public void LoadSpecialMiniGame()
-    {
-        SceneManager.LoadScene("MixMayhem"); // Ganti dengan nama scene mini-game khusus
-    }
+
     private void GoToResultScreen()
     {
         SceneManager.LoadScene("ArcadeRumbleResultScreen"); // Ganti dengan nama scene layar hasil yang sesuai
