@@ -2079,7 +2079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5ed8a1ef170ac4ea88ba988c0e4b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundDuration: 10
+  roundDuration: 30
   reactionMechanic: {fileID: 2128702128}
   timerText: {fileID: 669838909}
 --- !u!114 &1442442217

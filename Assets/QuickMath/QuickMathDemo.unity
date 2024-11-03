@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e67ff00b96d764d96d90478c70e7bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTime: 10
+  totalTime: 60
   isGameRunning: 0
   gameOverScript: {fileID: 2045765949}
   timerText: {fileID: 1631232021}
