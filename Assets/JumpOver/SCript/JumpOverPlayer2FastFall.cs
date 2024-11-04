@@ -8,6 +8,8 @@ public class JumpOverPlayer2FastFall : MonoBehaviour
     private Rigidbody2D rb;
 
     public bool canFastfall = false;
+    [SerializeField] public AudioClip fastFallSound; // Suara untuk fast fall
+    public AudioSource audioSource;
 
     private void Start()
     {
@@ -29,10 +31,18 @@ public class JumpOverPlayer2FastFall : MonoBehaviour
             FastFall();
         }
     }
+    private void PlayFastFallSound()
+    {
+        if (fastFallSound != null)
+        {
+            audioSource.PlayOneShot(fastFallSound); // Mainkan suara fast fall
+        }
+    }
 
     private void FastFall()
     {
         rb.velocity = new Vector2(rb.velocity.x, -fastFallSpeed); // Mempercepat kejatuhan pemain
+        PlayFastFallSound();
     }
 
     private bool IsGrounded()

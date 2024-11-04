@@ -15,6 +15,8 @@ public class PlayerMovement2 : MonoBehaviour
 
     public RaceToFinishAnimation Player2Animation;
 
+    [SerializeField] public AudioClip moveSound; // Suara saat bergerak
+    public AudioSource audioSource;
 
     private void Update()
     {
@@ -30,11 +32,20 @@ public class PlayerMovement2 : MonoBehaviour
         if (Input.GetKeyDown(moveKey1) || Input.GetKeyDown(moveKey2))
         {
             transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
+            PlayMoveSound(); // Mainkan suara saat bergerak
+
             Player2Animation.PlayMoveAnimation();  // Trigger the move animation
         }
         else
         {
             Player2Animation.PlayIdleAnimation();  // Trigger the idle animation
+        }
+    }
+    private void PlayMoveSound()
+    {
+        if (moveSound != null)
+        {
+            audioSource.PlayOneShot(moveSound); // Mainkan suara gerakan
         }
     }
 

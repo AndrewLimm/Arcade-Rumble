@@ -6,6 +6,8 @@ public class QuickTapPlayer2TrashInput : MonoBehaviour
 {
     public KeyCode trashCollectKeyplayer2; // Tombol untuk collect sampah
     public QuickTapPlayer2Input player2Collect;
+    [SerializeField] public AudioClip collectSound; // Suara untuk collect makanan edible
+    public AudioSource audioSource;
 
     private void Start()
     {
@@ -25,7 +27,7 @@ public class QuickTapPlayer2TrashInput : MonoBehaviour
             {
                 yield break; // Keluar dari coroutine jika permainan tidak aktif
             }
-            
+
             // Jika pemain menekan tombol untuk collect trash
             if (Input.GetKeyDown(trashCollectKeyplayer2))
             {
@@ -36,6 +38,8 @@ public class QuickTapPlayer2TrashInput : MonoBehaviour
                     if (frontFood.CompareTag("Trash"))
                     {
                         player2Collect.CollectTrash(frontFood); // Jika trash, collect
+                        PlayCollectSound(); // Mainkan suara pengambilan
+
                         Debug.Log("Trash collected: " + frontFood.name);
                     }
                     else
@@ -47,6 +51,13 @@ public class QuickTapPlayer2TrashInput : MonoBehaviour
             }
 
             yield return null; // Tunggu hingga frame berikutnya
+        }
+    }
+    private void PlayCollectSound()
+    {
+        if (collectSound != null)
+        {
+            audioSource.PlayOneShot(collectSound); // Mainkan suara collect
         }
     }
 }

@@ -10,6 +10,9 @@ public class JumpOverPlayer2JUmp : MonoBehaviour
 
     public bool canJump = false;
 
+    [SerializeField] public AudioClip jumpSound; // Suara untuk lompatan
+    public AudioSource audioSource;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -39,10 +42,18 @@ public class JumpOverPlayer2JUmp : MonoBehaviour
             }
         }
     }
-
     private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce); // Beri gaya ke atas pada rigidbody
+        PlayJumpSound(); // Mainkan suara lompatan
+
+    }
+    public void PlayJumpSound()
+    {
+        if (jumpSound != null)
+        {
+            audioSource.PlayOneShot(jumpSound); // Mainkan suara lompatan
+        }
     }
 
     private bool IsGrounded()

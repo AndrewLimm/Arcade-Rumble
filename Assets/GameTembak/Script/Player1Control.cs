@@ -18,6 +18,9 @@ public class Player1Control : MonoBehaviour
 
     [SerializeField] ImmunePlayer1GameTembak immunePlayer; // Referensi ke script immune
 
+    [SerializeField] public AudioClip shootSound; // AudioClip untuk suara tembakan
+    public AudioSource audioSource; // AudioSource untuk memainkan suara
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -65,6 +68,12 @@ public class Player1Control : MonoBehaviour
         // Menembakkan peluru dari posisi pemain
         Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
         lastShootTime = Time.time;
+
+        // Play shooting sound
+        if (shootSound != null)
+        {
+            audioSource.PlayOneShot(shootSound);
+        }
     }
 
     // Method untuk mengatur kapan Player1 bisa bergerak

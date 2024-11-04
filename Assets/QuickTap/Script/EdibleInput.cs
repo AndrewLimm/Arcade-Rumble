@@ -7,6 +7,9 @@ public class EdibleInput : MonoBehaviour
     public KeyCode edibleCollectKey; // Tombol untuk collect makanan edible
     private PlayerCollect playerCollect;
 
+    [SerializeField] public AudioClip collectSound; // Suara untuk collect makanan edible
+    public AudioSource audioSource;
+
     private void Start()
     {
         playerCollect = FindAnyObjectByType<PlayerCollect>(); // Mengakses skrip PlayerCollect
@@ -34,6 +37,8 @@ public class EdibleInput : MonoBehaviour
                     if (frontFood.CompareTag("Edible"))
                     {
                         playerCollect.CollectEdible(frontFood); // Jika edible, collect
+                        PlayCollectSound(); // Mainkan suara pengambilan
+
                         Debug.Log("Makanan berhasil diambil: " + frontFood.name);
                     }
                     else
@@ -45,6 +50,13 @@ public class EdibleInput : MonoBehaviour
             }
 
             yield return null; // Tunggu hingga frame berikutnya
+        }
+    }
+    private void PlayCollectSound()
+    {
+        if (collectSound != null)
+        {
+            audioSource.PlayOneShot(collectSound); // Mainkan suara collect
         }
     }
 }

@@ -18,6 +18,9 @@ public class PlayerController1 : MonoBehaviour
 
     public bool canmoveplayer1 = false;
 
+    // Variabel Audio
+    [SerializeField] public AudioClip attackSound; // Suara untuk serangan
+    public AudioSource audioSource;
     void Start()
     {
         // Mendapatkan referensi ke skrip KarateAnimalPlayer1Animator dari GameObject ini
@@ -34,18 +37,24 @@ public class PlayerController1 : MonoBehaviour
                 Debug.Log("Attacking lane 1");
                 playerAnimator.TriggerAttackAnimation(1); // Panggil animasi serangan untuk lane 1
                 Attack(attackPoint1); // Serang di baris 1
+                PlayAttackSound(); // Mainkan suara serangan
+
             }
             else if (Input.GetKeyDown(attackKey2))
             {
                 Debug.Log("Attacking lane 2");
                 playerAnimator.TriggerAttackAnimation(2); // Panggil animasi serangan untuk lane 2
                 Attack(attackPoint2); // Serang di baris 2
+                PlayAttackSound(); // Mainkan suara serangan
+
             }
             else if (Input.GetKeyDown(attackKey3))
             {
                 Debug.Log("Attacking lane 3");
                 playerAnimator.TriggerAttackAnimation(3); // Panggil animasi serangan untuk lane 3
                 Attack(attackPoint3); // Serang di baris 3
+                PlayAttackSound(); // Mainkan suara serangan
+
             }
         }
     }
@@ -98,6 +107,13 @@ public class PlayerController1 : MonoBehaviour
     public void DisableMove()
     {
         canmoveplayer1 = false;
+    }
+    private void PlayAttackSound()
+    {
+        if (attackSound != null)
+        {
+            audioSource.PlayOneShot(attackSound); // Mainkan suara serangan
+        }
     }
 }
 

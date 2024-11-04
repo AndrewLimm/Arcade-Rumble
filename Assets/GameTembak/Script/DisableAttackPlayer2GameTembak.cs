@@ -49,7 +49,7 @@ public class DisableAttackPlayer2GameTembak : MonoBehaviour
     {
         player2Controller.canShoot = false; // Menonaktifkan serangan
 
-        yield return new WaitForSeconds(2f); // Tunggu 2 detik
+        yield return new WaitForSeconds(1.5f); // Tunggu 2 detik
 
         player2Controller.canShoot = true; // Mengizinkan pemain untuk menembak lagi
         disableCoroutine = null; // Reset referensi coroutine

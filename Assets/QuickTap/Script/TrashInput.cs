@@ -7,6 +7,9 @@ public class TrashInput : MonoBehaviour
     public KeyCode trashCollectKey; // Tombol untuk collect sampah
     private PlayerCollect playerCollect;
 
+    [SerializeField] public AudioClip collectSound; // Suara untuk collect makanan edible
+    public AudioSource audioSource;
+
     private void Start()
     {
         playerCollect = FindAnyObjectByType<PlayerCollect>(); // Mengakses skrip PlayerCollect
@@ -34,6 +37,8 @@ public class TrashInput : MonoBehaviour
                     if (frontTrash.CompareTag("Trash"))
                     {
                         playerCollect.CollectTrash(frontTrash); // Jika trash, collect
+                        PlayCollectSound(); // Mainkan suara pengambilan
+
                         Debug.Log("Sampah berhasil diambil: " + frontTrash.name);
                     }
                     else
@@ -45,6 +50,14 @@ public class TrashInput : MonoBehaviour
             }
 
             yield return null; // Tunggu hingga frame berikutnya
+        }
+    }
+
+    private void PlayCollectSound()
+    {
+        if (collectSound != null)
+        {
+            audioSource.PlayOneShot(collectSound); // Mainkan suara collect
         }
     }
 }

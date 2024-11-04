@@ -8,6 +8,9 @@ public class Player1Mechanic : MonoBehaviour
     public ReactionMechanic reactionMechanic;
     private bool isInputEnabled = false; // Flag untuk mengendalikan input
 
+    [SerializeField] public AudioClip inputSound; // Suara saat input
+    public AudioSource audioSource;
+
     void Update()
     {
         if (isInputEnabled)
@@ -25,8 +28,18 @@ public class Player1Mechanic : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
+            PlayInputSound(); // Mainkan suara saat input
+
             Debug.Log("Pemain 1 menekan A");
             reactionMechanic.PlayerWin(1); // Panggil untuk menangani kemenangan Pemain 1
+        }
+    }
+
+    private void PlayInputSound()
+    {
+        if (inputSound != null)
+        {
+            audioSource.PlayOneShot(inputSound); // Mainkan suara input
         }
     }
 }

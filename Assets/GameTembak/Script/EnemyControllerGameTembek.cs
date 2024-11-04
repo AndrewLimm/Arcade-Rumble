@@ -12,9 +12,12 @@ public class EnemyControllerGameTembek : MonoBehaviour
     public int pointsForKill = 10; // Jumlah poin yang diberikan ketika musuh terbunuh
 
     [SerializeField] ScoreManagerGameTembak scoreManagerGameTembak;
-
+    // Audio variables
+    [SerializeField] public AudioClip deathSound; // AudioClip untuk suara kematian musuh
+    public AudioSource audioSource;
     void Awake()
     {
+
         // Temukan ScoreManagerGameTembak di scene
         scoreManagerGameTembak = FindObjectOfType<ScoreManagerGameTembak>();
 
@@ -23,6 +26,10 @@ public class EnemyControllerGameTembek : MonoBehaviour
         {
             Debug.LogError("ScoreManagerGameTembak tidak ditemukan di scene!");
         }
+        // Tambahkan AudioSource dan atur clip ke deathSound
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = deathSound; // Atur clip untuk audio source
+        audioSource.playOnAwake = false;
     }
 
     void Update()
@@ -70,9 +77,28 @@ public class EnemyControllerGameTembek : MonoBehaviour
                 // Tambahkan poin untuk Player 2
                 scoreManagerGameTembak.AddScorePlayer2(pointsForKill);
             }
-
-            Destroy(gameObject); // Hancurkan musuh
+            PlayDeathSoundAndDestroy(); // Mainkan suara dan hancurkan musuh
         }
+    }
+
+
+    private void PlayDeathSoundAndDestroy()
+    {
+        // Pastikan audio source tersedia sebelum diputar
+        if (deathSound != null)
+        {
+            audioSource.PlayOneShot(deathSound);
+            Invoke(nameof(DestroyEnemy), deathSound.length); // Hancurkan musuh setelah durasi suara
+        }
+        else
+        {
+            Destroy(gameObject); // Hancurkan segera jika tidak ada suara
+        }
+    }
+
+    private void DestroyEnemy()
+    {
+        Destroy(gameObject); // Hancurkan musuh sepenuhnya
     }
 
     // Fungsi untuk memulai gerakan musuh
@@ -88,5 +114,4 @@ public class EnemyControllerGameTembek : MonoBehaviour
         canMove = true;
         return;
     }
-
 }

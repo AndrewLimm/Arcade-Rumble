@@ -6,6 +6,8 @@ public class QuickTapPlayer2EdibleInput : MonoBehaviour
 {
     public KeyCode edibleCollectKeyplayer2; // Tombol untuk collect makanan edible
     public QuickTapPlayer2Input player2Collect;
+    [SerializeField] public AudioClip collectSound; // Suara untuk collect makanan edible
+    public AudioSource audioSource;
 
     private void Start()
     {
@@ -25,7 +27,7 @@ public class QuickTapPlayer2EdibleInput : MonoBehaviour
             {
                 yield break; // Keluar dari coroutine jika permainan tidak aktif
             }
-            
+
             // Jika pemain menekan tombol untuk collect edible
             if (Input.GetKeyDown(edibleCollectKeyplayer2))
             {
@@ -36,6 +38,8 @@ public class QuickTapPlayer2EdibleInput : MonoBehaviour
                     if (frontFood.CompareTag("Edible"))
                     {
                         player2Collect.CollectEdible(frontFood); // Jika edible, collect
+                        PlayCollectSound(); // Mainkan suara pengambilan
+
                         Debug.Log("Edible collected: " + frontFood.name);
                     }
                     else
@@ -47,6 +51,13 @@ public class QuickTapPlayer2EdibleInput : MonoBehaviour
             }
 
             yield return null; // Tunggu hingga frame berikutnya
+        }
+    }
+    private void PlayCollectSound()
+    {
+        if (collectSound != null)
+        {
+            audioSource.PlayOneShot(collectSound); // Mainkan suara collect
         }
     }
 }

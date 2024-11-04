@@ -21,6 +21,9 @@ public class PlayerController2 : MonoBehaviour
 
     public bool canmoveplayer2 = false;
 
+    [SerializeField] public AudioClip attackSound; // Suara untuk serangan
+    public AudioSource audioSource;
+
     void Start()
     {
         playerAnimator = GetComponent<KarateAnimalPlayer2Animator>();
@@ -45,18 +48,24 @@ public class PlayerController2 : MonoBehaviour
                 Debug.Log("Player 2 menyerang baris 1");
                 playerAnimator.TriggerAttackAnimation(1); // Panggil animasi serangan untuk baris 1
                 Attack(attackPoint1); // Serang di baris 1
+                PlayAttackSound(); // Mainkan suara serangan
+
             }
             else if (Input.GetKeyDown(attackKey2))
             {
                 Debug.Log("Player 2 menyerang baris 2");
                 playerAnimator.TriggerAttackAnimation(2); // Panggil animasi serangan untuk baris 2
                 Attack(attackPoint2); // Serang di baris 2
+                PlayAttackSound(); // Mainkan suara serangan
+
             }
             else if (Input.GetKeyDown(attackKey3))
             {
                 Debug.Log("Player 2 menyerang baris 3");
                 playerAnimator.TriggerAttackAnimation(3); // Panggil animasi serangan untuk baris 3
                 Attack(attackPoint3); // Serang di baris 3
+                PlayAttackSound(); // Mainkan suara serangan
+
             }
         }
 
@@ -114,5 +123,13 @@ public class PlayerController2 : MonoBehaviour
     public void DisableMovePlayer2()
     {
         canmoveplayer2 = false;
+    }
+
+    private void PlayAttackSound()
+    {
+        if (attackSound != null)
+        {
+            audioSource.PlayOneShot(attackSound); // Mainkan suara serangan
+        }
     }
 }

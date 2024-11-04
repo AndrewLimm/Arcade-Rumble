@@ -16,6 +16,10 @@ public class Player2ControllerGameTembak : MonoBehaviour
     private float lastShootTime; // Waktu tembakan terakhir
     public float shootCooldown = 0.3f; // Durasi cooldown tembakan
 
+
+    [SerializeField] public AudioClip shootSound; // AudioClip untuk suara tembakan
+    public AudioSource audioSource; // AudioSource untuk memainkan suara
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -55,6 +59,12 @@ public class Player2ControllerGameTembak : MonoBehaviour
         // Menembakkan peluru dari posisi pemain
         Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
         lastShootTime = Time.time; // Mengatur waktu tembakan terakhir
+
+        // Play shooting sound
+        if (shootSound != null)
+        {
+            audioSource.PlayOneShot(shootSound);
+        }
     }
 
     // Metode untuk menerima damage
