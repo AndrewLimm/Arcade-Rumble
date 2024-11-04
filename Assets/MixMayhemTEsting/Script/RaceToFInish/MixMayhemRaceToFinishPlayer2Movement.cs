@@ -13,6 +13,9 @@ public class MixMayhemRaceToFinishPlayer2Movement : MonoBehaviour
 
     public MixMayhemRaceToFInishANimator Player2Animation;
 
+    [SerializeField] public AudioClip moveSound; // Suara saat bergerak
+    public AudioSource audioSource;
+
     private void Update()
     {
         if (hasFinished || gameManager == null)
@@ -21,6 +24,7 @@ public class MixMayhemRaceToFinishPlayer2Movement : MonoBehaviour
         // Move right when either key is pressed
         if (Input.GetKeyDown(moveKey1) || Input.GetKeyDown(moveKey2))
         {
+            PlayMoveSound();
             transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
             Player2Animation.PlayMoveAnimation();  // Trigger the move animation
         }
@@ -35,6 +39,14 @@ public class MixMayhemRaceToFinishPlayer2Movement : MonoBehaviour
             hasFinished = true;
             Player2Animation.PlayIdleAnimation();  // Ensure the idle animation plays
             gameManager.RaceToFinishGameOver("Player 2");   // Notify GameManager that Player 2 won
+        }
+    }
+
+    private void PlayMoveSound()
+    {
+        if (moveSound != null)
+        {
+            audioSource.PlayOneShot(moveSound); // Mainkan suara gerakan
         }
     }
 }

@@ -12,8 +12,14 @@ public class StayAliveMixMayhemBotitemSpawner : MonoBehaviour
     private float spawnInterval; // Time interval for item spawning
     private float nextSpawnTime; // Next spawn time
 
+    // Audio for spawning
+    [SerializeField] private AudioClip spawnSound;
+    private AudioSource audioSource;
+
     void Start()
     {
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = spawnSound;
         // Set the initial spawn interval to a random value between minSpawnInterval and maxSpawnInterval
         spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
         nextSpawnTime = Time.time + spawnInterval;
@@ -33,9 +39,20 @@ public class StayAliveMixMayhemBotitemSpawner : MonoBehaviour
             int spawnIndex = Random.Range(0, spawnPoints.Length);
             Instantiate(itemPrefab, spawnPoints[spawnIndex].position, Quaternion.identity);
 
+            // Play spawn audio
+            PlaySpawnSound();
+
             // Set the next spawn time to a random value between minSpawnInterval and maxSpawnInterval
             spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
             nextSpawnTime = Time.time + spawnInterval;
+        }
+    }
+    private void PlaySpawnSound()
+    {
+        // Check if there's an audio clip set and play it
+        if (spawnSound != null)
+        {
+            audioSource.Play();
         }
     }
 }

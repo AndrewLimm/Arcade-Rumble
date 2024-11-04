@@ -17,11 +17,17 @@ public class KarateAnimalMixMayhemPlayer1 : MonoBehaviour
     public KarateAnimalPlayer1Animator playerAnimator; // Referensi ke skrip animator
     [SerializeField] public KarateAnimalMixMayhemScoreManager KarateAnimalScoreManager;
 
+    private AudioSource audioSource; // Audio source for playing sounds
+    public AudioClip attackSound; // Clip to play on attack
+
+
     void Start()
     {
         // Mendapatkan referensi ke skrip KarateAnimalPlayer1Animator dari GameObject ini
         playerAnimator = GetComponent<KarateAnimalPlayer1Animator>();
         KarateAnimalScoreManager = FindObjectOfType<KarateAnimalMixMayhemScoreManager>();
+        audioSource = GetComponent<AudioSource>(); // Get the AudioSource component
+
     }
 
     void Update()
@@ -32,18 +38,24 @@ public class KarateAnimalMixMayhemPlayer1 : MonoBehaviour
             Debug.Log("Attacking lane 1");
             playerAnimator.TriggerAttackAnimation(1); // Panggil animasi serangan untuk lane 1
             Attack(attackPoint1); // Serang di baris 1
+            PlayAttackSound(); // Mainkan suara serangan
+
         }
         else if (Input.GetKeyDown(attackKey2))
         {
             Debug.Log("Attacking lane 2");
             playerAnimator.TriggerAttackAnimation(2); // Panggil animasi serangan untuk lane 2
             Attack(attackPoint2); // Serang di baris 2
+            PlayAttackSound(); // Mainkan suara serangan
+
         }
         else if (Input.GetKeyDown(attackKey3))
         {
             Debug.Log("Attacking lane 3");
             playerAnimator.TriggerAttackAnimation(3); // Panggil animasi serangan untuk lane 3
             Attack(attackPoint3); // Serang di baris 3
+            PlayAttackSound(); // Mainkan suara serangan
+
         }
     }
 
@@ -84,5 +96,13 @@ public class KarateAnimalMixMayhemPlayer1 : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint1.position, attackRange);
         Gizmos.DrawWireSphere(attackPoint2.position, attackRange);
         Gizmos.DrawWireSphere(attackPoint3.position, attackRange);
+    }
+
+    private void PlayAttackSound()
+    {
+        if (attackSound != null)
+        {
+            audioSource.PlayOneShot(attackSound); // Mainkan suara serangan
+        }
     }
 }

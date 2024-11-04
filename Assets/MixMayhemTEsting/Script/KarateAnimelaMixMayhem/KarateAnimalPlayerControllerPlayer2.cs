@@ -19,10 +19,37 @@ public class KarateAnimalPlayerControllerPlayer2 : MonoBehaviour
 
     [SerializeField] private KarateAnimalMixMayhemScoreManagerPlayer2 karateAnimalPlayer2Score;
 
+    // Audio for attack
+    [SerializeField] private AudioClip attackSound;
+    private AudioSource audioSource;
+
+
+
     void Start()
     {
         playerAnimator = GetComponent<KarateAnimalPlayer2Animator>();
         karateAnimalPlayer2Score = FindObjectOfType<KarateAnimalMixMayhemScoreManagerPlayer2>();
+        // Initialize AudioSource
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        if (attackSound != null)
+        {
+            audioSource.clip = attackSound;
+        }
+        else
+        {
+            Debug.LogWarning("Attack sound not set in Inspector.");
+        }
+
+        if (karateAnimalPlayer2Score == null)
+        {
+            Debug.LogError("KarateAnimalPlayer2Score tidak ditemukan! Pastikan script ini ada di scene.");
+        }
+        else
+        {
+            Debug.Log("KarateAnimalPlayer2Score berhasil ditemukan.");
+        }
+
 
         if (karateAnimalPlayer2Score == null)
         {
@@ -42,18 +69,24 @@ public class KarateAnimalPlayerControllerPlayer2 : MonoBehaviour
             Debug.Log("Player 2 menyerang baris 1");
             playerAnimator.TriggerAttackAnimation(1); // Panggil animasi serangan untuk baris 1
             Attack(attackPoint1); // Serang di baris 1
+            PlayAttackSound(); // Mainkan suara serangan
+
         }
         else if (Input.GetKeyDown(attackKey2))
         {
             Debug.Log("Player 2 menyerang baris 2");
             playerAnimator.TriggerAttackAnimation(2); // Panggil animasi serangan untuk baris 2
             Attack(attackPoint2); // Serang di baris 2
+            PlayAttackSound(); // Mainkan suara serangan
+
         }
         else if (Input.GetKeyDown(attackKey3))
         {
             Debug.Log("Player 2 menyerang baris 3");
             playerAnimator.TriggerAttackAnimation(3); // Panggil animasi serangan untuk baris 3
             Attack(attackPoint3); // Serang di baris 3
+            PlayAttackSound(); // Mainkan suara serangan
+
         }
     }
 
@@ -99,5 +132,13 @@ public class KarateAnimalPlayerControllerPlayer2 : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint2.position, attackRange);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(attackPoint3.position, attackRange);
+    }
+
+    private void PlayAttackSound()
+    {
+        if (attackSound != null)
+        {
+            audioSource.PlayOneShot(attackSound); // Mainkan suara serangan
+        }
     }
 }
