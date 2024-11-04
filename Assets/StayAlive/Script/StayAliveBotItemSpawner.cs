@@ -11,6 +11,14 @@ public class StayAliveBotItemSpawner : MonoBehaviour
 
     private bool isSpawning = false; // Flag to control the spawning process
 
+    // Audio
+    [SerializeField] private AudioClip shootSound; // Audio clip for the shooting sound
+    private AudioSource audioSource;
+    private void Start()
+    {
+        audioSource = gameObject.AddComponent<AudioSource>(); // Tambahkan AudioSource jika belum ada
+    }
+
     public void StartSpawning()
     {
         isSpawning = true; // Enable item spawning
@@ -42,11 +50,21 @@ public class StayAliveBotItemSpawner : MonoBehaviour
                 // Spawn item at the specific spawn point for this bot
                 Instantiate(itemPrefab, spawnPoints[botIndex].position, Quaternion.identity);
 
+                // Play shooting sound
+                PlayShootSound();
+
                 // Set the next spawn time to a random value
                 spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
                 nextSpawnTime = Time.time + spawnInterval;
             }
             yield return null; // Wait for the next frame
+        }
+    }
+    private void PlayShootSound()
+    {
+        if (audioSource != null && shootSound != null)
+        {
+            audioSource.PlayOneShot(shootSound); // Play the shooting sound effect
         }
     }
 }

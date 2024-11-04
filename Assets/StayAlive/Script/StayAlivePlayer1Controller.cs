@@ -8,6 +8,20 @@ public class StayAlivePlayer1Controller : MonoBehaviour
     private bool isFacingRight = true; // Variable to track which direction the player is facing
     private bool canMove = false; // Flag to check if the player can move
 
+
+    // Audio
+    [SerializeField] private AudioClip movementSound; // Suara gerakan
+    private AudioSource audioSource;
+    private bool isPlayingMovementSound = false; // Cek apakah suara gerakan sedang diputar
+
+
+    void Start()
+    {
+        audioSource = gameObject.AddComponent<AudioSource>(); // Tambahkan AudioSource jika belum ada
+        audioSource.clip = movementSound;
+        audioSource.loop = true; // Set loop agar suara terus diputar selama bergerak
+    }
+
     void Update()
     {
         if (canMove)
@@ -35,6 +49,18 @@ public class StayAlivePlayer1Controller : MonoBehaviour
         // Move the player based on input
         Vector3 movement = new Vector3(horizontal, vertical, 0f).normalized;
         transform.position += movement * speed * Time.deltaTime;
+
+        // Start or stop movement sound based on player movement
+        if (movement.magnitude > 0 && !isPlayingMovementSound)
+        {
+            audioSource.Play(); // Mulai suara jika pemain mulai bergerak
+            isPlayingMovementSound = true;
+        }
+        else if (movement.magnitude == 0 && isPlayingMovementSound)
+        {
+            audioSource.Stop(); // Hentikan suara jika pemain berhenti
+            isPlayingMovementSound = false;
+        }
 
         // Flip the character sprite based on movement direction
         FlipCharacter(horizontal);
