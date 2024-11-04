@@ -15,6 +15,10 @@ public class FlappyAnimalPlayer2Controller : MonoBehaviour
 
     public bool canMove = false;
 
+    [SerializeField] public AudioClip jumpSound; // AudioClip for the jump sound
+    [SerializeField] public AudioClip collisionSound; // AudioClip for the collision sound
+    public AudioSource audioSource; // AudioSource to play sounds
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -41,6 +45,13 @@ public class FlappyAnimalPlayer2Controller : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.I) || Input.GetMouseButtonDown(1))
             {
                 direction = Vector3.up * strength;
+
+                // Play jump sound
+                if (jumpSound != null)
+                {
+                    audioSource.PlayOneShot(jumpSound);
+                }
+
             }
 
             // Apply gravity and update the position
@@ -77,6 +88,11 @@ public class FlappyAnimalPlayer2Controller : MonoBehaviour
             // Jika Player 2 mati, panggil Player2GameOver di skrip Game Over
             FlappyAnimalGameOverManager gameOverManager = FindObjectOfType<FlappyAnimalGameOverManager>();
             gameOverManager.Player2GameOver();
+            // Play collision sound
+            if (collisionSound != null)
+            {
+                audioSource.PlayOneShot(collisionSound);
+            }
             StopSpriteAnimation();  // Stop the animation
 
         }

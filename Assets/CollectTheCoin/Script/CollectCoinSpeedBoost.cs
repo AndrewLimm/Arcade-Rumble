@@ -7,6 +7,9 @@ public class CollectCoinSpeedBoost : MonoBehaviour
     public float boostDuration = 3f; // Durasi speed boost
     public float boostMultiplier = 2f; // Pengganda kecepatan
 
+    [SerializeField] public AudioClip collectSound; // AudioClip untuk suara pengumpulan
+    public AudioSource audioSource; // AudioSource untuk memutar suara
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Jika Player 1 yang menyentuh item, berikan speed boost ke Player 1
@@ -16,7 +19,13 @@ public class CollectCoinSpeedBoost : MonoBehaviour
             if (player1Movement != null)
             {
                 player1Movement.ActivateSpeedBoost(boostMultiplier, boostDuration); // Aktifkan speed boost
-                Destroy(gameObject); // Hancurkan item setelah dikumpulkan
+                if (collectSound != null)
+                {
+                    audioSource.PlayOneShot(collectSound);
+                }
+
+                // Hancurkan item setelah sedikit waktu untuk memastikan suara sempat dimainkan
+                Destroy(gameObject, collectSound.length);
             }
         }
         // Jika Player 2 yang menyentuh item, berikan speed boost ke Player 2
@@ -26,7 +35,13 @@ public class CollectCoinSpeedBoost : MonoBehaviour
             if (player2Movement != null)
             {
                 player2Movement.ActivateSpeedBoost(boostMultiplier, boostDuration); // Aktifkan speed boost
-                Destroy(gameObject); // Hancurkan item setelah dikumpulkan
+                if (collectSound != null)
+                {
+                    audioSource.PlayOneShot(collectSound);
+                }
+
+                // Hancurkan item setelah sedikit waktu untuk memastikan suara sempat dimainkan
+                Destroy(gameObject, collectSound.length);
             }
         }
     }
