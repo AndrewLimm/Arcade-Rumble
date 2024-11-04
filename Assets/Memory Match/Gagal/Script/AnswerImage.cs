@@ -49,6 +49,10 @@ public class AnswerImage : MonoBehaviour
             TampilkanJawaban();
             gameStarted = true;
 
+            // Enable player input after question is displayed
+            player1InputAllowed = true;
+            player2InputAllowed = true;
+
             // Mulai memeriksa input pemain setelah soal ditampilkan
             yield return StartCoroutine(PeriksaInput());
 
@@ -79,9 +83,11 @@ public class AnswerImage : MonoBehaviour
 
         while (!correctAnswerGiven)
         {
-            player1Input.PeriksaInputPlayer1();
-            player2Input.PeriksaInputPlayer2();
-            yield return null; // Tunggu frame berikutnya
+            if (player1InputAllowed)
+                player1Input.PeriksaInputPlayer1();
+            if (player2InputAllowed)
+                player2Input.PeriksaInputPlayer2();
+            yield return null;
 
             // Cek apakah Player 1 sudah menginputkan jawaban sebanyak jumlah yang dibutuhkan
             if (player1Answers.Count == correctAnswerOrder.Count)
@@ -115,7 +121,7 @@ public class AnswerImage : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1f); // Tunggu sebentar sebelum memulai soal baru
-        StartCoroutine(PeriksaInput()); // Mulai paket soal baru setelah soal lama terselesaikan
+        // StartCoroutine(PeriksaInput()); // Mulai paket soal baru setelah soal lama terselesaikan
     }
 
 

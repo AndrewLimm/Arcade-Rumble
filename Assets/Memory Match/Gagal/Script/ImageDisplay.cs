@@ -18,7 +18,7 @@ public class ImageDisplay : MonoBehaviour
         StartCoroutine(DisplaySprites());
     }
 
-    IEnumerator DisplaySprites()
+    public IEnumerator DisplaySprites()
     {
         List<int> indices = new List<int> { 0, 1, 2 };
         Shuffle(indices);
