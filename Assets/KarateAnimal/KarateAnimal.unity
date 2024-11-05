@@ -682,6 +682,7 @@ MonoBehaviour:
   canmoveplayer2: 0
   attackSound: {fileID: 8300000, guid: cfbf85c2d070e1446ab027fcda5d35b8, type: 3}
   audioSource: {fileID: 247428987}
+  attackCooldown: 0.25
 --- !u!114 &247428985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1772,6 +1773,7 @@ MonoBehaviour:
   canmoveplayer1: 0
   attackSound: {fileID: 8300000, guid: cfbf85c2d070e1446ab027fcda5d35b8, type: 3}
   audioSource: {fileID: 966671963}
+  attackCooldown: 0.25
 --- !u!212 &966671957
 SpriteRenderer:
   m_ObjectHideFlags: 0
