@@ -25,15 +25,15 @@ public class QuickMathPlayer2Input : MonoBehaviour
         if (timeSinceLastInput >= cooldown)
         {
             // Input untuk Player 1
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.J))
             {
                 CekJawaban(0);
             }
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.K))
             {
                 CekJawaban(1);
             }
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.L))
             {
                 CekJawaban(2);
             }

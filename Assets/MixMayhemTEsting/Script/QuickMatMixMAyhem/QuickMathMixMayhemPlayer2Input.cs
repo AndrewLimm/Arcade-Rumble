@@ -18,22 +18,19 @@ public class QuickMathMixMayhemPlayer2Input : MonoBehaviour
     }
     void Update()
     {
-        // Perbarui waktu sejak input terakhir
-        timeSinceLastInput += Time.deltaTime;
-
         // Cek apakah cooldown telah habis
         if (timeSinceLastInput >= cooldown)
         {
             // Input untuk Player 1
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.J))
             {
                 CekJawaban(0);
             }
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.K))
             {
                 CekJawaban(1);
             }
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.L))
             {
                 CekJawaban(2);
             }
