@@ -1866,7 +1866,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &197655674
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4429,7 +4429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &511275869
 Transform:
   m_ObjectHideFlags: 0
@@ -14286,6 +14286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mathGameLogic: {fileID: 524868719}
   selectionSound: {fileID: 8300000, guid: cd74fbd041f9d8e4c91f8bf455444c59, type: 3}
+  cooldown: 1
 --- !u!82 &1818530169
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16716,6 +16717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mathGameLogic: {fileID: 524868719}
   selectionSound: {fileID: 8300000, guid: cd74fbd041f9d8e4c91f8bf455444c59, type: 3}
+  cooldown: 1
 --- !u!82 &2095761343
 AudioSource:
   m_ObjectHideFlags: 0
