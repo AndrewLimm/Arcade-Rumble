@@ -48,8 +48,6 @@ public class QuickMathPlayer2Input : MonoBehaviour
             mathGameLogic.CekJawaban(pilihanDipilih, 2); // 2 menunjukkan Player 2
             PlaySelectionSound(); // Play selection sound
             timeSinceLastInput = 0f; // Reset waktu untuk cooldown
-
-
         }
         else
         {
