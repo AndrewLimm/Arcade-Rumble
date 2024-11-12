@@ -12,8 +12,8 @@ public class GameRumbleResultGameScreenManager : MonoBehaviour
     private void Start()
     {
         // Menampilkan skor sementara dari GameManager
-        player1ScoreText.text = "Player 1 Score: " + GameRumbleGameManagerForScore.instance.player1Wins;
-        player2ScoreText.text = "Player 2 Score: " + GameRumbleGameManagerForScore.instance.player2Wins;
+        player1ScoreText.text = GameRumbleGameManagerForScore.instance.player1Wins.ToString();
+        player2ScoreText.text = GameRumbleGameManagerForScore.instance.player2Wins.ToString();
     }
 
     public void OnContinueButtonPressed()

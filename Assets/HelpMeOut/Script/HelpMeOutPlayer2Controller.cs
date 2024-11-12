@@ -10,9 +10,13 @@ public class HelpMeOutPlayer2Controller : MonoBehaviour
     private bool controlsEnabled = true; // Menyimpan status kontrol pemain
 
     [SerializeField] HelpMeOutGameOver helpMeOutGameOver;
+    private SpriteRenderer spriteRenderer; // Reference to SpriteRenderer for flipping
+
 
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         rb = GetComponent<Rigidbody2D>(); // Mengambil komponen Rigidbody2D dari objek
         // Mendapatkan referensi GameOverManager
         // helpMeOutGameOver = FindObjectOfType<HelpMeOutGameOver>();
@@ -46,6 +50,10 @@ public class HelpMeOutPlayer2Controller : MonoBehaviour
             else if (Input.GetKey(KeyCode.L))
             {
                 movement.x = 1; // Gerak ke kanan
+            }
+            if (movement.x != 0)
+            {
+                spriteRenderer.flipX = movement.x < 0;
             }
         }
     }

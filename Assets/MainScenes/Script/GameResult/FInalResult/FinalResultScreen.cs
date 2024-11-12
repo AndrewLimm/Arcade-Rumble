@@ -13,19 +13,19 @@ public class FinalResultScreen : MonoBehaviour
     private void Start()
     {
         // Menampilkan skor akhir dari GameManager
-        finalPlayer1ScoreText.text = "Final Score - Player 1: " + GameRumbleGameManagerForScore.instance.player1Wins;
-        finalPlayer2ScoreText.text = "Final Score - Player 2: " + GameRumbleGameManagerForScore.instance.player2Wins;
+        finalPlayer1ScoreText.text = GameRumbleGameManagerForScore.instance.player1Wins.ToString();
+        finalPlayer2ScoreText.text = GameRumbleGameManagerForScore.instance.player2Wins.ToString();
 
         // Menentukan dan menampilkan pemenang berdasarkan skor akhir
         if (GameRumbleGameManagerForScore.instance.player1Wins > GameRumbleGameManagerForScore.instance.player2Wins)
         {
-            winnerText.text = "Player 1 Wins!";
+            winnerText.text = "Tim Biru Wins!";
         }
         else if (GameRumbleGameManagerForScore.instance.player2Wins > GameRumbleGameManagerForScore.instance.player1Wins)
         {
-            winnerText.text = "Player 2 Wins!";
+            winnerText.text = "Tim Merah Wins!";
         }
-    }   
+    }
 
     public void OnExitGamePressed()
     {

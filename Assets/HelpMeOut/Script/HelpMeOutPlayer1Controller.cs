@@ -10,6 +10,10 @@ public class HelpMeOutPlayer1Controller : MonoBehaviour
     private bool controlsEnabled = true; // Menyimpan status kontrol pemain
 
     [SerializeField] HelpMeOutGameOver helpMeOutGameOver;
+    private SpriteRenderer spriteRenderer; // Reference to SpriteRenderer for flipping
+    private bool isFacingRight = false; // Status menghadap awal
+
+
 
     void Start()
     {
@@ -19,6 +23,8 @@ public class HelpMeOutPlayer1Controller : MonoBehaviour
         {
             Debug.LogError("HelpMeOutGameOver tidak ditemukan di scene!");
         }
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
     }
 
     void Update()
@@ -41,11 +47,19 @@ public class HelpMeOutPlayer1Controller : MonoBehaviour
             if (Input.GetKey(KeyCode.A))
             {
                 movement.x = -1; // Gerak ke kiri
+                isFacingRight = false; // Update arah
+
             }
             else if (Input.GetKey(KeyCode.D))
             {
                 movement.x = 1; // Gerak ke kanan
+                isFacingRight = true; // Update arah
+
             }
+
+
+            // Set flipX berdasarkan arah terakhir yang disimpan
+            spriteRenderer.flipX = isFacingRight;
         }
     }
 
