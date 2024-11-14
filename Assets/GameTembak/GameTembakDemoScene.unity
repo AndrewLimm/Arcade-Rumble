@@ -274,8 +274,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: TImer Game
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: afb83571939f0cc4cad37c1a64f294b4, type: 2}
+  m_sharedMaterial: {fileID: -2858916205424119450, guid: afb83571939f0cc4cad37c1a64f294b4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -763,8 +763,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Score : '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: afb83571939f0cc4cad37c1a64f294b4, type: 2}
+  m_sharedMaterial: {fileID: -2858916205424119450, guid: afb83571939f0cc4cad37c1a64f294b4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -969,8 +969,6 @@ GameObject:
   m_Component:
   - component: {fileID: 525253503}
   - component: {fileID: 525253502}
-  - component: {fileID: 525253505}
-  - component: {fileID: 525253504}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -990,8 +988,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089b100820fd8734aa12c7f16f2c76df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disableAttackPlayer1: {fileID: 525253505}
-  disableAttackPlayer2: {fileID: 525253504}
+  disableAttackPlayer1: {fileID: 7941172361800428535}
+  disableAttackPlayer2: {fileID: 8960993996335644665}
   player1Control1: {fileID: 2224193420829131342}
   Player2Control: {fileID: 8960993996335644662}
 --- !u!4 &525253503
@@ -1009,32 +1007,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &525253504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 525253501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c47d03e0b0bad9c47aa24dc20a794467, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player2Controller: {fileID: 5288655974736016165, guid: 0dd32dda26df04a439fb549171c14e5d, type: 3}
---- !u!114 &525253505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 525253501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d73eab156f0f4e04ab0bc9b57ccf5eff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player1Controller: {fileID: 1003174450230095278, guid: 5fbf2fb2361f2354bab8415e31af0956, type: 3}
 --- !u!1 &558114935
 GameObject:
   m_ObjectHideFlags: 0
@@ -1593,8 +1565,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: GameOver
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: afb83571939f0cc4cad37c1a64f294b4, type: 2}
+  m_sharedMaterial: {fileID: -2858916205424119450, guid: afb83571939f0cc4cad37c1a64f294b4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2194,8 +2166,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Score : '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: afb83571939f0cc4cad37c1a64f294b4, type: 2}
+  m_sharedMaterial: {fileID: -2858916205424119450, guid: afb83571939f0cc4cad37c1a64f294b4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2988,8 +2960,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: CountDOwn
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: afb83571939f0cc4cad37c1a64f294b4, type: 2}
+  m_sharedMaterial: {fileID: -2858916205424119450, guid: afb83571939f0cc4cad37c1a64f294b4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3553,6 +3525,7 @@ GameObject:
   - component: {fileID: 1474353831805813977}
   - component: {fileID: 7941172361800428533}
   - component: {fileID: 7941172361800428534}
+  - component: {fileID: 7941172361800428535}
   m_Layer: 6
   m_Name: Player 1
   m_TagString: Player1
@@ -3608,6 +3581,7 @@ GameObject:
   - component: {fileID: 1713585932}
   - component: {fileID: 8960993996335644663}
   - component: {fileID: 8960993996335644664}
+  - component: {fileID: 8960993996335644665}
   m_Layer: 6
   m_Name: Player 2
   m_TagString: Player2
@@ -3924,6 +3898,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7941172361800428535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3342626964904942935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d73eab156f0f4e04ab0bc9b57ccf5eff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1Controller: {fileID: 2224193420829131342}
 --- !u!4 &8615085662851567338
 Transform:
   m_ObjectHideFlags: 0
@@ -4077,6 +4064,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8960993996335644665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5639032247591457133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47d03e0b0bad9c47aa24dc20a794467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player2Controller: {fileID: 8960993996335644662}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

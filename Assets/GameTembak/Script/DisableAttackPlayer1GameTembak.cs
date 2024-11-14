@@ -6,9 +6,11 @@ public class DisableAttackPlayer1GameTembak : MonoBehaviour
 {
     public Player1Control player1Controller; // Referensi ke Player1Control
     private Coroutine disableCoroutine; // Menyimpan referensi ke coroutine yang berjalan
+    private SpriteRenderer player1SpriteRenderer; // Referensi ke SpriteRenderer Player 1
 
     private void Awake()
     {
+
         // Mencari Player1Control di scene
         player1Controller = FindObjectOfType<Player1Control>();
 
@@ -16,6 +18,11 @@ public class DisableAttackPlayer1GameTembak : MonoBehaviour
         if (player1Controller == null)
         {
             Debug.LogError("Player 1 Controller is not assigned or found!");
+        }
+        else
+        {
+            // Dapatkan komponen SpriteRenderer dari Player 1
+            player1SpriteRenderer = player1Controller.GetComponent<SpriteRenderer>();
         }
     }
 
@@ -49,7 +56,20 @@ public class DisableAttackPlayer1GameTembak : MonoBehaviour
     {
         player1Controller.canShoot = false; // Menonaktifkan serangan
 
+        // Mengubah warna sprite menjadi merah
+        if (player1SpriteRenderer != null)
+        {
+            player1SpriteRenderer.color = Color.red;
+        }
+
         yield return new WaitForSeconds(1.5f); // Tunggu 2 detik
+
+
+        // Mengembalikan warna sprite ke warna asli (putih)
+        if (player1SpriteRenderer != null)
+        {
+            player1SpriteRenderer.color = Color.white;
+        }
 
         player1Controller.canShoot = true; // Mengizinkan pemain untuk menembak lagi
         disableCoroutine = null; // Reset referensi coroutine

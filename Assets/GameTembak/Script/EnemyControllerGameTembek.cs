@@ -15,6 +15,11 @@ public class EnemyControllerGameTembek : MonoBehaviour
     // Audio variables
     [SerializeField] public AudioClip deathSound; // AudioClip untuk suara kematian musuh
     public AudioSource audioSource;
+
+    private Animator animator; // Referensi ke komponen Animator
+    private bool isDestroyed = false; // Untuk mencegah beberapa kali pemanggilan saat musuh sudah dihancurkan
+
+
     void Awake()
     {
 
@@ -26,6 +31,14 @@ public class EnemyControllerGameTembek : MonoBehaviour
         {
             Debug.LogError("ScoreManagerGameTembak tidak ditemukan di scene!");
         }
+
+        // **Mendapatkan komponen Animator**
+        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError("Animator tidak ditemukan pada musuh!");
+        }
+
         // Tambahkan AudioSource dan atur clip ke deathSound
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = deathSound; // Atur clip untuk audio source
@@ -65,40 +78,63 @@ public class EnemyControllerGameTembek : MonoBehaviour
         else if (other.CompareTag("PlayerBullet"))
         {
             // Ketika terkena peluru dari pemain, musuh akan mati dan memberikan poin
-            Destroy(other.gameObject); // Hancurkan peluru
+            if (!isDestroyed) // Cegah pemanggilan berulang
+            {
+                isDestroyed = true;
+                Destroy(other.gameObject); // Hancurkan peluru
 
-            if (other.gameObject.layer == LayerMask.NameToLayer("Player1Bullet"))
-            {
-                // Tambahkan poin untuk Player 1
-                scoreManagerGameTembak.AddScorePlayer1(pointsForKill);
+                if (other.gameObject.layer == LayerMask.NameToLayer("Player1Bullet"))
+                {
+                    // Tambahkan poin untuk Player 1
+                    scoreManagerGameTembak.AddScorePlayer1(pointsForKill);
+                }
+                else if (other.gameObject.layer == LayerMask.NameToLayer("Player2Bullet"))
+                {
+                    // Tambahkan poin untuk Player 2
+                    scoreManagerGameTembak.AddScorePlayer2(pointsForKill);
+                }
+
+                TriggerExplosion(); // Mainkan animasi ledakan
             }
-            else if (other.gameObject.layer == LayerMask.NameToLayer("Player2Bullet"))
-            {
-                // Tambahkan poin untuk Player 2
-                scoreManagerGameTembak.AddScorePlayer2(pointsForKill);
-            }
-            PlayDeathSoundAndDestroy(); // Mainkan suara dan hancurkan musuh
+        }
+    }
+    // Fungsi untuk menangani kematian musuh
+    public void HandleDeath()
+    {
+        if (!isDestroyed) // Cegah pemanggilan berulang
+        {
+            isDestroyed = true;
+            TriggerExplosion(); // Mainkan animasi ledakan dan suara
         }
     }
 
+    // Method untuk memicu animasi ledakan
+    private void TriggerExplosion()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("Explode"); // Aktifkan animasi ledakan
+        }
+        PlayDeathSound(); // Mainkan suara kematian
+        StartCoroutine(DestroyAfterAnimation()); // Hancurkan setelah animasi selesai
+    }
 
-    private void PlayDeathSoundAndDestroy()
+    // Coroutine untuk menghancurkan musuh setelah animasi selesai
+    private IEnumerator DestroyAfterAnimation()
+    {
+        // Tunggu hingga durasi animasi (sesuaikan dengan panjang animasi ledakan)
+        yield return new WaitForSeconds(0.5f); // Sesuaikan waktu dengan durasi animasi ledakan
+
+        Destroy(gameObject); // Hancurkan musuh sepenuhnya
+    }
+
+    private void PlayDeathSound()
     {
         // Pastikan audio source tersedia sebelum diputar
-        if (deathSound != null)
+        if (audioSource != null && deathSound != null)
         {
             audioSource.PlayOneShot(deathSound);
-            Invoke(nameof(DestroyEnemy), deathSound.length); // Hancurkan musuh setelah durasi suara
         }
-        else
-        {
-            Destroy(gameObject); // Hancurkan segera jika tidak ada suara
-        }
-    }
-
-    private void DestroyEnemy()
-    {
-        Destroy(gameObject); // Hancurkan musuh sepenuhnya
     }
 
     // Fungsi untuk memulai gerakan musuh

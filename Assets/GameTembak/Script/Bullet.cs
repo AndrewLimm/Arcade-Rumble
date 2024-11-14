@@ -24,11 +24,17 @@ public class Bullet : MonoBehaviour
         // Memeriksa apakah peluru mengenai musuh
         if (other.CompareTag("Enemy"))
         {
-            // Hancurkan musuh
-            Destroy(other.gameObject);
+            // Alih-alih langsung menghancurkan musuh, panggil fungsi yang menangani kematian musuh
+            EnemyControllerGameTembek enemy = other.GetComponent<EnemyControllerGameTembek>();
+            if (enemy != null)
+            {
+                enemy.HandleDeath(); // Panggil fungsi untuk menangani kematian musuh
+            }
+
             // Hancurkan peluru
             Destroy(gameObject);
         }
+
         if (other.CompareTag("Wall"))
         {
             Debug.Log("Peluru terkena tembok!"); // Debug untuk tembok
