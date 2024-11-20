@@ -1257,7 +1257,7 @@ GameObject:
   - component: {fileID: 1409960177}
   - component: {fileID: 1409960176}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ImageMenang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1279,8 +1279,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -432, y: 0}
-  m_SizeDelta: {x: 300, y: 200}
+  m_AnchoredPosition: {x: -432, y: -34}
+  m_SizeDelta: {x: 400, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1409960176
 MonoBehaviour:
@@ -1302,7 +1302,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2af06379633e31e4ba62f6c3506f6369, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4213282400528374d819a59cfada20a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1907,6 +1907,10 @@ MonoBehaviour:
   finalPlayer1ScoreText: {fileID: 931223382}
   finalPlayer2ScoreText: {fileID: 472594777}
   winnerText: {fileID: 609592366}
+  winnerImage: {fileID: 1409960176}
+  blueTeamWinSprite: {fileID: 21300000, guid: 75a1f374dc255ca4784f5355b0229734, type: 3}
+  redTeamWinSprite: {fileID: 21300000, guid: 4213282400528374d819a59cfada20a2, type: 3}
+  drawSprite: {fileID: 21300000, guid: 80719990d234dc14db2fc99204c04f7f, type: 3}
 --- !u!4 &1881201612
 Transform:
   m_ObjectHideFlags: 0
