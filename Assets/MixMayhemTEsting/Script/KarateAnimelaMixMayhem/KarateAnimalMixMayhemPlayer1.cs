@@ -20,6 +20,9 @@ public class KarateAnimalMixMayhemPlayer1 : MonoBehaviour
     private AudioSource audioSource; // Audio source for playing sounds
     public AudioClip attackSound; // Clip to play on attack
 
+    public float attackCooldown = 0.5f; // Durasi cooldown serangan
+    private float lastAttackTime = 0f; // Waktu terakhir serangan dilakukan
+
 
     void Start()
     {
@@ -32,31 +35,39 @@ public class KarateAnimalMixMayhemPlayer1 : MonoBehaviour
 
     void Update()
     {
-        // Cek input pemain untuk setiap baris
-        if (Input.GetKeyDown(attackKey1))
-        {
-            Debug.Log("Attacking lane 1");
-            playerAnimator.TriggerAttackAnimation(1); // Panggil animasi serangan untuk lane 1
-            Attack(attackPoint1); // Serang di baris 1
-            PlayAttackSound(); // Mainkan suara serangan
+        
+        if (Time.time >= lastAttackTime + attackCooldown)
+        {   // Cek input pemain untuk setiap baris
+            if (Input.GetKeyDown(attackKey1))
+            {
+                Debug.Log("Attacking lane 1");
+                playerAnimator.TriggerAttackAnimation(1); // Panggil animasi serangan untuk lane 1
+                Attack(attackPoint1); // Serang di baris 1
+                PlayAttackSound(); // Mainkan suara serangan
+                lastAttackTime = Time.time; // Update waktu serangan terakhir
 
-        }
-        else if (Input.GetKeyDown(attackKey2))
-        {
-            Debug.Log("Attacking lane 2");
-            playerAnimator.TriggerAttackAnimation(2); // Panggil animasi serangan untuk lane 2
-            Attack(attackPoint2); // Serang di baris 2
-            PlayAttackSound(); // Mainkan suara serangan
+            }
+            else if (Input.GetKeyDown(attackKey2))
+            {
+                Debug.Log("Attacking lane 2");
+                playerAnimator.TriggerAttackAnimation(2); // Panggil animasi serangan untuk lane 2
+                Attack(attackPoint2); // Serang di baris 2
+                PlayAttackSound(); // Mainkan suara serangan
+                lastAttackTime = Time.time; // Update waktu serangan terakhir
 
-        }
-        else if (Input.GetKeyDown(attackKey3))
-        {
-            Debug.Log("Attacking lane 3");
-            playerAnimator.TriggerAttackAnimation(3); // Panggil animasi serangan untuk lane 3
-            Attack(attackPoint3); // Serang di baris 3
-            PlayAttackSound(); // Mainkan suara serangan
+            }
+            else if (Input.GetKeyDown(attackKey3))
+            {
+                Debug.Log("Attacking lane 3");
+                playerAnimator.TriggerAttackAnimation(3); // Panggil animasi serangan untuk lane 3
+                Attack(attackPoint3); // Serang di baris 3
+                PlayAttackSound(); // Mainkan suara serangan
+                lastAttackTime = Time.time; // Update waktu serangan terakhir
 
+            }
         }
+
+
     }
 
     public void Attack(Transform attackPoint)

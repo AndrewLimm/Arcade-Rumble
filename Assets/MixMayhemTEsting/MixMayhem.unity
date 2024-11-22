@@ -1866,7 +1866,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &197655674
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6150,6 +6150,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 630150921}
   karateAnimalPlayer2Score: {fileID: 625817888}
   attackSound: {fileID: 8300000, guid: cfbf85c2d070e1446ab027fcda5d35b8, type: 3}
+  attackCooldown: 0.5
 --- !u!82 &630150926
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7397,6 +7398,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 911196868}
   KarateAnimalScoreManager: {fileID: 625817889}
   attackSound: {fileID: 8300000, guid: cfbf85c2d070e1446ab027fcda5d35b8, type: 3}
+  attackCooldown: 0.5
 --- !u!82 &911196872
 AudioSource:
   m_ObjectHideFlags: 0
