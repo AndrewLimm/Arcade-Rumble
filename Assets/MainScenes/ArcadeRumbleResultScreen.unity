@@ -179,7 +179,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TIm Merah
+  m_text: Red Team
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: afb83571939f0cc4cad37c1a64f294b4, type: 2}
   m_sharedMaterial: {fileID: -2858916205424119450, guid: afb83571939f0cc4cad37c1a64f294b4, type: 2}
@@ -611,8 +611,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1ScoreText: {fileID: 1628640014}
   player2ScoreText: {fileID: 1611942574}
-  player1Background: {fileID: 159892319}
-  player2Background: {fileID: 589969522}
 --- !u!1 &575329996
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,7 +1341,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -97.85, y: 60}
+  m_AnchoredPosition: {x: -129, y: 60}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1270568816
@@ -1366,7 +1364,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TIm Biru
+  m_text: Blue Team
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: afb83571939f0cc4cad37c1a64f294b4, type: 2}
   m_sharedMaterial: {fileID: -2858916205424119450, guid: afb83571939f0cc4cad37c1a64f294b4, type: 2}
@@ -1429,7 +1427,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -64.95508, w: 0}
+  m_margin: {x: 0, y: 0, z: -133.091, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

@@ -28,12 +28,12 @@ public class FinalResultScreen : MonoBehaviour
         // Menentukan dan menampilkan pemenang berdasarkan skor akhir
         if (GameRumbleGameManagerForScore.instance.player1Wins > GameRumbleGameManagerForScore.instance.player2Wins)
         {
-            winnerText.text = "Tim Biru Wins!";
+            winnerText.text = "Blue Team Wins!";
             winnerImage.sprite = blueTeamWinSprite;  // Tampilkan gambar A jika Tim Biru menang
         }
         else if (GameRumbleGameManagerForScore.instance.player1Wins < GameRumbleGameManagerForScore.instance.player2Wins)
         {
-            winnerText.text = "Tim Merah Wins!";
+            winnerText.text = "Red Team Wins!";
             winnerImage.sprite = redTeamWinSprite;   // Tampilkan gambar B jika Tim Merah menang
         }
         else
