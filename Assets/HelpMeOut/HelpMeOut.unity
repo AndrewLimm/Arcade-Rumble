@@ -307,6 +307,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3228266855765039036, guid: e52992863d4a8534a897a636f5241914, type: 3}
+      propertyPath: m_text
+      value: 'Player 2 (Red Team) Using IJKL
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310257118084699216, guid: e52992863d4a8534a897a636f5241914, type: 3}
+      propertyPath: m_text
+      value: Player 1 (Blue Team) Using WASD
+      objectReference: {fileID: 0}
     - target: {fileID: 8043832268739167718, guid: e52992863d4a8534a897a636f5241914, type: 3}
       propertyPath: m_Name
       value: HelpMeOUt 1

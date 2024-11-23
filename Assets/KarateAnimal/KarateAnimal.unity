@@ -1142,6 +1142,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3228266855765039036, guid: 9c4d9ed0e1da26345827e66204136b4f, type: 3}
+      propertyPath: m_text
+      value: 'Player 2 (Red Team) Using JKL
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 5891445182618895166, guid: 9c4d9ed0e1da26345827e66204136b4f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1150,6 +1156,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1062307664}
+    - target: {fileID: 6310257118084699216, guid: 9c4d9ed0e1da26345827e66204136b4f, type: 3}
+      propertyPath: m_text
+      value: Player 1 (Blue Team) Using ASD
+      objectReference: {fileID: 0}
     - target: {fileID: 8043832268739167718, guid: 9c4d9ed0e1da26345827e66204136b4f, type: 3}
       propertyPath: m_Name
       value: Hit THe Target 1

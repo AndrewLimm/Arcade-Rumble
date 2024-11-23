@@ -5207,6 +5207,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4292574876807452081, guid: 4696b1625bf71344cb65dc74fe7401bb, type: 3}
+      propertyPath: m_text
+      value: Player 1 (Blue Team) Using WASD
+      objectReference: {fileID: 0}
+    - target: {fileID: 6485083351910116857, guid: 4696b1625bf71344cb65dc74fe7401bb, type: 3}
+      propertyPath: m_text
+      value: 'Player 2 (Red Team) Using IJKL
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 8043832268739167718, guid: 4696b1625bf71344cb65dc74fe7401bb, type: 3}
       propertyPath: m_Name
       value: TurboMayhem 1

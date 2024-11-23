@@ -565,6 +565,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1775436072}
+    - target: {fileID: 3228266855765039036, guid: 2a4a8246d2a717f43957bd352f994073, type: 3}
+      propertyPath: m_text
+      value: 'Player 2 (RedTeam) Using IJL
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310257118084699216, guid: 2a4a8246d2a717f43957bd352f994073, type: 3}
+      propertyPath: m_text
+      value: Player 1 (Blue Team) Using WAD
+      objectReference: {fileID: 0}
     - target: {fileID: 8043832268739167718, guid: 2a4a8246d2a717f43957bd352f994073, type: 3}
       propertyPath: m_Name
       value: Falling Blocks 1

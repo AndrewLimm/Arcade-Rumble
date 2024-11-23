@@ -2025,6 +2025,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4292574876807452081, guid: c1816848f41db5d4ebbd1ff2e9e93791, type: 3}
+      propertyPath: m_text
+      value: Player 1 (Blue Team) Using WAD
+      objectReference: {fileID: 0}
     - target: {fileID: 5266430605189635245, guid: c1816848f41db5d4ebbd1ff2e9e93791, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -2064,6 +2068,12 @@ PrefabInstance:
     - target: {fileID: 5266430605189635245, guid: c1816848f41db5d4ebbd1ff2e9e93791, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.AudioClip, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6485083351910116857, guid: c1816848f41db5d4ebbd1ff2e9e93791, type: 3}
+      propertyPath: m_text
+      value: 'Player 2  (Red Team) Using IJL
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 8043832268739167718, guid: c1816848f41db5d4ebbd1ff2e9e93791, type: 3}
       propertyPath: m_Name

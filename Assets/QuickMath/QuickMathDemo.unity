@@ -2266,6 +2266,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3228266855765039036, guid: 94db3ca01374f6d4097c9c2c3a67713a, type: 3}
+      propertyPath: m_text
+      value: 'Player 2 (Red Team) Using JKL
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310257118084699216, guid: 94db3ca01374f6d4097c9c2c3a67713a, type: 3}
+      propertyPath: m_text
+      value: Player 1 (Blue Team) Using ASD
+      objectReference: {fileID: 0}
     - target: {fileID: 8043832268739167718, guid: 94db3ca01374f6d4097c9c2c3a67713a, type: 3}
       propertyPath: m_Name
       value: QuickMath 1

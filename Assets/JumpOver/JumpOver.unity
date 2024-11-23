@@ -222,6 +222,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4292574876807452081, guid: 2a84c0af1e877f94c8c6325c03e7e747, type: 3}
+      propertyPath: m_text
+      value: Player 1 (Blue Team) Using W
+      objectReference: {fileID: 0}
     - target: {fileID: 4527896078218358599, guid: 2a84c0af1e877f94c8c6325c03e7e747, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -230,6 +234,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 413179886}
+    - target: {fileID: 6485083351910116857, guid: 2a84c0af1e877f94c8c6325c03e7e747, type: 3}
+      propertyPath: m_text
+      value: Player 2 (Red Team) Using I
+      objectReference: {fileID: 0}
     - target: {fileID: 8043832268739167718, guid: 2a84c0af1e877f94c8c6325c03e7e747, type: 3}
       propertyPath: m_Name
       value: JumpOver 1

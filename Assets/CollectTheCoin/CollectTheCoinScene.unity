@@ -7177,6 +7177,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4292574876807452081, guid: fb66fc569d7ecf544b41b8ba9a65b485, type: 3}
+      propertyPath: m_text
+      value: Player 1(Blue Team) Using WASD
+      objectReference: {fileID: 0}
     - target: {fileID: 6206422714689900108, guid: fb66fc569d7ecf544b41b8ba9a65b485, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -7185,6 +7189,12 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1327836117}
+    - target: {fileID: 6485083351910116857, guid: fb66fc569d7ecf544b41b8ba9a65b485, type: 3}
+      propertyPath: m_text
+      value: 'Player 2 (Red Team) Using IJKL
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 8043832268739167718, guid: fb66fc569d7ecf544b41b8ba9a65b485, type: 3}
       propertyPath: m_Name
       value: Collect The COin 1
