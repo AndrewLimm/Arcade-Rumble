@@ -61,8 +61,8 @@ public class HelpMeOUtPlayerTimeController : MonoBehaviour
 
     private void UpdateTimerUI()
     {
-        player1TimerText.text = "Player 1 Time: " + player1ElapsedTime.ToString("F2") + " s";
-        player2TimerText.text = "Player 2 Time: " + player2ElapsedTime.ToString("F2") + " s";
+        player1TimerText.text = player1ElapsedTime.ToString("F2") + " s";
+        player2TimerText.text = player2ElapsedTime.ToString("F2") + " s";
     }
 
     public void StopAllTimers()
