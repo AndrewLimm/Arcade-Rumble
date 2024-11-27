@@ -10,6 +10,8 @@ public class JumpOverCOuntDown : MonoBehaviour
 
     public delegate void CountdownFinished();
     public static event CountdownFinished OnCountdownFinished; // Event untuk menandakan countdown selesai
+    public GameObject attentionObject1; // Objek yang muncul di awal dan menghilang setelah countdown
+    public GameObject attentionObject2; // Objek kedua yang muncul sebelum "GO!"
 
     void Start()
     {
@@ -19,11 +21,22 @@ public class JumpOverCOuntDown : MonoBehaviour
             countdownText.gameObject.SetActive(false);
             Debug.Log("Countdown text disembunyikan saat permainan dimulai.");
         }
+        if (attentionObject1 != null)
+            attentionObject1.SetActive(false);
+
+        if (attentionObject2 != null)
+            attentionObject2.SetActive(false);
     }
 
     public void StartCountDown()
     {
         countdownText.gameObject.SetActive(true); // Mengaktifkan countdown text saat mulai
+        if (attentionObject1 != null)
+            attentionObject1.SetActive(true); // Menampilkan objek perhatian di awal
+
+        if (attentionObject2 != null)
+            attentionObject2.SetActive(true); // Menampilkan objek perhatian di awal
+
         StartCoroutine(StartCountdown());
     }
 
@@ -40,7 +53,15 @@ public class JumpOverCOuntDown : MonoBehaviour
 
         countdownText.text = "GO!";
         yield return new WaitForSeconds(1f);
-        countdownText.gameObject.SetActive(false); // Sembunyikan countdown setelah selesai
+
+        if (countdownText != null)
+            countdownText.gameObject.SetActive(false); // Sembunyikan teks countdown
+
+        if (attentionObject1 != null)
+            attentionObject1.SetActive(false); // Sembunyikan objek perhatian setelah countdown
+
+        if (attentionObject2 != null)
+            attentionObject2.SetActive(false); // Sembunyikan objek perhatian setelah countdown
 
         OnCountdownFinished?.Invoke(); // Memicu event saat countdown selesai
     }

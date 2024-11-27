@@ -8,16 +8,29 @@ public class CatchItemCOuntDownDUration : MonoBehaviour
 {
     public float countdownDuration = 5f; // Durasi countdown
     public TMP_Text countdownText; // Referensi ke TMP_Text untuk menampilkan countdown
+    public GameObject attentionObject1; // Objek yang muncul di awal dan menghilang setelah countdown
+    public GameObject attentionObject2; // Objek kedua yang muncul sebelum "GO!"
 
     private void Start()
     {
-        // Sembunyikan countdown text pada awal game
-        countdownText.gameObject.SetActive(false);
+        if (countdownText != null)
+            countdownText.gameObject.SetActive(false);
+
+        if (attentionObject1 != null)
+            attentionObject1.SetActive(false);
+
+        if (attentionObject2 != null)
+            attentionObject2.SetActive(false);
     }
 
     // Fungsi yang dipanggil ketika tombol ditekan
     public void StartCountdown()
     {
+        if (attentionObject1 != null)
+            attentionObject1.SetActive(true); // Menampilkan objek perhatian di awal
+
+        if (attentionObject2 != null)
+            attentionObject2.SetActive(true); // Menampilkan objek perhatian di awal
         // Mulai countdown
         StartCoroutine(Countdown());
     }
@@ -39,6 +52,13 @@ public class CatchItemCOuntDownDUration : MonoBehaviour
         countdownText.text = "GO!"; // Menampilkan 'GO!' setelah countdown selesai
         yield return new WaitForSecondsRealtime(1f); // Tampilkan "GO!" selama 1 detik
 
-        countdownText.gameObject.SetActive(false); // Sembunyikan teks countdown
+        if (countdownText != null)
+            countdownText.gameObject.SetActive(false); // Sembunyikan teks countdown
+
+        if (attentionObject1 != null)
+            attentionObject1.SetActive(false); // Sembunyikan objek perhatian setelah countdown
+
+        if (attentionObject2 != null)
+            attentionObject2.SetActive(false); // Sembunyikan objek perhatian setelah countdown
     }
 }

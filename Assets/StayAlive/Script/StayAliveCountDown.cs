@@ -10,6 +10,8 @@ public class StayAliveCountDown : MonoBehaviour
     public float countdownTime = 5f; // Durasi countdown dalam detik
 
     public StayAliveGameManager stayAliveGameManager;
+    public GameObject attentionObject1; // Objek yang muncul di awal dan menghilang setelah countdown
+    public GameObject attentionObject2; // Objek kedua yang muncul sebelum "GO!"
 
     void Start()
     {
@@ -19,10 +21,21 @@ public class StayAliveCountDown : MonoBehaviour
             countdownText.gameObject.SetActive(false);
             Debug.Log("Countdown text disembunyikan saat permainan dimulai.");
         }
+        if (attentionObject1 != null)
+            attentionObject1.SetActive(false);
+
+        if (attentionObject2 != null)
+            attentionObject2.SetActive(false);
     }
 
     public void StartCountDown()
     {
+        if (attentionObject1 != null)
+            attentionObject1.SetActive(true); // Menampilkan objek perhatian di awal
+
+        if (attentionObject2 != null)
+            attentionObject2.SetActive(true); // Menampilkan objek perhatian di awal
+
         countdownText.gameObject.SetActive(true); // Mengaktifkan countdown text saat mulai
         StartCoroutine(StartCountdown());
     }
@@ -40,7 +53,14 @@ public class StayAliveCountDown : MonoBehaviour
 
         countdownText.text = "GO!";
         yield return new WaitForSeconds(1f);
-        countdownText.gameObject.SetActive(false); // Sembunyikan countdown setelah selesai
+        if (countdownText != null)
+            countdownText.gameObject.SetActive(false); // Sembunyikan teks countdown
+
+        if (attentionObject1 != null)
+            attentionObject1.SetActive(false); // Sembunyikan objek perhatian setelah countdown
+
+        if (attentionObject2 != null)
+            attentionObject2.SetActive(false); // Sembunyikan objek perhatian setelah countdown
 
         // Panggil metode OnCountdownFinished di StayAliveGameManager
         stayAliveGameManager.OnCountdownFinished();
