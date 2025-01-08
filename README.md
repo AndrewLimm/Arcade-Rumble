@@ -10,14 +10,18 @@ Game Selection
 ![image](https://github.com/user-attachments/assets/7fc5efb1-fff8-43d7-8594-5b33c51e344c)
 
 About
+
 ![image](https://github.com/user-attachments/assets/e1b18734-ca02-4739-b22d-dcda23e99b25)
 
 Help
+
 ![image](https://github.com/user-attachments/assets/6f4ca1df-9527-411d-acb0-4e4375b90015)
 
 Result Scene
+
 ![image](https://github.com/user-attachments/assets/f48e16b0-c58c-40e0-977d-c8efedfefd1d)
 
 Final Result
+
 ![image](https://github.com/user-attachments/assets/fd9bfbda-c2fc-44f7-8636-bc9a7eaf04a9)
 
